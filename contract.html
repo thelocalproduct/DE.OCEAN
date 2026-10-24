@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DE'OCEAN | Wholesale Partnership & Contract</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,172 +36,138 @@
     </script>
 
     <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             background-color: #080808;
             color: #E5E4E2;
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
         }
 
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #080808;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #262626;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #52525B;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #262626; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525B; }
 
-        .border-platinum-subtle {
-            border-color: rgba(229, 228, 226, 0.12);
-        }
-
-        .bg-glass {
-            background: rgba(18, 18, 18, 0.65);
-            backdrop-filter: blur(14px);
-        }
+        .border-platinum-subtle { border-color: rgba(229, 228, 226, 0.12); }
+        .bg-glass { background: rgba(12, 12, 12, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     </style>
 </head>
-<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
-    <!-- FULLSCREEN BACKGROUND WITH SCROLL FADE -->
+    <!-- BACKGROUND WITH SCROLL FADE -->
     <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
-        <img src="bg.jpg" 
-             alt="Planted Aquascape Background" 
-             class="w-full h-full object-cover brightness-[0.65] contrast-[1.10] saturate-[1.15]"
-             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
-             
+        <img src="bg.jpg" alt="Planted Aquascape Background" class="w-full h-full object-cover brightness-[0.70] contrast-[1.10] saturate-[1.15]" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/95"></div>
     </div>
 
-    <!-- STANDARDIZED TOP BAR (DE'OCEAN) -->
-<header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Mobile Hamburger Button -->
-        <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 focus:outline-none">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-22 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col group py-2">
+                <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
+            </a>
 
-        <!-- Brand / Logo -->
-        <a href="index.html" class="flex flex-col items-center lg:items-start group">
-            <span class="font-serif text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
-            <span class="text-[9px] tracking-[0.3em] uppercase text-platinumMuted -mt-1 font-sans">Guppy Atelier</span>
-        </a>
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">Collections</a>
+                <a href="discover.html" class="hover:text-platinum transition py-2 relative group">Discover</a>
+                <a href="contract.html" class="text-platinum transition py-2 relative group">Wholesale</a>
+                <a href="genetics.html" class="hover:text-platinum transition py-2 relative group">Genetics</a>
+                <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">Water Specs</a>
+            </nav>
 
-        <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
-            <a href="vault.html" class="hover:text-platinum transition">Collections</a>
-            <a href="discover.html" class="hover:text-platinum transition">Discover</a>
-            <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
-            <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
-            <a href="index.html#parameters" class="hover:text-platinum transition">Water Specs</a>
+            <div class="hidden lg:flex items-center">
+                <a href="vault.html" class="border border-platinum-subtle px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-platinum hover:bg-platinum hover:text-obsidian transition duration-300">
+                    Explore Strain Vault
+                </a>
+            </div>
+
+            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2.5 -mr-2 focus:outline-none flex items-center gap-2" aria-label="Open Menu">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-platinumMuted">Menu</span>
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
+        <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
+            <div class="flex flex-col">
+                <span class="font-serif text-xl tracking-widest text-platinum">DE'OCEAN</span>
+                <span class="text-[8px] tracking-[0.25em] uppercase text-platinumMuted">Guppy Atelier</span>
+            </div>
+            <button id="closeMobileMenu" class="text-platinum p-2 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-base sm:text-xl tracking-[0.2em] uppercase my-auto py-6">
+            <a href="vault.html" class="text-platinumMuted hover:text-platinum py-1 transition">Collections</a>
+            <a href="discover.html" class="text-platinumMuted hover:text-platinum py-1 transition">Discover Strains</a>
+            <a href="contract.html" class="text-platinum py-1 hover:text-white transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
+            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
         </nav>
-
-        <!-- Action Icons (Search, Favorites / Wishlist, Hidden Admin, Cart) -->
-        <div class="flex items-center space-x-4 sm:space-x-5">
-            <button onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2" title="Search Vault">
-                <i data-lucide="search" class="w-5 h-5"></i>
-            </button>
-            <button id="wishlistToggle" onclick="toggleWishlistDrawer()" class="text-platinumMuted hover:text-platinum transition p-2 relative" title="Saved Favorites">
-                <i data-lucide="heart" class="w-5 h-5"></i>
-                <span id="wishlistBadge" class="absolute top-1 right-1 w-2 h-2 bg-platinum rounded-full hidden"></span>
-            </button>
-
-            <!-- Secret Admin Portal Toggle (Hidden by default) -->
-            <button id="adminToggleBtn" onclick="toggleAdminPanel()" class="hidden text-platinumMuted hover:text-platinum transition p-2 items-center gap-1 border border-platinum-subtle px-2.5 py-1.5 text-xs tracking-wider" title="Admin Portal">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span class="hidden md:inline uppercase text-[10px] font-mono">Admin</span>
-            </button>
-
-            <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-2 border border-platinum-subtle px-3 py-1.5 text-xs tracking-wider">
-                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                <span id="cartCount" class="font-mono text-xs">0</span>
-            </button>
-        </div>
-    </div>
-</header>
-
-    <!-- MOBILE MENU MODAL -->
-    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-95 hidden flex-col justify-between p-8">
-        <div class="flex justify-between items-center">
-            <span class="font-serif text-xl tracking-widest">DE'OCEAN</span>
-            <button id="closeMobileMenu" class="text-platinum"><i data-lucide="x" class="w-6 h-6"></i></button>
-        </div>
-        <nav class="flex flex-col space-y-6 text-center font-serif text-lg tracking-widest uppercase my-auto">
-            <a href="vault.html">Collections</a>
-            <a href="discover.html">Discover</a>
-            <a href="contract.html" class="text-platinum font-bold">Wholesale Partnership</a>
-            <a href="genetics.html">Genetics</a>
-            <a href="index.html#parameters">Water Specs</a>
-        </nav>
-        <div class="text-center text-xs text-platinumMuted tracking-widest">
-            © 2026 DE'OCEAN ATELIER
-        </div>
+        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
 
-    <!-- MAIN WRAPPER -->
-    <div class="relative z-10 flex-grow flex flex-col">
-
-        <!-- HERO SECTION -->
-        <section class="border-b border-platinum-subtle py-20 bg-obsidian/75 backdrop-blur-md px-4 sm:px-6 lg:px-8 text-center">
+    <!-- MAIN CONTENT -->
+    <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
+        <section class="border-b border-platinum-subtle py-16 sm:py-24 bg-obsidian/80 backdrop-blur-md px-4 sm:px-6 lg:px-8 text-center">
             <div class="max-w-4xl mx-auto space-y-4">
-                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-black/40">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3.5 py-1.5 text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-black/50">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> B2B Commercial & Breeder Alliance
                 </div>
-                <h1 class="font-serif text-4xl sm:text-6xl text-platinum tracking-tight uppercase">Wholesale Partnership</h1>
-                <p class="text-xs sm:text-sm text-platinumMuted max-w-2xl mx-auto font-light leading-relaxed">
+                <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl text-platinum tracking-tight uppercase">Wholesale Partnership</h1>
+                <p class="text-xs sm:text-sm text-platinumMuted max-w-2xl mx-auto font-light leading-relaxed px-2">
                     Partner with DE'OCEAN Atelier to supply premium, genetically isolated show-grade guppies to elite aquarium stores, specialty hatcheries, and international distributors.
                 </p>
             </div>
         </section>
 
-        <!-- MAIN CONTENT & APPLICATION FORM -->
-        <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex-grow space-y-20">
+        <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 flex-grow space-y-12 sm:space-y-20">
             
-            <!-- BENEFITS GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="border border-platinum-subtle p-8 bg-surface/90 backdrop-blur-md space-y-4 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="border border-platinum-subtle p-6 sm:p-8 bg-surface/90 backdrop-blur-md space-y-4 shadow-xl">
                     <div class="w-10 h-10 border border-platinum-subtle flex items-center justify-center text-platinum bg-obsidian">
                         <i data-lucide="shield-check" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wide">Guaranteed Lineage</h3>
+                    <h3 class="font-serif text-base sm:text-lg text-platinum uppercase tracking-wide">Guaranteed Lineage</h3>
                     <p class="text-xs text-platinumMuted leading-relaxed">
                         Zero cross-contamination strains bred in controlled, pathogen-monitored indoor and terrace systems with natural botanical conditioning.
                     </p>
                 </div>
 
-                <div class="border border-platinum-subtle p-8 bg-surface/90 backdrop-blur-md space-y-4 shadow-xl">
+                <div class="border border-platinum-subtle p-6 sm:p-8 bg-surface/90 backdrop-blur-md space-y-4 shadow-xl">
                     <div class="w-10 h-10 border border-platinum-subtle flex items-center justify-center text-platinum bg-obsidian">
                         <i data-lucide="truck" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wide">Insulated Transit</h3>
+                    <h3 class="font-serif text-base sm:text-lg text-platinum uppercase tracking-wide">Insulated Transit</h3>
                     <p class="text-xs text-platinumMuted leading-relaxed">
                         Industrial oxygen-infused commercial shipping boxes with heat/cold barrier insulation and complete live arrival transit coverage.
                     </p>
                 </div>
 
-                <div class="border border-platinum-subtle p-8 bg-surface/90 backdrop-blur-md space-y-4 shadow-xl">
+                <div class="border border-platinum-subtle p-6 sm:p-8 bg-surface/90 backdrop-blur-md space-y-4 shadow-xl">
                     <div class="w-10 h-10 border border-platinum-subtle flex items-center justify-center text-platinum bg-obsidian">
                         <i data-lucide="percent" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wide">Tiered Pricing</h3>
+                    <h3 class="font-serif text-base sm:text-lg text-platinum uppercase tracking-wide">Tiered Pricing</h3>
                     <p class="text-xs text-platinumMuted leading-relaxed">
                         Attractive wholesale volume brackets starting from minimum orders of 25 pairs with dedicated account manager assistance.
                     </p>
                 </div>
             </div>
 
-            <!-- CONTRACT / APPLICATION FORM -->
-            <div class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-8 sm:p-12 max-w-3xl mx-auto space-y-8 shadow-2xl">
+            <!-- CONTRACT FORM WITH WHATSAPP SUBMISSION -->
+            <div class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-6 sm:p-12 max-w-3xl mx-auto space-y-8 shadow-2xl">
                 <div class="text-center space-y-2 border-b border-platinum-subtle pb-6">
                     <span class="text-[10px] uppercase tracking-[0.25em] text-platinumMuted">B2B Application Contract</span>
                     <h2 class="font-serif text-2xl sm:text-3xl text-platinum">Submit Wholesale Inquiry</h2>
-                    <p class="text-xs text-platinumMuted">Complete the commercial credentials below for direct review by our master breeder.</p>
+                    <p class="text-xs text-platinumMuted">Complete the commercial credentials below for direct review and instant WhatsApp submission.</p>
                 </div>
 
                 <form id="wholesaleForm" onsubmit="submitWholesaleApp(event)" class="space-y-6">
@@ -252,90 +218,41 @@
                         <label for="wsTerms" class="text-[11px] text-platinumMuted">I agree to maintain live care standards and verify commercial credentials upon approval.</label>
                     </div>
 
-                    <button type="submit" class="w-full bg-platinum text-obsidian py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center shadow-xl">
-                        Submit Wholesale Contract Application
+                    <button type="submit" class="w-full bg-platinum text-obsidian py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center shadow-xl active:scale-[0.99] flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i> Submit Wholesale Contract via WhatsApp
                     </button>
                 </form>
             </div>
         </main>
 
-        <!-- FOOTER (EXACTLY IDENTICAL TO INDEX.HTML) -->
-        <footer class="border-t border-platinum-subtle bg-obsidian py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
                 <div class="flex flex-col items-center md:items-start gap-1">
-                    <span class="font-serif text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
-                    <span class="text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                    <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
                 </div>
                 
-                <div class="flex gap-8 uppercase tracking-widest text-[11px]">
-                    <a href="vault.html" class="hover:text-platinum">Vault</a>
-                    <a href="discover.html" class="hover:text-platinum">Discover</a>
-                    <a href="contract.html" class="hover:text-platinum">Wholesale Partnership</a>
-                    <a href="genetics.html" class="hover:text-platinum">Genetics</a>
-                    <a href="index.html#parameters" class="hover:text-platinum">Care Specs</a>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
+                    <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
+                    <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
+                    <a href="genetics.html" class="hover:text-platinum py-1">Genetics</a>
+                    <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
                 </div>
 
-                <!-- SECRET UNLOCK ON DOUBLE CLICK -->
-                <div class="text-[11px] tracking-wider cursor-pointer select-none" ondblclick="toggleSecretAdmin()">
+                <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
                     © 2026 DE'OCEAN Studio. All Rights Reserved.
                 </div>
             </div>
         </footer>
-
     </div>
 
-    <!-- ADMIN PORTAL MODAL / DASHBOARD -->
-    <div id="adminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div id="adminOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="toggleAdminPanel()"></div>
-        <div class="relative bg-surface border border-platinum-subtle max-w-3xl w-full p-6 sm:p-8 z-10 max-h-[85vh] overflow-y-auto">
-            <button onclick="toggleAdminPanel()" class="absolute top-4 right-4 text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-            
-            <div id="adminAuthSection" class="space-y-6 text-center">
-                <div class="w-12 h-12 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h3 class="font-serif text-2xl text-platinum">Atelier Admin Portal</h3>
-                    <p class="text-xs text-platinumMuted mt-1">Enter Master Access PIN (Default: 1234)</p>
-                </div>
-                <div class="max-w-xs mx-auto space-y-3">
-                    <input type="password" id="adminPinInput" placeholder="Enter PIN..." class="w-full bg-obsidian border border-platinum-subtle text-center text-sm py-2.5 text-platinum placeholder-platinumMuted focus:outline-none">
-                    <button onclick="authenticateAdmin()" class="w-full bg-platinum text-obsidian py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-white transition">Verify Key</button>
-                </div>
-            </div>
-
-            <div id="adminDashboardSection" class="hidden space-y-8">
-                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4">
-                    <div>
-                        <span class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest">Authenticated Session</span>
-                        <h3 class="font-serif text-xl text-platinum">Master Atelier Dashboard</h3>
-                    </div>
-                    <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-serif text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="file-text" class="w-4 h-4 text-platinum"></i> Wholesale Applications (<span id="adminWsCount">0</span>)
-                        </h4>
-                        <button onclick="clearAllWholesale()" class="text-[10px] text-rose-400 hover:text-rose-300 uppercase tracking-wider">Clear All</button>
-                    </div>
-
-                    <div id="adminWsList" class="space-y-3 max-h-64 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        let WHOLESALE_APPS = JSON.parse(localStorage.getItem('deocean_wholesale_apps')) || [];
-        let isAdminLoggedIn = false;
+        const OWNER_WHATSAPP = "918592899766";
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
 
-            // Background Scroll Fade
             const heroBg = document.getElementById('heroBg');
             if (heroBg) {
                 window.addEventListener('scroll', () => {
@@ -344,7 +261,6 @@
                 });
             }
 
-            // Mobile Menu
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.remove('hidden');
                 document.getElementById('mobileMenu').classList.add('flex');
@@ -353,165 +269,39 @@
                 document.getElementById('mobileMenu').classList.add('hidden');
                 document.getElementById('mobileMenu').classList.remove('flex');
             });
-
-            // Cart counter
-            const cart = JSON.parse(localStorage.getItem('deocean_cart')) || [];
-            const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
-            const cartCountEl = document.getElementById('cartCount');
-            if(cartCountEl) cartCountEl.textContent = totalQty;
-
-            // Secret Admin Shortcut (Ctrl + Shift + A)
-            document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
-                    e.preventDefault();
-                    toggleSecretAdmin();
-                }
-            });
         });
-
-        function toggleSecretAdmin() {
-            const adminBtn = document.getElementById('adminToggleBtn');
-            if (adminBtn) {
-                if (adminBtn.classList.contains('hidden')) {
-                    adminBtn.classList.remove('hidden');
-                    adminBtn.classList.add('flex');
-                    alert("Admin Button Unlocked!");
-                } else {
-                    adminBtn.classList.add('hidden');
-                    adminBtn.classList.remove('flex');
-                    alert("Admin Button Hidden.");
-                }
-            }
-        }
 
         function submitWholesaleApp(e) {
             e.preventDefault();
-            const business = document.getElementById('wsBusiness').value;
-            const name = document.getElementById('wsName').value;
-            const phone = document.getElementById('wsPhone').value;
-            const email = document.getElementById('wsEmail').value;
+            const business = document.getElementById('wsBusiness').value.trim();
+            const name = document.getElementById('wsName').value.trim();
+            const phone = document.getElementById('wsPhone').value.trim();
+            const email = document.getElementById('wsEmail').value.trim();
             const volume = document.getElementById('wsVolume').value;
-            const strains = document.getElementById('wsStrains').value || "General Strains";
-            const address = document.getElementById('wsAddress').value;
+            const strains = document.getElementById('wsStrains').value.trim() || "General Strains";
+            const address = document.getElementById('wsAddress').value.trim();
+            const appId = Date.now().toString().slice(-6);
 
-            const newApp = {
-                id: Date.now(),
-                business,
-                name,
-                phone,
-                email,
-                volume,
-                strains,
-                address,
-                status: 'PENDING',
-                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' })
-            };
+            const rawMessage = 
+`*DE'OCEAN ATELIER | B2B WHOLESALE APPLICATION (#${appId})*
+----------------------------------
+*BUSINESS CREDENTIALS:*
+• Business Name: ${business}
+• Contact Person: ${name}
+• Phone / WhatsApp: ${phone}
+• Email: ${email}
 
-            WHOLESALE_APPS.unshift(newApp);
-            localStorage.setItem('deocean_wholesale_apps', JSON.stringify(WHOLESALE_APPS));
+*ORDER SPECIFICATIONS:*
+• Monthly Volume: ${volume}
+• Target Strains: ${strains}
+• Facility Address: ${address}
+----------------------------------
+_Submitted via DE'OCEAN Wholesale Portal_`;
 
-            alert(`Thank you, ${name} (${business}). Your wholesale partnership application has been submitted successfully. Our team will review and contact you via ${phone}.`);
+            const encodedMessage = encodeURIComponent(rawMessage);
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
+
             document.getElementById('wholesaleForm').reset();
-        }
-
-        function toggleAdminPanel() {
-            const modal = document.getElementById('adminModal');
-            modal.classList.toggle('hidden');
-            if (!modal.classList.contains('hidden') && isAdminLoggedIn) {
-                renderAdminDashboard();
-            }
-        }
-
-        function authenticateAdmin() {
-            const pin = document.getElementById('adminPinInput').value;
-            if (pin === '1234') {
-                isAdminLoggedIn = true;
-                document.getElementById('adminAuthSection').classList.add('hidden');
-                document.getElementById('adminDashboardSection').classList.remove('hidden');
-                renderAdminDashboard();
-            } else {
-                alert('Invalid Atelier Master Access Key.');
-            }
-        }
-
-        function logoutAdmin() {
-            isAdminLoggedIn = false;
-            document.getElementById('adminPinInput').value = '';
-            document.getElementById('adminAuthSection').classList.remove('hidden');
-            document.getElementById('adminDashboardSection').classList.add('hidden');
-        }
-
-        function renderAdminDashboard() {
-            WHOLESALE_APPS = JSON.parse(localStorage.getItem('deocean_wholesale_apps')) || [];
-
-            const wsList = document.getElementById('adminWsList');
-            document.getElementById('adminWsCount').textContent = WHOLESALE_APPS.length;
-            wsList.innerHTML = '';
-
-            if (WHOLESALE_APPS.length === 0) {
-                wsList.innerHTML = `<p class="text-xs text-platinumMuted italic">No wholesale partnership applications recorded.</p>`;
-            } else {
-                WHOLESALE_APPS.forEach(app => {
-                    const row = document.createElement('div');
-                    row.className = "border border-platinum-subtle p-3.5 bg-obsidian text-left text-xs space-y-2";
-                    
-                    let statusBadge = `<span class="text-amber-400 font-mono text-[10px] px-2 py-0.5 border border-amber-500/30 bg-amber-950/20">PENDING</span>`;
-                    if (app.status === 'CONFIRMED') {
-                        statusBadge = `<span class="text-emerald-400 font-mono text-[10px] px-2 py-0.5 border border-emerald-500/30 bg-emerald-950/20">APPROVED</span>`;
-                    } else if (app.status === 'DECLINED') {
-                        statusBadge = `<span class="text-rose-400 font-mono text-[10px] px-2 py-0.5 border border-rose-500/30 bg-rose-950/20">DECLINED</span>`;
-                    }
-
-                    row.innerHTML = `
-                        <div class="flex justify-between items-start text-platinum">
-                            <div>
-                                <span class="font-semibold text-sm">${app.business}</span> (${app.name})
-                                <div class="text-emerald-400 font-mono mt-0.5">${app.phone} | ${app.email}</div>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                ${statusBadge}
-                                <span class="text-[10px] text-platinumMuted font-mono">${app.timestamp}</span>
-                            </div>
-                        </div>
-                        <div class="text-[11px] text-platinumMuted">
-                            <strong class="text-platinum font-normal">Volume:</strong> ${app.volume} • <strong class="text-platinum font-normal">Strains:</strong> ${app.strains}
-                        </div>
-                        <div class="text-[11px] text-platinumMuted">
-                            <strong class="text-platinum font-normal">Address:</strong> ${app.address}
-                        </div>
-                        <div class="flex justify-end items-center gap-2 pt-2 border-t border-platinum-subtle/50">
-                            ${app.status === 'PENDING' ? `
-                                <button onclick="updateWsStatus(${app.id}, 'CONFIRMED')" class="bg-emerald-600/80 hover:bg-emerald-500 text-white text-[10px] px-2.5 py-1 uppercase tracking-wider transition">Approve</button>
-                                <button onclick="updateWsStatus(${app.id}, 'DECLINED')" class="bg-rose-900/80 hover:bg-rose-800 text-rose-200 text-[10px] px-2.5 py-1 uppercase tracking-wider transition">Decline</button>
-                            ` : ''}
-                            <button onclick="deleteWsApp(${app.id})" class="text-platinumMuted hover:text-rose-400 text-[10px] uppercase tracking-wider ml-1">Delete</button>
-                        </div>
-                    `;
-                    wsList.appendChild(row);
-                });
-            }
-
-            lucide.createIcons();
-        }
-
-        function updateWsStatus(id, status) {
-            WHOLESALE_APPS = WHOLESALE_APPS.map(a => a.id === id ? { ...a, status } : a);
-            localStorage.setItem('deocean_wholesale_apps', JSON.stringify(WHOLESALE_APPS));
-            renderAdminDashboard();
-        }
-
-        function deleteWsApp(id) {
-            WHOLESALE_APPS = WHOLESALE_APPS.filter(a => a.id !== id);
-            localStorage.setItem('deocean_wholesale_apps', JSON.stringify(WHOLESALE_APPS));
-            renderAdminDashboard();
-        }
-
-        function clearAllWholesale() {
-            if (confirm("Clear all wholesale partnership applications?")) {
-                WHOLESALE_APPS = [];
-                localStorage.setItem('deocean_wholesale_apps', JSON.stringify(WHOLESALE_APPS));
-                renderAdminDashboard();
-            }
         }
     </script>
 </body>

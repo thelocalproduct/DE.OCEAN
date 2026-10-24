@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -36,6 +36,11 @@
     </script>
 
     <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             background-color: #080808;
             color: #E5E4E2;
@@ -70,9 +75,9 @@
         }
 
         .bg-glass {
-            background: rgba(18, 18, 18, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(12, 12, 12, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .img-container img {
@@ -87,62 +92,58 @@
         }
     </style>
 </head>
-<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen">
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
-    <!-- SEARCH BAR OVERLAY -->
-    <div id="searchBar" class="hidden sticky top-16 sm:top-20 z-30 bg-surface border-b border-platinum-subtle px-4 py-3 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3 flex-grow bg-obsidian border border-platinum-subtle px-3 py-2 rounded-none">
-                <i data-lucide="search" class="w-4 h-4 text-platinumMuted flex-shrink-0"></i>
-                <input type="text" id="searchInput" placeholder="Search strains by name or trait..." class="w-full bg-transparent text-xs text-platinum placeholder-platinumMuted focus:outline-none">
-            </div>
-            <button id="closeSearch" class="text-platinumMuted hover:text-white p-2 flex-shrink-0"><i data-lucide="x" class="w-5 h-5"></i></button>
-        </div>
-    </div>
-
-    <!-- STANDARDIZED TOP BAR (DE'OCEAN) -->
-    <header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+    <!-- FIXED TOP BAR (EXACT 1:1 COPY FROM index.html) -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-22 flex items-center justify-between">
             
-            <!-- Mobile Hamburger Button -->
-            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 -ml-2 focus:outline-none" aria-label="Open Menu">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-
             <!-- Brand / Logo -->
-            <a href="index.html" class="flex flex-col items-center lg:items-start group">
-                <span class="font-serif text-xl sm:text-2xl tracking-[0.2em] sm:tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
-                <span class="text-[8px] sm:text-[9px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-platinumMuted -mt-0.5 sm:-mt-1 font-sans">Guppy Atelier</span>
+            <a href="index.html" class="flex flex-col group py-2">
+                <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
             </a>
 
             <!-- Desktop Navigation Links -->
-            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
-                <a href="vault.html" class="hover:text-platinum transition">Collections</a>
-                <a href="discover.html" class="hover:text-platinum transition">Discover</a>
-                <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
-                <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
-                <a href="index.html#parameters" class="hover:text-platinum transition">Water Specs</a>
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">
+                    Collections
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="discover.html" class="hover:text-platinum transition py-2 relative group">
+                    Discover
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="contract.html" class="hover:text-platinum transition py-2 relative group">
+                    Wholesale
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="genetics.html" class="hover:text-platinum transition py-2 relative group">
+                    Genetics
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#parameters" class="hover:text-platinum transition py-2 relative group">
+                    Water Specs
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
             </nav>
 
-            <!-- Action Icons -->
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <button id="searchToggle" class="text-platinumMuted hover:text-platinum transition p-2" title="Search Vault">
-                    <i data-lucide="search" class="w-5 h-5"></i>
-                </button>
-                <button id="wishlistToggle" onclick="toggleWishlistFilter()" class="text-platinumMuted hover:text-platinum transition p-2 relative" title="Saved Favorites">
-                    <i data-lucide="heart" class="w-5 h-5"></i>
-                    <span id="wishlistBadge" class="absolute top-1.5 right-1.5 w-2 h-2 bg-platinum rounded-full hidden"></span>
-                </button>
-
-                <button id="cartToggle" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-1.5 sm:gap-2 border border-platinum-subtle px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs tracking-wider">
-                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                    <span id="cartCount" class="font-mono text-xs font-semibold">0</span>
-                </button>
+            <!-- Desktop Direct Access Action -->
+            <div class="hidden lg:flex items-center">
+                <a href="vault.html" class="border border-platinum-subtle px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-platinum hover:bg-platinum hover:text-obsidian transition duration-300">
+                    Explore Strain Vault
+                </a>
             </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2.5 -mr-2 focus:outline-none flex items-center gap-2" aria-label="Open Menu">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-platinumMuted">Menu</span>
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
         </div>
     </header>
 
-    <!-- MOBILE / TABLET NAV MODAL -->
+    <!-- MOBILE MENU (EXACT 1:1 COPY FROM index.html) -->
     <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
         <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
             <div class="flex flex-col">
@@ -151,72 +152,73 @@
             </div>
             <button id="closeMobileMenu" class="text-platinum p-2 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <nav class="flex flex-col space-y-5 text-center font-serif text-base sm:text-xl tracking-widest uppercase my-auto py-6">
-            <a href="vault.html" class="mobile-nav-link text-platinum py-1">Collections</a>
-            <a href="discover.html" class="mobile-nav-link text-platinumMuted hover:text-platinum py-1">Discover</a>
-            <a href="contract.html" class="mobile-nav-link text-platinumMuted hover:text-platinum py-1">Wholesale Partnership</a>
-            <a href="genetics.html" class="mobile-nav-link text-platinumMuted hover:text-platinum py-1">Genetics</a>
-            <a href="index.html#parameters" class="mobile-nav-link text-platinumMuted hover:text-platinum py-1">Water Specs</a>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-base sm:text-xl tracking-[0.2em] uppercase my-auto py-6">
+            <a href="vault.html" class="text-platinum py-1 hover:text-white transition">Collections</a>
+            <a href="discover.html" class="text-platinumMuted hover:text-platinum py-1 transition">Discover Strains</a>
+            <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
+            <a href="#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
         </nav>
-        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">
-            © 2026 DE'OCEAN ATELIER
-        </div>
+        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
 
-    <!-- VAULT HERO BANNER -->
-    <section class="border-b border-platinum-subtle py-8 sm:py-16 bg-charcoal px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
-            <div>
-                <span class="text-[10px] sm:text-xs text-platinumMuted tracking-[0.2em] sm:tracking-[0.25em] uppercase font-mono">Private Genetics Reserve</span>
-                <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl text-platinum tracking-tight uppercase mt-1 sm:mt-2">Strain Vault</h1>
+    <!-- MAIN CONTENT CONTAINER -->
+    <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
+        <!-- VAULT HERO BANNER -->
+        <section class="border-b border-platinum-subtle py-8 sm:py-16 bg-charcoal px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
+                <div>
+                    <span class="text-[10px] sm:text-xs text-platinumMuted tracking-[0.2em] sm:tracking-[0.25em] uppercase font-mono">Private Genetics Reserve</span>
+                    <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl text-platinum tracking-tight uppercase mt-1 sm:mt-2">Strain Vault</h1>
+                </div>
+                <p class="text-xs text-platinumMuted max-w-md font-light leading-relaxed">
+                    Explore signature purebred guppy lineages. Direct enquiry or request an immediate callback from our head breeder.
+                </p>
             </div>
-            <p class="text-xs text-platinumMuted max-w-md font-light leading-relaxed">
-                Explore signature purebred guppy lineages. Direct enquiry or request an immediate callback from our head breeder.
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- MAIN CATALOG & FILTERS -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 flex-grow w-full">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4 border-b border-platinum-subtle pb-4 sm:pb-6">
-            <div>
-                <h2 class="font-serif text-lg sm:text-xl text-platinum tracking-wide uppercase">All Strains</h2>
-                <p class="text-[10px] sm:text-xs text-platinumMuted tracking-widest mt-0.5 sm:mt-1 uppercase">Filter by phenotype class</p>
-            </div>
+        <!-- MAIN CATALOG & FILTERS -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 flex-grow w-full">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4 border-b border-platinum-subtle pb-4 sm:pb-6">
+                <div>
+                    <h2 class="font-serif text-lg sm:text-xl text-platinum tracking-wide uppercase">All Strains</h2>
+                    <p class="text-[10px] sm:text-xs text-platinumMuted tracking-widest mt-0.5 sm:mt-1 uppercase">Filter by phenotype class</p>
+                </div>
 
-            <!-- Horizontal Swipe Filters -->
-            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 sm:mx-0 sm:px-0 w-screen sm:w-auto" id="categoryFilters">
-                <button data-filter="all" class="filter-btn active-filter px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum bg-platinum text-obsidian transition whitespace-nowrap flex-shrink-0">All</button>
-                <button data-filter="platinum" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Platinum</button>
-                <button data-filter="moscow" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Moscow</button>
-                <button data-filter="albino" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Albino</button>
-                <button data-filter="dragon" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Dragon</button>
-            </div>
-        </div>
-
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-            <div class="flex flex-col items-center md:items-start gap-1">
-                <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
-                <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
-            </div>
-            
-            <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
-                <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
-                <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
-                <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
-                <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
+                <!-- Horizontal Swipe Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 sm:mx-0 sm:px-0 w-screen sm:w-auto" id="categoryFilters">
+                    <button data-filter="all" class="filter-btn active-filter px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum bg-platinum text-obsidian transition whitespace-nowrap flex-shrink-0">All</button>
+                    <button data-filter="platinum" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Platinum</button>
+                    <button data-filter="moscow" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Moscow</button>
+                    <button data-filter="albino" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Albino</button>
+                    <button data-filter="dragon" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Dragon</button>
+                </div>
             </div>
 
-            <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
-                © 2026 DE'OCEAN Studio. All Rights Reserved.
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
+                    <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
+                    <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
+                    <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
+                </div>
+
+                <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
+                    © 2026 DE'OCEAN Studio. All Rights Reserved.
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <!-- CART SLIDE-OUT DRAWER -->
     <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
@@ -352,13 +354,10 @@
         
         let state = {
             cart: [],
-            wishlist: [],
             activeFilter: 'all',
-            searchQuery: '',
-            filterWishlistOnly: false
+            searchQuery: ''
         };
 
-        // Your WhatsApp Number
         const OWNER_WHATSAPP = "918592899766";
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -369,25 +368,7 @@
                 document.getElementById('mobileMenu').classList.remove('hidden');
                 document.getElementById('mobileMenu').classList.add('flex');
             });
-            document.getElementById('closeMobileMenu').addEventListener('click', () => {
-                document.getElementById('mobileMenu').classList.add('hidden');
-                document.getElementById('mobileMenu').classList.remove('flex');
-            });
-
-            document.getElementById('searchToggle').addEventListener('click', () => {
-                const searchBar = document.getElementById('searchBar');
-                searchBar.classList.toggle('hidden');
-                if(!searchBar.classList.contains('hidden')) {
-                    document.getElementById('searchInput').focus();
-                }
-            });
-            document.getElementById('closeSearch').addEventListener('click', () => {
-                document.getElementById('searchBar').classList.add('hidden');
-            });
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                state.searchQuery = e.target.value.toLowerCase();
-                renderProducts();
-            });
+            document.getElementById('closeMobileMenu').addEventListener('click', closeMobileMenuFunc);
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -400,15 +381,18 @@
                     e.target.classList.add('bg-platinum', 'text-obsidian', 'border-platinum');
 
                     state.activeFilter = e.target.getAttribute('data-filter');
-                    state.filterWishlistOnly = false;
                     renderProducts();
                 });
             });
 
-            document.getElementById('cartToggle').addEventListener('click', toggleCartDrawer);
-            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
             document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
+            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
         });
+
+        function closeMobileMenuFunc() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('mobileMenu').classList.remove('flex');
+        }
 
         /* --- CATALOG RENDERING --- */
         function renderProducts() {
@@ -419,8 +403,7 @@
             const filtered = PRODUCTS.filter(p => {
                 const matchesCategory = state.activeFilter === 'all' || p.category === state.activeFilter;
                 const matchesSearch = p.name.toLowerCase().includes(state.searchQuery) || p.description.toLowerCase().includes(state.searchQuery);
-                const matchesWishlist = !state.filterWishlistOnly || state.wishlist.includes(p.id);
-                return matchesCategory && matchesSearch && matchesWishlist;
+                return matchesCategory && matchesSearch;
             });
 
             if (filtered.length === 0) {
@@ -433,7 +416,6 @@
             }
 
             filtered.forEach(product => {
-                const isWishlisted = state.wishlist.includes(product.id);
                 const isAvailable = product.stock > 0;
                 const card = document.createElement('div');
                 card.className = "border border-platinum-subtle bg-surface flex flex-col justify-between group";
@@ -448,10 +430,6 @@
                                     ? `<span class="text-emerald-400">●</span> ${product.stock} PAIRS` 
                                     : `<span class="text-rose-400">●</span> OUT OF STOCK`}
                             </div>
-
-                            <button onclick="toggleWishlist(${product.id})" class="absolute top-2.5 right-2.5 p-2 bg-obsidian/90 border border-platinum-subtle text-platinum hover:text-white transition active:scale-95">
-                                <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-platinum text-platinum' : ''}"></i>
-                            </button>
                         </div>
 
                         <div class="p-4 sm:p-6 space-y-2.5 sm:space-y-3">
@@ -481,32 +459,7 @@
             lucide.createIcons();
         }
 
-        /* --- WISHLIST & CART --- */
-        function toggleWishlist(id) {
-            const index = state.wishlist.indexOf(id);
-            if (index > -1) {
-                state.wishlist.splice(index, 1);
-            } else {
-                state.wishlist.push(id);
-            }
-            updateWishlistBadge();
-            renderProducts();
-        }
-
-        function toggleWishlistFilter() {
-            state.filterWishlistOnly = !state.filterWishlistOnly;
-            renderProducts();
-        }
-
-        function updateWishlistBadge() {
-            const badge = document.getElementById('wishlistBadge');
-            if (state.wishlist.length > 0) {
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        }
-
+        /* --- CART MANAGEMENT --- */
         function toggleCartDrawer() {
             const drawer = document.getElementById('cartDrawer');
             drawer.classList.toggle('hidden');
@@ -638,7 +591,6 @@ ${itemSummary}
 _Sent via DE'OCEAN Strain Vault_`;
 
             const encodedMessage = encodeURIComponent(rawMessage);
-
             window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
 
             state.cart = [];
@@ -665,7 +617,6 @@ _Sent via DE'OCEAN Strain Vault_`;
 ----------------------------------`;
 
             const encodedMessage = encodeURIComponent(rawMessage);
-
             window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
 
             closeCallbackModal();

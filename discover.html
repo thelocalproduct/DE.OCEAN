@@ -49,28 +49,13 @@
             touch-action: manipulation;
         }
 
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #080808;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #262626;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #52525B;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #262626; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525B; }
 
-        .border-platinum-subtle {
-            border-color: rgba(229, 228, 226, 0.12);
-        }
-
-        .bg-glass {
-            background: rgba(18, 18, 18, 0.85);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-        }
+        .border-platinum-subtle { border-color: rgba(229, 228, 226, 0.12); }
+        .bg-glass { background: rgba(12, 12, 12, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 
         .img-zoom img {
             transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
@@ -86,54 +71,42 @@
 </head>
 <body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
-    <!-- FULLSCREEN CUSTOMIZABLE BACKGROUND WITH SCROLL FADE -->
+    <!-- BACKGROUND WITH SCROLL FADE -->
     <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
-        <img src="bg.jpg" 
-             alt="Planted Aquascape Background" 
-             class="w-full h-full object-cover brightness-[0.70] contrast-[1.10] saturate-[1.15]"
-             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
-             
+        <img src="bg.jpg" alt="Planted Aquascape Background" class="w-full h-full object-cover brightness-[0.70] contrast-[1.10] saturate-[1.15]" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/95"></div>
     </div>
 
-    <!-- NAVIGATION -->
-    <header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-            
-            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 -ml-2 focus:outline-none" aria-label="Open Menu">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-
-            <a href="index.html" class="flex flex-col items-center lg:items-start group">
-                <span class="font-serif text-xl sm:text-2xl tracking-[0.2em] sm:tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
-                <span class="text-[8px] sm:text-[9px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-platinumMuted -mt-0.5 sm:-mt-1 font-sans">Guppy Atelier</span>
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-22 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col group py-2">
+                <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
             </a>
 
-            <nav class="hidden lg:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
-                <a href="vault.html" class="hover:text-platinum transition">Collections</a>
-                <a href="discover.html" class="text-platinum font-semibold transition">Discover</a>
-                <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
-                <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
-                <a href="index.html#parameters" class="hover:text-platinum transition">Water Specs</a>
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">Collections</a>
+                <a href="discover.html" class="text-platinum transition py-2 relative group">Discover</a>
+                <a href="contract.html" class="hover:text-platinum transition py-2 relative group">Wholesale</a>
+                <a href="genetics.html" class="hover:text-platinum transition py-2 relative group">Genetics</a>
+                <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">Water Specs</a>
             </nav>
 
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <button id="searchToggle" onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2">
-                    <i data-lucide="search" class="w-5 h-5"></i>
-                </button>
-                <button id="wishlistToggle" onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2 relative hidden sm:block">
-                    <i data-lucide="heart" class="w-5 h-5"></i>
-                </button>
-
-                <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-1.5 sm:gap-2 border border-platinum-subtle px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs tracking-wider">
-                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                    <span id="cartCount" class="font-mono text-xs">0</span>
-                </button>
+            <div class="hidden lg:flex items-center">
+                <a href="vault.html" class="border border-platinum-subtle px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-platinum hover:bg-platinum hover:text-obsidian transition duration-300">
+                    Explore Strain Vault
+                </a>
             </div>
+
+            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2.5 -mr-2 focus:outline-none flex items-center gap-2" aria-label="Open Menu">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-platinumMuted">Menu</span>
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
         </div>
     </header>
 
-    <!-- MOBILE MENU MODAL -->
+    <!-- MOBILE MENU -->
     <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
         <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
             <div class="flex flex-col">
@@ -142,25 +115,21 @@
             </div>
             <button id="closeMobileMenu" class="text-platinum p-2 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <nav class="flex flex-col space-y-5 text-center font-serif text-base sm:text-xl tracking-widest uppercase my-auto py-6">
-            <a href="vault.html" class="text-platinumMuted hover:text-platinum py-1">Collections</a>
-            <a href="discover.html" class="text-platinum font-bold py-1">Discover</a>
-            <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1">Wholesale Partnership</a>
-            <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1">Genetics</a>
-            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1">Water Specs</a>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-base sm:text-xl tracking-[0.2em] uppercase my-auto py-6">
+            <a href="vault.html" class="text-platinumMuted hover:text-platinum py-1 transition">Collections</a>
+            <a href="discover.html" class="text-platinum py-1 hover:text-white transition">Discover Strains</a>
+            <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
+            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
         </nav>
-        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">
-            © 2026 DE'OCEAN ATELIER
-        </div>
+        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
 
     <!-- MAIN CONTENT -->
-    <div class="relative z-10 flex-grow flex flex-col">
-
-        <!-- HERO BANNER -->
+    <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
         <section class="relative py-12 sm:py-24 border-b border-platinum-subtle px-4 sm:px-6 lg:px-8 text-center bg-obsidian/80 backdrop-blur-md">
             <div class="max-w-4xl mx-auto space-y-3 sm:space-y-4">
-                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3 py-1 text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-platinumMuted bg-black/50">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3 py-1 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-platinumMuted bg-black/50">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
                     Atelier Breeding Lab Showcase
                 </div>
@@ -168,185 +137,138 @@
                     Discover New <span class="italic text-platinumLight">Strains</span>
                 </h1>
                 <p class="text-xs sm:text-sm text-platinumMuted max-w-2xl mx-auto font-light leading-relaxed px-2">
-                    Explore three newly developed experimental strains crafted inside the DE'OCEAN atelier. Each lineage represents generations of precise selective cross breeding and environmental conditioning.
+                    Explore three newly developed experimental strains crafted inside the DE'OCEAN atelier. Each lineage represents generations of precise selective cross breeding.
                 </p>
             </div>
         </section>
 
-        <!-- 3 EXPERIMENTAL STRAIN CARDS -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 space-y-8 sm:space-y-16">
 
             <!-- STRAIN 1 -->
             <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-4 sm:p-8 space-y-6 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-                    
                     <div class="lg:col-span-5 relative overflow-hidden img-zoom aspect-[4/3] border border-platinum-subtle bg-obsidian">
                         <img src="new/1.jpg" alt="Platinum Gold Shadow Guppy" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1000&q=80';">
                         <div class="absolute top-2.5 left-2.5 bg-obsidian/90 border border-platinum-subtle px-2.5 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
                             ● F3 Generation Stable
                         </div>
                     </div>
-
                     <div class="lg:col-span-7 space-y-4 sm:space-y-6">
                         <div class="space-y-1 sm:space-y-2">
-                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em] sm:tracking-[0.25em]">Experimental Strain 01</span>
+                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em]">Experimental Strain 01</span>
                             <h2 class="font-serif text-xl sm:text-3xl text-platinum uppercase">Platinum Gold Shadow</h2>
                             <div class="w-12 h-px bg-platinum/30 mt-1"></div>
                         </div>
-
                         <div class="grid grid-cols-2 gap-2 sm:gap-4 border border-platinum-subtle p-3 sm:p-4 bg-obsidian/80 text-[11px] sm:text-xs font-mono">
-                            <div class="space-y-1 border-r border-platinum-subtle/50 pr-1.5 sm:pr-2">
-                                <span class="text-[9px] sm:text-[10px] text-blue-400 uppercase tracking-wider block flex items-center gap-1">
-                                    <i data-lucide="mars" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> Male Parent (P1)
-                                </span>
+                            <div class="space-y-1 border-r border-platinum-subtle/50 pr-2">
+                                <span class="text-[9px] sm:text-[10px] text-blue-400 uppercase tracking-wider block">Male Parent (P1)</span>
                                 <span class="text-platinum font-semibold block text-xs sm:text-sm truncate">Full Gold Metallic</span>
-                                <span class="text-[9px] sm:text-[10px] text-platinumMuted block line-clamp-1">Y-Linked Golden Sheen</span>
                             </div>
-                            <div class="space-y-1 pl-1.5 sm:pl-2">
-                                <span class="text-[9px] sm:text-[10px] text-rose-400 uppercase tracking-wider block flex items-center gap-1">
-                                    <i data-lucide="venus" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> Female Parent (P2)
-                                </span>
+                            <div class="space-y-1 pl-2">
+                                <span class="text-[9px] sm:text-[10px] text-rose-400 uppercase tracking-wider block">Female Parent (P2)</span>
                                 <span class="text-platinum font-semibold block text-xs sm:text-sm truncate">Full Black Moscow</span>
-                                <span class="text-[9px] sm:text-[10px] text-platinumMuted block line-clamp-1">Dark Fin Genes</span>
                             </div>
                         </div>
-
-                        <div class="space-y-2 text-xs text-platinumMuted font-light leading-relaxed">
-                            <p>
-                                Developed to challenge traditional mono-color strains, the <strong class="text-platinum font-normal">Platinum Gold Shadow</strong> blends luminous golden body luster with midnight-black dorsal and caudal fins.
-                            </p>
-                            <p class="hidden sm:block">
-                                By crossing a pure Full Gold male with a dark Full Black female across three generations (F1 to F3), we successfully isolated a striking bi-color expression.
-                            </p>
-                        </div>
-
+                        <p class="text-xs text-platinumMuted font-light leading-relaxed">
+                            Blends luminous golden body luster with midnight-black dorsal and caudal fins across three stable generations.
+                        </p>
                         <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-platinum-subtle/60">
-                            <div class="flex items-center justify-between sm:justify-start gap-4 sm:gap-6 text-xs text-platinumMuted font-mono">
-                                <div><span class="text-[8px] sm:text-[9px] uppercase block text-platinumMuted">Yield / Spawn</span> 30-40 Fry</div>
-                                <div><span class="text-[8px] sm:text-[9px] uppercase block text-platinumMuted">Target pH</span> 7.0 - 7.4</div>
+                            <div class="flex items-center justify-between sm:justify-start gap-6 text-xs text-platinumMuted font-mono">
+                                <div><span class="text-[9px] uppercase block">Yield</span> 30-40 Fry</div>
+                                <div><span class="text-[9px] uppercase block">pH</span> 7.0 - 7.4</div>
                             </div>
-                            <button onclick="openOrderModal('Platinum Gold Shadow')" class="w-full sm:w-auto bg-platinum text-obsidian px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-widest hover:bg-white transition active:scale-[0.99] text-center">
+                            <button onclick="openOrderModal('Platinum Gold Shadow')" class="w-full sm:w-auto bg-platinum text-obsidian px-5 py-3 text-xs font-semibold uppercase tracking-widest hover:bg-white transition active:scale-[0.99] text-center">
                                 Request Strain Pair
                             </button>
                         </div>
                     </div>
-
                 </div>
             </article>
 
             <!-- STRAIN 2 -->
             <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-4 sm:p-8 space-y-6 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-                    
                     <div class="lg:col-span-5 relative overflow-hidden img-zoom aspect-[4/3] border border-platinum-subtle bg-obsidian">
                         <img src="new/2.jpg" alt="Crimson Opal Albino Guppy" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80';">
                         <div class="absolute top-2.5 left-2.5 bg-obsidian/90 border border-platinum-subtle px-2.5 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
                             ● F2 Lineage Test
                         </div>
                     </div>
-
                     <div class="lg:col-span-7 space-y-4 sm:space-y-6">
                         <div class="space-y-1 sm:space-y-2">
-                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em] sm:tracking-[0.25em]">Experimental Strain 02</span>
+                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em]">Experimental Strain 02</span>
                             <h2 class="font-serif text-xl sm:text-3xl text-platinum uppercase">Crimson Opal Albino</h2>
                             <div class="w-12 h-px bg-platinum/30 mt-1"></div>
                         </div>
-
                         <div class="grid grid-cols-2 gap-2 sm:gap-4 border border-platinum-subtle p-3 sm:p-4 bg-obsidian/80 text-[11px] sm:text-xs font-mono">
-                            <div class="space-y-1 border-r border-platinum-subtle/50 pr-1.5 sm:pr-2">
-                                <span class="text-[9px] sm:text-[10px] text-blue-400 uppercase tracking-wider block flex items-center gap-1">
-                                    <i data-lucide="mars" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> Male Parent (P1)
-                                </span>
+                            <div class="space-y-1 border-r border-platinum-subtle/50 pr-2">
+                                <span class="text-[9px] sm:text-[10px] text-blue-400 uppercase tracking-wider block">Male Parent (P1)</span>
                                 <span class="text-platinum font-semibold block text-xs sm:text-sm truncate">Albino Full Red</span>
-                                <span class="text-[9px] sm:text-[10px] text-platinumMuted block line-clamp-1">Ruby Eyes & Crimson</span>
                             </div>
-                            <div class="space-y-1 pl-1.5 sm:pl-2">
-                                <span class="text-[9px] sm:text-[10px] text-rose-400 uppercase tracking-wider block flex items-center gap-1">
-                                    <i data-lucide="venus" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> Female Parent (P2)
-                                </span>
+                            <div class="space-y-1 pl-2">
+                                <span class="text-[9px] sm:text-[10px] text-rose-400 uppercase tracking-wider block">Female Parent (P2)</span>
                                 <span class="text-platinum font-semibold block text-xs sm:text-sm truncate">Platinum White Dumbo</span>
-                                <span class="text-[9px] sm:text-[10px] text-platinumMuted block line-clamp-1">Opal Iridescence</span>
                             </div>
                         </div>
-
-                        <div class="space-y-2 text-xs text-platinumMuted font-light leading-relaxed">
-                            <p>
-                                The <strong class="text-platinum font-normal">Crimson Opal Albino</strong> represents an ambitious hybrid attempt to fuse intense ruby pigmentation with pearl iridescence.
-                            </p>
-                        </div>
-
+                        <p class="text-xs text-platinumMuted font-light leading-relaxed">
+                            An ambitious hybrid combining intense ruby pigmentation with pearl iridescence and ruby eyes.
+                        </p>
                         <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-platinum-subtle/60">
-                            <div class="flex items-center justify-between sm:justify-start gap-4 sm:gap-6 text-xs text-platinumMuted font-mono">
-                                <div><span class="text-[8px] sm:text-[9px] uppercase block text-platinumMuted">Yield / Spawn</span> 25-35 Fry</div>
-                                <div><span class="text-[8px] sm:text-[9px] uppercase block text-platinumMuted">Target pH</span> 6.8 - 7.2</div>
+                            <div class="flex items-center justify-between sm:justify-start gap-6 text-xs text-platinumMuted font-mono">
+                                <div><span class="text-[9px] uppercase block">Yield</span> 25-35 Fry</div>
+                                <div><span class="text-[9px] uppercase block">pH</span> 6.8 - 7.2</div>
                             </div>
-                            <button onclick="openOrderModal('Crimson Opal Albino')" class="w-full sm:w-auto bg-platinum text-obsidian px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-widest hover:bg-white transition active:scale-[0.99] text-center">
+                            <button onclick="openOrderModal('Crimson Opal Albino')" class="w-full sm:w-auto bg-platinum text-obsidian px-5 py-3 text-xs font-semibold uppercase tracking-widest hover:bg-white transition active:scale-[0.99] text-center">
                                 Request Strain Pair
                             </button>
                         </div>
                     </div>
-
                 </div>
             </article>
 
             <!-- STRAIN 3 -->
             <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-4 sm:p-8 space-y-6 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-                    
                     <div class="lg:col-span-5 relative overflow-hidden img-zoom aspect-[4/3] border border-platinum-subtle bg-obsidian">
                         <img src="new/3.jpg" alt="Emerald Dragon Mesh Guppy" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1000&q=80';">
                         <div class="absolute top-2.5 left-2.5 bg-obsidian/90 border border-platinum-subtle px-2.5 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
                             ● F1 Hybrid Reserve
                         </div>
                     </div>
-
                     <div class="lg:col-span-7 space-y-4 sm:space-y-6">
                         <div class="space-y-1 sm:space-y-2">
-                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em] sm:tracking-[0.25em]">Experimental Strain 03</span>
+                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em]">Experimental Strain 03</span>
                             <h2 class="font-serif text-xl sm:text-3xl text-platinum uppercase">Emerald Dragon Mesh</h2>
                             <div class="w-12 h-px bg-platinum/30 mt-1"></div>
                         </div>
-
                         <div class="grid grid-cols-2 gap-2 sm:gap-4 border border-platinum-subtle p-3 sm:p-4 bg-obsidian/80 text-[11px] sm:text-xs font-mono">
-                            <div class="space-y-1 border-r border-platinum-subtle/50 pr-1.5 sm:pr-2">
-                                <span class="text-[9px] sm:text-[10px] text-blue-400 uppercase tracking-wider block flex items-center gap-1">
-                                    <i data-lucide="mars" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> Male Parent (P1)
-                                </span>
+                            <div class="space-y-1 border-r border-platinum-subtle/50 pr-2">
+                                <span class="text-[9px] sm:text-[10px] text-blue-400 uppercase tracking-wider block">Male Parent (P1)</span>
                                 <span class="text-platinum font-semibold block text-xs sm:text-sm truncate">Green Dragon Mosaic</span>
-                                <span class="text-[9px] sm:text-[10px] text-platinumMuted block line-clamp-1">Dragon Scale Pattern</span>
                             </div>
-                            <div class="space-y-1 pl-1.5 sm:pl-2">
-                                <span class="text-[9px] sm:text-[10px] text-rose-400 uppercase tracking-wider block flex items-center gap-1">
-                                    <i data-lucide="venus" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> Female Parent (P2)
-                                </span>
+                            <div class="space-y-1 pl-2">
+                                <span class="text-[9px] sm:text-[10px] text-rose-400 uppercase tracking-wider block">Female Parent (P2)</span>
                                 <span class="text-platinum font-semibold block text-xs sm:text-sm truncate">Platinum Metal Lace</span>
-                                <span class="text-[9px] sm:text-[10px] text-platinumMuted block line-clamp-1">Snakeskin Lattice</span>
                             </div>
                         </div>
-
-                        <div class="space-y-2 text-xs text-platinumMuted font-light leading-relaxed">
-                            <p>
-                                Designed for aquascapers seeking intricate pattern density, the <strong class="text-platinum font-normal">Emerald Dragon Mesh</strong> combines fine metallic snakeskin webbing with deep emerald green scales.
-                            </p>
-                        </div>
-
+                        <p class="text-xs text-platinumMuted font-light leading-relaxed">
+                            Combines fine metallic snakeskin webbing with deep emerald green dragon scale patterns.
+                        </p>
                         <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-platinum-subtle/60">
-                            <div class="flex items-center justify-between sm:justify-start gap-4 sm:gap-6 text-xs text-platinumMuted font-mono">
-                                <div><span class="text-[8px] sm:text-[9px] uppercase block text-platinumMuted">Yield / Spawn</span> 35-45 Fry</div>
-                                <div><span class="text-[8px] sm:text-[9px] uppercase block text-platinumMuted">Target pH</span> 7.2 - 7.5</div>
+                            <div class="flex items-center justify-between sm:justify-start gap-6 text-xs text-platinumMuted font-mono">
+                                <div><span class="text-[9px] uppercase block">Yield</span> 35-45 Fry</div>
+                                <div><span class="text-[9px] uppercase block">pH</span> 7.2 - 7.5</div>
                             </div>
-                            <button onclick="openOrderModal('Emerald Dragon Mesh')" class="w-full sm:w-auto bg-platinum text-obsidian px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-widest hover:bg-white transition active:scale-[0.99] text-center">
+                            <button onclick="openOrderModal('Emerald Dragon Mesh')" class="w-full sm:w-auto bg-platinum text-obsidian px-5 py-3 text-xs font-semibold uppercase tracking-widest hover:bg-white transition active:scale-[0.99] text-center">
                                 Request Strain Pair
                             </button>
                         </div>
                     </div>
-
                 </div>
             </article>
 
         </main>
 
-        <!-- FOOTER -->
         <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
                 <div class="flex flex-col items-center md:items-start gap-1">
@@ -367,10 +289,9 @@
                 </div>
             </div>
         </footer>
-
     </div>
 
-    <!-- EXPERIMENTAL STRAIN ORDER MODAL -->
+    <!-- ORDER MODAL -->
     <div id="experimentalOrderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
         <div class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeOrderModal()"></div>
         <div class="relative bg-surface border border-platinum-subtle max-w-md w-full p-5 sm:p-8 z-10 max-h-[92vh] overflow-y-auto">
@@ -418,7 +339,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         const OWNER_WHATSAPP = "918592899766";
 

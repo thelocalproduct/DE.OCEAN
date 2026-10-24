@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DE'OCEAN | Genetics & Botanical Pond Culture</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,11 +38,17 @@
     </script>
 
     <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             background-color: #080808;
             color: #E5E4E2;
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
         }
 
         /* Custom scrollbar */
@@ -64,8 +70,9 @@
         }
 
         .bg-glass {
-            background: rgba(18, 18, 18, 0.65);
-            backdrop-filter: blur(14px);
+            background: rgba(12, 12, 12, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         /* Editorial Article Typography Enhancements */
@@ -119,7 +126,7 @@
         }
     </style>
 </head>
-<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
     <!-- FULLSCREEN NATURAL BOTANICAL POND BACKGROUND WITH SCROLL FADE -->
     <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
@@ -132,76 +139,79 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/95"></div>
     </div>
 
-    <!-- STANDARDIZED TOP BAR (DE'OCEAN) -->
-<header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Mobile Hamburger Button -->
-        <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 focus:outline-none">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-22 flex items-center justify-between">
+            
+            <!-- Brand / Logo -->
+            <a href="index.html" class="flex flex-col group py-2">
+                <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
+            </a>
 
-        <!-- Brand / Logo -->
-        <a href="index.html" class="flex flex-col items-center lg:items-start group">
-            <span class="font-serif text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
-            <span class="text-[9px] tracking-[0.3em] uppercase text-platinumMuted -mt-1 font-sans">Guppy Atelier</span>
-        </a>
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">
+                    Collections
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="discover.html" class="hover:text-platinum transition py-2 relative group">
+                    Discover
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="contract.html" class="hover:text-platinum transition py-2 relative group">
+                    Wholesale
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="genetics.html" class="text-platinum transition py-2 relative group">
+                    Genetics
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">
+                    Water Specs
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
 
-        <!-- Desktop Navigation Links -->
-        <nav class="hidden lg:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
-            <a href="vault.html" class="hover:text-platinum transition">Collections</a>
-            <a href="discover.html" class="hover:text-platinum transition">Discover</a>
-            <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
-            <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
-            <a href="index.html#parameters" class="hover:text-platinum transition">Water Specs</a>
+            <!-- Desktop Direct Access Action -->
+            <div class="hidden lg:flex items-center">
+                <a href="vault.html" class="border border-platinum-subtle px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-platinum hover:bg-platinum hover:text-obsidian transition duration-300">
+                    Explore Strain Vault
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2.5 -mr-2 focus:outline-none flex items-center gap-2" aria-label="Open Menu">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-platinumMuted">Menu</span>
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
+        <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
+            <div class="flex flex-col">
+                <span class="font-serif text-xl tracking-widest text-platinum">DE'OCEAN</span>
+                <span class="text-[8px] tracking-[0.25em] uppercase text-platinumMuted">Guppy Atelier</span>
+            </div>
+            <button id="closeMobileMenu" class="text-platinum p-2 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-base sm:text-xl tracking-[0.2em] uppercase my-auto py-6">
+            <a href="vault.html" class="text-platinumMuted hover:text-platinum py-1 transition">Collections</a>
+            <a href="discover.html" class="text-platinumMuted hover:text-platinum py-1 transition">Discover Strains</a>
+            <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="text-platinum py-1 hover:text-white transition">Genetics Documentation</a>
+            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
         </nav>
-
-        <!-- Action Icons (Search, Favorites / Wishlist, Hidden Admin, Cart) -->
-        <div class="flex items-center space-x-4 sm:space-x-5">
-            <button onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2" title="Search Vault">
-                <i data-lucide="search" class="w-5 h-5"></i>
-            </button>
-            <button id="wishlistToggle" onclick="toggleWishlistDrawer()" class="text-platinumMuted hover:text-platinum transition p-2 relative" title="Saved Favorites">
-                <i data-lucide="heart" class="w-5 h-5"></i>
-                <span id="wishlistBadge" class="absolute top-1 right-1 w-2 h-2 bg-platinum rounded-full hidden"></span>
-            </button>
-
-            <!-- Secret Admin Portal Toggle (Hidden by default) -->
-            <button id="adminToggleBtn" onclick="toggleAdminPanel()" class="hidden text-platinumMuted hover:text-platinum transition p-2 items-center gap-1 border border-platinum-subtle px-2.5 py-1.5 text-xs tracking-wider" title="Admin Portal">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span class="hidden md:inline uppercase text-[10px] font-mono">Admin</span>
-            </button>
-
-            <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-2 border border-platinum-subtle px-3 py-1.5 text-xs tracking-wider">
-                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                <span id="cartCount" class="font-mono text-xs">0</span>
-            </button>
-        </div>
-    </div>
-</header>
-
-    <!-- MOBILE MENU MODAL -->
-    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-95 hidden flex-col justify-between p-8">
-        <div class="flex justify-between items-center">
-            <span class="font-serif text-xl tracking-widest">DE'OCEAN</span>
-            <button id="closeMobileMenu" class="text-platinum"><i data-lucide="x" class="w-6 h-6"></i></button>
-        </div>
-        <nav class="flex flex-col space-y-6 text-center font-serif text-lg tracking-widest uppercase my-auto">
-            <a href="vault.html" class="mobile-nav-link">Collections</a>
-            <a href="genetics.html" class="mobile-nav-link text-platinum">Genetics</a>
-            <a href="index.html#parameters" class="mobile-nav-link">Water Specs</a>
-            <a href="index.html#guarantee" class="mobile-nav-link">Guarantee</a>
-        </nav>
-        <div class="text-center text-xs text-platinumMuted tracking-widest">
-            © 2026 DE'OCEAN ATELIER
-        </div>
+        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
 
     <!-- MAIN ARTICLE CONTENT CONTAINER -->
-    <div class="relative z-10 flex-grow flex flex-col">
+    <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
 
         <!-- ARTICLE HERO HEADER -->
-        <section class="relative py-20 sm:py-28 border-b border-platinum-subtle px-4 sm:px-6 lg:px-8 bg-charcoal/40 backdrop-blur-md">
+        <section class="relative py-16 sm:py-28 border-b border-platinum-subtle px-4 sm:px-6 lg:px-8 bg-charcoal/40 backdrop-blur-md">
             <div class="max-w-4xl mx-auto text-center space-y-6">
                 <div class="inline-flex items-center gap-2 border border-platinum-subtle px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-obsidian/60 shadow-lg">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
@@ -384,29 +394,30 @@
 
             <!-- EXPLORE VAULT CTA -->
             <div class="pt-10 text-center">
-                <a href="vault.html" class="inline-flex items-center gap-3 bg-platinum text-obsidian px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition shadow-2xl">
+                <a href="vault.html" class="inline-flex items-center gap-3 bg-platinum text-obsidian px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition shadow-2xl active:scale-[0.99]">
                     Explore Vault Strains <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
             </div>
 
         </article>
 
-        <!-- FOOTER (IDENTICAL TO INDEX.HTML FOOTER) -->
-        <footer class="border-t border-platinum-subtle bg-obsidian py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- FOOTER -->
+        <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
                 <div class="flex flex-col items-center md:items-start gap-1">
-                    <span class="font-serif text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
-                    <span class="text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                    <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
                 </div>
                 
-                <div class="flex gap-8 uppercase tracking-widest text-[11px]">
-                    <a href="vault.html" class="hover:text-platinum">Vault</a>
-                    <a href="genetics.html" class="hover:text-platinum">Genetics</a>
-                    <a href="index.html#parameters" class="hover:text-platinum">Care Specs</a>
-                    <a href="index.html#about" class="hover:text-platinum">Guarantee</a>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
+                    <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
+                    <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
+                    <a href="genetics.html" class="hover:text-platinum py-1">Genetics</a>
+                    <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
                 </div>
 
-                <div class="text-[11px] tracking-wider">
+                <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
                     © 2026 DE'OCEAN Studio. All Rights Reserved.
                 </div>
             </div>
@@ -414,42 +425,12 @@
 
     </div>
 
-    <!-- CART SLIDE-OUT DRAWER -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
-        <div id="cartOverlay" class="absolute inset-0 bg-obsidian bg-opacity-80 transition-opacity pointer-events-auto"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-platinum-subtle p-6 flex flex-col justify-between pointer-events-auto shadow-2xl">
-            <div>
-                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4 mb-6">
-                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Your Vault (<span id="cartDrawerCount">0</span>)
-                    </h3>
-                    <button id="closeCart" class="text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-                </div>
-
-                <div id="cartItems" class="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
-                    <!-- Dynamic Cart Rows -->
-                </div>
-            </div>
-
-            <div class="border-t border-platinum-subtle pt-4 space-y-4">
-                <div class="flex justify-between text-sm uppercase tracking-wider">
-                    <span class="text-platinumMuted">Subtotal</span>
-                    <span id="cartSubtotal" class="font-mono text-platinum">$0.00</span>
-                </div>
-                <p class="text-[10px] text-platinumMuted tracking-wider uppercase">Insulated Thermal Courier calculated at checkout.</p>
-                <button onclick="alert('Proceeding to Platinum Encrypted Checkout')" class="w-full bg-platinum text-obsidian py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center">
-                    Proceed to Checkout
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- JAVASCRIPT LOGIC -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
 
-            // Mobile menu listeners
+            // Mobile Menu Handlers
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.remove('hidden');
                 document.getElementById('mobileMenu').classList.add('flex');
@@ -459,35 +440,15 @@
                 document.getElementById('mobileMenu').classList.remove('flex');
             });
 
-            // Cart Drawer Controls
-            document.getElementById('cartToggle').addEventListener('click', toggleCartDrawer);
-            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
-            document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
-
             // HERO BACKGROUND SCROLL FADE LOGIC
             const heroBg = document.getElementById('heroBg');
-            const fadeThreshold = 550;
-
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                if (scrolled <= fadeThreshold) {
-                    const opacity = 1 - (scrolled / fadeThreshold);
-                    heroBg.style.opacity = opacity.toFixed(2);
-                } else {
-                    heroBg.style.opacity = 0;
-                }
-            });
-        });
-
-        function toggleCartDrawer(openForce) {
-            const drawer = document.getElementById('cartDrawer');
-            if (openForce === true) {
-                drawer.classList.remove('hidden');
-                drawer.classList.add('pointer-events-auto');
-            } else {
-                drawer.classList.toggle('hidden');
+            if (heroBg) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    heroBg.style.opacity = scrolled <= 550 ? (1 - (scrolled / 550)).toFixed(2) : 0;
+                });
             }
-        }
+        });
     </script>
 </body>
 </html>
