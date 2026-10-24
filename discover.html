@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DE'OCEAN | Discover Experimental Strains</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,6 +41,7 @@
             color: #E5E4E2;
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
         }
 
         ::-webkit-scrollbar {
@@ -87,7 +88,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/90"></div>
     </div>
 
-    <!-- NAVIGATION (EXACTLY IDENTICAL TO INDEX.HTML) -->
+    <!-- NAVIGATION -->
     <header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
@@ -114,12 +115,6 @@
                 </button>
                 <button id="wishlistToggle" onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2 relative hidden sm:block">
                     <i data-lucide="heart" class="w-5 h-5"></i>
-                </button>
-
-                <!-- SECRET ADMIN BUTTON -->
-                <button id="adminToggleBtn" onclick="toggleAdminPanel()" class="hidden text-platinumMuted hover:text-platinum transition p-2 items-center gap-1 border border-platinum-subtle px-2.5 py-1.5 text-xs tracking-wider" title="Admin Portal">
-                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                    <span class="hidden md:inline uppercase text-[10px] font-mono">Admin</span>
                 </button>
 
                 <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-2 border border-platinum-subtle px-3 py-1.5 text-xs tracking-wider">
@@ -174,7 +169,6 @@
             <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-6 sm:p-10 space-y-8 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <!-- Picture Container (Path: new/1.jpg) -->
                     <div class="lg:col-span-5 relative overflow-hidden img-zoom aspect-[4/3] border border-platinum-subtle bg-obsidian">
                         <img src="new/1.jpg" alt="Platinum Gold Shadow Guppy" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1000&q=80';">
                         <div class="absolute top-3 left-3 bg-obsidian/80 border border-platinum-subtle px-3 py-1 text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
@@ -182,7 +176,6 @@
                         </div>
                     </div>
 
-                    <!-- Article & Details -->
                     <div class="lg:col-span-7 space-y-6">
                         <div class="space-y-2">
                             <span class="text-[10px] font-mono text-platinumMuted uppercase tracking-[0.25em]">Experimental Strain 01</span>
@@ -190,7 +183,6 @@
                             <div class="w-12 h-px bg-platinum/30"></div>
                         </div>
 
-                        <!-- Parent Details Box -->
                         <div class="grid grid-cols-2 gap-4 border border-platinum-subtle p-4 bg-obsidian/80 text-xs font-mono">
                             <div class="space-y-1 border-r border-platinum-subtle/50 pr-2">
                                 <span class="text-[10px] text-blue-400 uppercase tracking-wider block flex items-center gap-1">
@@ -208,13 +200,12 @@
                             </div>
                         </div>
 
-                        <!-- Short Editorial Article -->
                         <div class="space-y-3 text-xs text-platinumMuted font-light leading-relaxed">
                             <p>
                                 Developed to challenge traditional mono-color strains, the <strong class="text-platinum font-normal">Platinum Gold Shadow</strong> blends luminous golden body luster with midnight-black dorsal and caudal fins.
                             </p>
                             <p>
-                                By crossing a pure Full Gold male with a dark Full Black female across three generations (F1 to F3), we successfully isolated a striking bi-color expression. The males feature a mirror-like golden torso paired with jet-black caudal tails, resulting in a dramatic contrast ideal for planted display aquariums.
+                                By crossing a pure Full Gold male with a dark Full Black female across three generations (F1 to F3), we successfully isolated a striking bi-color expression.
                             </p>
                         </div>
 
@@ -223,9 +214,9 @@
                                 <div><span class="text-[9px] uppercase block text-platinumMuted">Yield / Spawn</span> 30-40 Fry</div>
                                 <div><span class="text-[9px] uppercase block text-platinumMuted">Target pH</span> 7.0 - 7.4</div>
                             </div>
-                            <a href="vault.html" class="bg-platinum text-obsidian px-6 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition">
+                            <button onclick="openOrderModal('Platinum Gold Shadow')" class="bg-platinum text-obsidian px-6 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition active:scale-95">
                                 Request Strain Pair
-                            </a>
+                            </button>
                         </div>
                     </div>
 
@@ -236,7 +227,6 @@
             <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-6 sm:p-10 space-y-8 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <!-- Picture Container (Path: new/2.jpg) -->
                     <div class="lg:col-span-5 relative overflow-hidden img-zoom aspect-[4/3] border border-platinum-subtle bg-obsidian">
                         <img src="new/2.jpg" alt="Crimson Opal Albino Guppy" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80';">
                         <div class="absolute top-3 left-3 bg-obsidian/80 border border-platinum-subtle px-3 py-1 text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
@@ -244,7 +234,6 @@
                         </div>
                     </div>
 
-                    <!-- Article & Details -->
                     <div class="lg:col-span-7 space-y-6">
                         <div class="space-y-2">
                             <span class="text-[10px] font-mono text-platinumMuted uppercase tracking-[0.25em]">Experimental Strain 02</span>
@@ -252,7 +241,6 @@
                             <div class="w-12 h-px bg-platinum/30"></div>
                         </div>
 
-                        <!-- Parent Details Box -->
                         <div class="grid grid-cols-2 gap-4 border border-platinum-subtle p-4 bg-obsidian/80 text-xs font-mono">
                             <div class="space-y-1 border-r border-platinum-subtle/50 pr-2">
                                 <span class="text-[10px] text-blue-400 uppercase tracking-wider block flex items-center gap-1">
@@ -270,13 +258,9 @@
                             </div>
                         </div>
 
-                        <!-- Short Editorial Article -->
                         <div class="space-y-3 text-xs text-platinumMuted font-light leading-relaxed">
                             <p>
                                 The <strong class="text-platinum font-normal">Crimson Opal Albino</strong> represents an ambitious hybrid attempt to fuse intense ruby pigmentation with pearl iridescence.
-                            </p>
-                            <p>
-                                Incorporating the autosomal recessive albino trait from the male line alongside the heavy platinum scale coverage of the female parent created a translucent, fiery red body with pastel opal highlights. The result is an ethereal specimen that shimmers red and platinum under overhead aquarium lighting.
                             </p>
                         </div>
 
@@ -285,9 +269,9 @@
                                 <div><span class="text-[9px] uppercase block text-platinumMuted">Yield / Spawn</span> 25-35 Fry</div>
                                 <div><span class="text-[9px] uppercase block text-platinumMuted">Target pH</span> 6.8 - 7.2</div>
                             </div>
-                            <a href="vault.html" class="bg-platinum text-obsidian px-6 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition">
+                            <button onclick="openOrderModal('Crimson Opal Albino')" class="bg-platinum text-obsidian px-6 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition active:scale-95">
                                 Request Strain Pair
-                            </a>
+                            </button>
                         </div>
                     </div>
 
@@ -298,7 +282,6 @@
             <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-6 sm:p-10 space-y-8 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <!-- Picture Container (Path: new/3.jpg) -->
                     <div class="lg:col-span-5 relative overflow-hidden img-zoom aspect-[4/3] border border-platinum-subtle bg-obsidian">
                         <img src="new/3.jpg" alt="Emerald Dragon Mesh Guppy" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1000&q=80';">
                         <div class="absolute top-3 left-3 bg-obsidian/80 border border-platinum-subtle px-3 py-1 text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
@@ -306,7 +289,6 @@
                         </div>
                     </div>
 
-                    <!-- Article & Details -->
                     <div class="lg:col-span-7 space-y-6">
                         <div class="space-y-2">
                             <span class="text-[10px] font-mono text-platinumMuted uppercase tracking-[0.25em]">Experimental Strain 03</span>
@@ -314,7 +296,6 @@
                             <div class="w-12 h-px bg-platinum/30"></div>
                         </div>
 
-                        <!-- Parent Details Box -->
                         <div class="grid grid-cols-2 gap-4 border border-platinum-subtle p-4 bg-obsidian/80 text-xs font-mono">
                             <div class="space-y-1 border-r border-platinum-subtle/50 pr-2">
                                 <span class="text-[10px] text-blue-400 uppercase tracking-wider block flex items-center gap-1">
@@ -332,13 +313,9 @@
                             </div>
                         </div>
 
-                        <!-- Short Editorial Article -->
                         <div class="space-y-3 text-xs text-platinumMuted font-light leading-relaxed">
                             <p>
                                 Designed for aquascapers seeking intricate pattern density, the <strong class="text-platinum font-normal">Emerald Dragon Mesh</strong> combines fine metallic snakeskin webbing with deep emerald green scales.
-                            </p>
-                            <p>
-                                Inheriting Y-linked dragon motifs from the sire and metallic lattice structures from the dam, this strain exhibits a reticulated mesh across its broad delta tail. Conditioned with live Artemia nauplii and natural tannin-rich water, offspring demonstrate exceptional fin extension and rich color retention.
                             </p>
                         </div>
 
@@ -347,9 +324,9 @@
                                 <div><span class="text-[9px] uppercase block text-platinumMuted">Yield / Spawn</span> 35-45 Fry</div>
                                 <div><span class="text-[9px] uppercase block text-platinumMuted">Target pH</span> 7.2 - 7.5</div>
                             </div>
-                            <a href="vault.html" class="bg-platinum text-obsidian px-6 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition">
+                            <button onclick="openOrderModal('Emerald Dragon Mesh')" class="bg-platinum text-obsidian px-6 py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition active:scale-95">
                                 Request Strain Pair
-                            </a>
+                            </button>
                         </div>
                     </div>
 
@@ -358,7 +335,7 @@
 
         </main>
 
-        <!-- FOOTER (EXACTLY IDENTICAL TO INDEX.HTML) -->
+        <!-- FOOTER -->
         <footer class="border-t border-platinum-subtle bg-obsidian py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex flex-col items-center md:items-start gap-1">
@@ -374,8 +351,7 @@
                     <a href="index.html#parameters" class="hover:text-platinum">Care Specs</a>
                 </div>
 
-                <!-- SECRET UNLOCK ON DOUBLE CLICK -->
-                <div class="text-[11px] tracking-wider cursor-pointer select-none" ondblclick="toggleSecretAdmin()">
+                <div class="text-[11px] tracking-wider select-none">
                     © 2026 DE'OCEAN Studio. All Rights Reserved.
                 </div>
             </div>
@@ -383,56 +359,61 @@
 
     </div>
 
-    <!-- ADMIN PORTAL MODAL / DASHBOARD (IDENTICAL TO INDEX.HTML) -->
-    <div id="adminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div id="adminOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="toggleAdminPanel()"></div>
-        <div class="relative bg-surface border border-platinum-subtle max-w-3xl w-full p-6 sm:p-8 z-10 max-h-[85vh] overflow-y-auto">
-            <button onclick="toggleAdminPanel()" class="absolute top-4 right-4 text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <!-- EXPERIMENTAL STRAIN ORDER MODAL -->
+    <div id="experimentalOrderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeOrderModal()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-md w-full p-5 sm:p-8 z-10 max-h-[92vh] overflow-y-auto">
+            <button onclick="closeOrderModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
             
-            <div id="adminAuthSection" class="space-y-6 text-center">
-                <div class="w-12 h-12 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+            <form id="expOrderForm" onsubmit="submitExpOrder(event)" class="space-y-4 text-left">
+                <div class="text-center space-y-1">
+                    <div class="w-10 h-10 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum mb-2">
+                        <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-platinumMuted font-mono">Experimental Reserve</span>
+                    <h3 id="modalStrainTitle" class="font-serif text-lg sm:text-xl text-platinum">Request Experimental Pair</h3>
                 </div>
-                <div>
-                    <h3 class="font-serif text-2xl text-platinum">Atelier Admin Portal</h3>
-                    <p class="text-xs text-platinumMuted mt-1">Enter Master Access PIN (Default: 1234)</p>
-                </div>
-                <div class="max-w-xs mx-auto space-y-3">
-                    <input type="password" id="adminPinInput" placeholder="Enter PIN..." class="w-full bg-obsidian border border-platinum-subtle text-center text-sm py-2.5 text-platinum placeholder-platinumMuted focus:outline-none">
-                    <button onclick="authenticateAdmin()" class="w-full bg-platinum text-obsidian py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-white transition">Verify Key</button>
-                </div>
-            </div>
 
-            <div id="adminDashboardSection" class="hidden space-y-8">
-                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4">
+                <input type="hidden" id="modalStrainName" value="">
+
+                <div class="space-y-3 pt-2">
                     <div>
-                        <span class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest">Authenticated Session</span>
-                        <h3 class="font-serif text-xl text-platinum">Master Atelier Dashboard</h3>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Full Name</label>
+                        <input type="text" id="custName" required placeholder="e.g. Julian Vance" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none">
                     </div>
-                    <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Phone / WhatsApp Number</label>
+                        <input type="tel" id="custPhone" required placeholder="+91 98765 43210" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Delivery Address</label>
+                        <textarea id="custAddress" required rows="2" placeholder="Full address with pincode..." class="w-full bg-obsidian border border-platinum-subtle text-xs py-2 px-3 text-platinum placeholder-platinumMuted focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Pair Quantity</label>
+                        <select id="custPairQty" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum font-mono focus:outline-none">
+                            <option value="1">1 Pair (1 Male / 1 Female)</option>
+                            <option value="2">2 Pairs (2 Males / 2 Females)</option>
+                            <option value="3">3 Pairs (3 Males / 3 Females)</option>
+                            <option value="5">5 Pairs (Trio / Breeder Set)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-serif text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="shopping-bag" class="w-4 h-4 text-platinum"></i> Vault Confirmations / Customer Orders (<span id="adminOrdersCount">0</span>)
-                        </h4>
-                    </div>
-                    <div id="adminOrdersList" class="space-y-3 max-h-64 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
+                <button type="submit" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
+                    Send Request via WhatsApp
+                </button>
+            </form>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        let ORDERS = JSON.parse(localStorage.getItem('deocean_orders')) || [];
-        let isAdminLoggedIn = false;
+        const OWNER_WHATSAPP = "918592899766";
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
 
-            // Background Scroll Fade
             const heroBg = document.getElementById('heroBg');
             if (heroBg) {
                 window.addEventListener('scroll', () => {
@@ -441,7 +422,6 @@
                 });
             }
 
-            // Mobile Menu Toggle
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.remove('hidden');
                 document.getElementById('mobileMenu').classList.add('flex');
@@ -450,64 +430,46 @@
                 document.getElementById('mobileMenu').classList.add('hidden');
                 document.getElementById('mobileMenu').classList.remove('flex');
             });
-
-            // Secret Admin Shortcut (Ctrl + Shift + A)
-            document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
-                    e.preventDefault();
-                    toggleSecretAdmin();
-                }
-            });
         });
 
-        function toggleSecretAdmin() {
-            const adminBtn = document.getElementById('adminToggleBtn');
-            if (adminBtn) {
-                if (adminBtn.classList.contains('hidden')) {
-                    adminBtn.classList.remove('hidden');
-                    adminBtn.classList.add('flex');
-                    alert("Admin Button Unlocked!");
-                } else {
-                    adminBtn.classList.add('hidden');
-                    adminBtn.classList.remove('flex');
-                    alert("Admin Button Hidden.");
-                }
-            }
+        function openOrderModal(strainName) {
+            document.getElementById('modalStrainName').value = strainName;
+            document.getElementById('modalStrainTitle').innerText = strainName;
+            document.getElementById('experimentalOrderModal').classList.remove('hidden');
         }
 
-        function toggleAdminPanel() {
-            const modal = document.getElementById('adminModal');
-            modal.classList.toggle('hidden');
-            if (!modal.classList.contains('hidden') && isAdminLoggedIn) {
-                renderAdminDashboard();
-            }
+        function closeOrderModal() {
+            document.getElementById('experimentalOrderModal').classList.add('hidden');
         }
 
-        function authenticateAdmin() {
-            const pin = document.getElementById('adminPinInput').value;
-            if (pin === '1234') {
-                isAdminLoggedIn = true;
-                document.getElementById('adminAuthSection').classList.add('hidden');
-                document.getElementById('adminDashboardSection').classList.remove('hidden');
-                renderAdminDashboard();
-            } else {
-                alert('Invalid Atelier Master Access Key.');
-            }
-        }
+        function submitExpOrder(e) {
+            e.preventDefault();
+            const strainName = document.getElementById('modalStrainName').value;
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const pairQty = document.getElementById('custPairQty').value;
+            const orderId = Date.now().toString().slice(-6);
 
-        function logoutAdmin() {
-            isAdminLoggedIn = false;
-            document.getElementById('adminPinInput').value = '';
-            document.getElementById('adminAuthSection').classList.remove('hidden');
-            document.getElementById('adminDashboardSection').classList.add('hidden');
-        }
+            const rawMessage = 
+`*DE'OCEAN ATELIER | EXPERIMENTAL STRAIN RESERVE (#${orderId})*
+----------------------------------
+*CUSTOMER DETAILS:*
+• Name: ${name}
+• Phone: ${phone}
+• Delivery Address: ${address}
 
-        function renderAdminDashboard() {
-            ORDERS = JSON.parse(localStorage.getItem('deocean_orders')) || [];
-            const ordersList = document.getElementById('adminOrdersList');
-            document.getElementById('adminOrdersCount').textContent = ORDERS.length;
-            ordersList.innerHTML = ORDERS.length === 0 ? `<p class="text-xs text-platinumMuted italic">No customer orders recorded.</p>` : `<p class="text-xs text-emerald-400 font-mono">${ORDERS.length} active orders logged.</p>`;
-            lucide.createIcons();
+*REQUESTED EXPERIMENTAL LINEAGE:*
+• Strain: ${strainName}
+• Pair Count: ${pairQty} Pair(s)
+----------------------------------
+_Sent via DE'OCEAN Discover Showcase_`;
+
+            const encodedMessage = encodeURIComponent(rawMessage);
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
+
+            closeOrderModal();
+            document.getElementById('expOrderForm').reset();
         }
     </script>
 </body>
