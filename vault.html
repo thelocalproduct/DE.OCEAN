@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Firebase Compatibility SDKs for Real-Time Cross-Device Order Syncing -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     
     <script>
         tailwind.config = {
@@ -44,7 +48,6 @@
             touch-action: manipulation;
         }
 
-        /* Custom Horizontal Scrollbar Hiding for Filters */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -89,6 +92,13 @@
     </style>
 </head>
 <body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen">
+
+    <!-- REALTIME CONNECTION NOTICE BANNER -->
+    <div id="cloudStatusBanner" class="bg-amber-950/80 border-b border-amber-600/30 px-4 py-2 text-center text-[10px] sm:text-xs text-amber-200 flex items-center justify-center gap-2">
+        <i data-lucide="cloud-off" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span>Cross-device cloud mode inactive. Orders currently saving locally on this device.</span>
+        <button onclick="openFirebaseSetupModal()" class="underline font-semibold uppercase tracking-wider ml-1 text-white hover:text-amber-300">Connect Cloud</button>
+    </div>
 
     <!-- SEARCH BAR OVERLAY -->
     <div id="searchBar" class="hidden sticky top-16 sm:top-20 z-30 bg-surface border-b border-platinum-subtle px-4 py-3 transition-all duration-300">
@@ -177,7 +187,7 @@
         </div>
     </section>
 
-    <!-- ADMIN PORTAL MODAL / DASHBOARD (Completely hidden from UI layout by default) -->
+    <!-- ADMIN PORTAL MODAL / DASHBOARD (Triggered via Ctrl+Shift+A or double-clicking footer copyright) -->
     <div id="adminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
         <div id="adminOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="toggleAdminPanel()"></div>
         <div class="relative bg-surface border border-platinum-subtle max-w-3xl w-full p-4 sm:p-8 z-10 max-h-[90vh] overflow-y-auto">
@@ -200,16 +210,22 @@
             <div id="adminDashboardSection" class="hidden space-y-6 sm:space-y-8">
                 <div class="flex items-center justify-between border-b border-platinum-subtle pb-4">
                     <div>
-                        <span class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest">Authenticated Session</span>
-                        <h3 class="font-serif text-lg sm:text-xl text-platinum">Master Atelier Dashboard</h3>
+                        <span id="adminCloudStatusTag" class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Cloud Sync Active
+                        </span>
+                        <h3 class="font-serif text-lg sm:text-xl text-platinum mt-0.5">Master Atelier Dashboard</h3>
                     </div>
-                    <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openFirebaseSetupModal()" class="text-xs text-amber-400 hover:text-amber-300 uppercase tracking-wider font-mono">Database Settings</button>
+                        <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
+                    </div>
                 </div>
 
+                <!-- ORDERS SECTION -->
                 <div class="space-y-4">
                     <div class="flex justify-between items-center">
                         <h4 class="font-serif text-xs sm:text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="shopping-bag" class="w-4 h-4 text-platinum"></i> Orders (<span id="adminOrdersCount">0</span>)
+                            <i data-lucide="shopping-bag" class="w-4 h-4 text-platinum"></i> Incoming Customer Orders (<span id="adminOrdersCount">0</span>)
                         </h4>
                         <button onclick="clearAllOrders()" class="text-[10px] text-rose-400 hover:text-rose-300 uppercase tracking-wider">Clear All</button>
                     </div>
@@ -217,6 +233,7 @@
                     <div id="adminOrdersList" class="space-y-3 max-h-64 overflow-y-auto pr-1"></div>
                 </div>
 
+                <!-- CALLBACK REQUESTS SECTION -->
                 <div class="space-y-4 border-t border-platinum-subtle pt-6">
                     <div class="flex justify-between items-center">
                         <h4 class="font-serif text-xs sm:text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
@@ -228,6 +245,7 @@
                     <div id="adminCallbacksList" class="space-y-3 max-h-48 overflow-y-auto pr-1"></div>
                 </div>
 
+                <!-- STOCK CONTROL SECTION -->
                 <div class="space-y-4 border-t border-platinum-subtle pt-6">
                     <div class="flex justify-between items-center">
                         <h4 class="font-serif text-xs sm:text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
@@ -238,6 +256,25 @@
 
                     <div id="adminStockList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIREBASE SETUP CONFIG MODAL -->
+    <div id="firebaseSetupModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeFirebaseSetupModal()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-lg w-full p-5 sm:p-8 z-10 space-y-4">
+            <button onclick="closeFirebaseSetupModal()" class="absolute top-3 right-3 text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div>
+                <h3 class="font-serif text-xl text-platinum">Connect Free Firebase Cloud Database</h3>
+                <p class="text-xs text-platinumMuted mt-1 leading-relaxed">
+                    Paste your Firebase Realtime Database config below so customer orders from mobile phones instantly appear on your admin panel screen.
+                </p>
+            </div>
+            <textarea id="firebaseConfigInput" rows="6" placeholder='{"apiKey": "...", "databaseURL": "https://...", "projectId": "..."}' class="w-full bg-obsidian border border-platinum-subtle text-xs p-3 font-mono text-platinum placeholder-platinumMuted focus:outline-none"></textarea>
+            <div class="flex gap-2">
+                <button onclick="saveFirebaseConfig()" class="flex-1 bg-platinum text-obsidian py-2.5 text-xs font-semibold uppercase tracking-wider hover:bg-white transition">Save & Connect</button>
+                <button onclick="clearFirebaseConfig()" class="border border-platinum-subtle text-rose-400 px-4 py-2.5 text-xs font-mono uppercase hover:border-rose-400">Disconnect</button>
             </div>
         </div>
     </div>
@@ -279,7 +316,7 @@
                 <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
             </div>
 
-            <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted" ondblclick="toggleAdminPanel()">
+            <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted cursor-pointer" ondblclick="toggleAdminPanel()">
                 © 2026 DE'OCEAN Studio. All Rights Reserved.
             </div>
         </div>
@@ -348,7 +385,7 @@
                     <span id="checkoutTotalAmount" class="font-mono text-platinum text-sm font-semibold">₹0</span>
                 </div>
 
-                <button type="submit" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
+                <button type="submit" id="submitOrderBtn" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
                     Confirm & Submit Order
                 </button>
             </form>
@@ -425,11 +462,68 @@
             activeFilter: 'all',
             searchQuery: '',
             isAdminLoggedIn: false,
-            filterWishlistOnly: false
+            filterWishlistOnly: false,
+            firebaseConnected: false
         };
+
+        let db = null;
+
+        // Initialize Firebase Cloud Database
+        function initFirebase() {
+            const storedConfig = localStorage.getItem('deocean_firebase_config');
+            if (storedConfig) {
+                try {
+                    const cfg = JSON.parse(storedConfig);
+                    if (!firebase.apps.length) {
+                        firebase.initializeApp(cfg);
+                    }
+                    db = firebase.database();
+                    state.firebaseConnected = true;
+
+                    document.getElementById('cloudStatusBanner').classList.add('hidden');
+                    const tag = document.getElementById('adminCloudStatusTag');
+                    if (tag) tag.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Cloud Sync Active`;
+
+                    // Real-Time Listener for Cross-Device Orders
+                    db.ref('orders').on('value', (snapshot) => {
+                        const val = snapshot.val();
+                        if (val) {
+                            ORDERS = Object.values(val).reverse();
+                            localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+                            if (state.isAdminLoggedIn) renderAdminData();
+                        }
+                    });
+
+                    // Real-Time Listener for Callbacks
+                    db.ref('callbacks').on('value', (snapshot) => {
+                        const val = snapshot.val();
+                        if (val) {
+                            CALLBACKS = Object.values(val).reverse();
+                            localStorage.setItem('deocean_callbacks', JSON.stringify(CALLBACKS));
+                            if (state.isAdminLoggedIn) renderAdminData();
+                        }
+                    });
+
+                    // Real-Time Listener for Stock
+                    db.ref('products').on('value', (snapshot) => {
+                        const val = snapshot.val();
+                        if (val) {
+                            PRODUCTS = val;
+                            localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+                            renderProducts();
+                            if (state.isAdminLoggedIn) renderAdminData();
+                        }
+                    });
+
+                } catch (e) {
+                    console.error("Firebase config error:", e);
+                }
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
+            initFirebase();
             renderProducts();
 
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
@@ -476,7 +570,6 @@
             document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
             document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
 
-            // Keyboard shortcut (Ctrl+Shift+A) to toggle hidden Admin Modal
             document.addEventListener('keydown', (e) => {
                 if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                     e.preventDefault();
@@ -484,6 +577,31 @@
                 }
             });
         });
+
+        /* --- FIREBASE MODAL SETUP --- */
+        function openFirebaseSetupModal() {
+            document.getElementById('firebaseSetupModal').classList.remove('hidden');
+        }
+        function closeFirebaseSetupModal() {
+            document.getElementById('firebaseSetupModal').classList.add('hidden');
+        }
+        function saveFirebaseConfig() {
+            const raw = document.getElementById('firebaseConfigInput').value;
+            try {
+                const parsed = JSON.parse(raw);
+                localStorage.setItem('deocean_firebase_config', JSON.stringify(parsed));
+                closeFirebaseSetupModal();
+                alert("Firebase Config saved! Reloading page to establish cloud link...");
+                location.reload();
+            } catch (err) {
+                alert("Invalid JSON format. Please paste a valid Firebase config JSON object.");
+            }
+        }
+        function clearFirebaseConfig() {
+            localStorage.removeItem('deocean_firebase_config');
+            alert("Firebase config cleared.");
+            location.reload();
+        }
 
         /* --- ADMIN PANEL FUNCTIONALITY --- */
         function toggleAdminPanel() {
@@ -525,7 +643,7 @@
         }
 
         function renderAdminData() {
-            // Orders
+            // Render Orders
             const ordersList = document.getElementById('adminOrdersList');
             document.getElementById('adminOrdersCount').innerText = ORDERS.length;
             if (ORDERS.length === 0) {
@@ -545,7 +663,7 @@
                 `).join('');
             }
 
-            // Callbacks
+            // Render Callbacks
             const cbList = document.getElementById('adminCallbacksList');
             document.getElementById('adminCallbackCount').innerText = CALLBACKS.length;
             if (CALLBACKS.length === 0) {
@@ -562,7 +680,7 @@
                 `).join('');
             }
 
-            // Stock Adjuster
+            // Render Stock Control
             const stockList = document.getElementById('adminStockList');
             stockList.innerHTML = PRODUCTS.map(p => `
                 <div class="flex justify-between items-center bg-obsidian border border-platinum-subtle p-2 text-xs">
@@ -583,6 +701,7 @@
             if (prod) {
                 prod.stock = Math.max(0, prod.stock + change);
                 localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+                if (db) db.ref('products').set(PRODUCTS);
                 renderAdminData();
                 renderProducts();
             }
@@ -591,6 +710,7 @@
         function resetDefaultStock() {
             PRODUCTS.forEach(p => p.stock = 50);
             localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+            if (db) db.ref('products').set(PRODUCTS);
             renderAdminData();
             renderProducts();
         }
@@ -599,6 +719,7 @@
             if (confirm("Clear all recorded orders?")) {
                 ORDERS = [];
                 localStorage.removeItem('deocean_orders');
+                if (db) db.ref('orders').remove();
                 renderAdminData();
             }
         }
@@ -607,6 +728,7 @@
             if (confirm("Clear all callback requests?")) {
                 CALLBACKS = [];
                 localStorage.removeItem('deocean_callbacks');
+                if (db) db.ref('callbacks').remove();
                 renderAdminData();
             }
         }
@@ -650,7 +772,7 @@
                                     : `<span class="text-rose-400">●</span> OUT OF STOCK`}
                             </div>
 
-                            <button onclick="toggleWishlist(${product.id})" class="absolute top-2.5 right-2.5 p-2 bg-obsidian/90 border border-platinum-subtle text-platinum hover:text-white transition active:scale-95" aria-label="Add to Wishlist">
+                            <button onclick="toggleWishlist(${product.id})" class="absolute top-2.5 right-2.5 p-2 bg-obsidian/90 border border-platinum-subtle text-platinum hover:text-white transition active:scale-95">
                                 <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-platinum text-platinum' : ''}"></i>
                             </button>
                         </div>
@@ -816,9 +938,10 @@
             const phone = document.getElementById('custPhone').value;
             const address = document.getElementById('custAddress').value;
             const total = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const orderKey = Date.now().toString();
 
             const order = {
-                id: Date.now().toString().slice(-6),
+                id: orderKey.slice(-6),
                 name,
                 phone,
                 address,
@@ -836,19 +959,23 @@
             });
 
             localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
-
             ORDERS.unshift(order);
             localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+
+            // Sync to Firebase Cloud if connected
+            if (db) {
+                db.ref('orders/' + orderKey).set(order);
+                db.ref('products').set(PRODUCTS);
+            }
 
             state.cart = [];
             updateCartCount();
             closeCheckoutModal();
             renderProducts();
-            
-            // Sync Admin Data if open
-            if(state.isAdminLoggedIn) renderAdminData();
 
-            alert(`Thank you, ${name}! Your strain reserve confirmation (#${order.id}) has been recorded. Our head breeder will contact you shortly via WhatsApp.`);
+            if (state.isAdminLoggedIn) renderAdminData();
+
+            alert(`Thank you, ${name}! Your strain reserve confirmation (#${order.id}) has been recorded. Our head breeder will contact you shortly.`);
         }
 
         /* --- CALLBACK REQUEST --- */
@@ -872,9 +999,10 @@
             const name = document.getElementById('cbName').value;
             const phone = document.getElementById('cbPhone').value;
             const time = document.getElementById('cbTime').value;
+            const cbKey = Date.now().toString();
 
             const callbackReq = {
-                id: Date.now(),
+                id: cbKey,
                 strainName: product ? product.name : 'General Enquiry',
                 name,
                 phone,
@@ -884,13 +1012,17 @@
             CALLBACKS.unshift(callbackReq);
             localStorage.setItem('deocean_callbacks', JSON.stringify(CALLBACKS));
 
+            // Sync to Firebase Cloud if connected
+            if (db) {
+                db.ref('callbacks/' + cbKey).set(callbackReq);
+            }
+
             closeCallbackModal();
             document.getElementById('callbackForm').reset();
-            
-            // Sync Admin Data if open
-            if(state.isAdminLoggedIn) renderAdminData();
 
-            alert(`Callback request submitted! Our atelier concierge will contact you during ${time}.`);
+            if (state.isAdminLoggedIn) renderAdminData();
+
+            alert(`Callback request submitted! Our concierge will contact you during ${time}.`);
         }
     </script>
 </body>
