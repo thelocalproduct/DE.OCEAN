@@ -176,73 +176,6 @@
         </div>
     </section>
 
-    <!-- ADMIN PORTAL MODAL / DASHBOARD -->
-    <div id="adminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
-        <div id="adminOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="toggleAdminPanel()"></div>
-        <div class="relative bg-surface border border-platinum-subtle max-w-3xl w-full p-4 sm:p-8 z-10 max-h-[90vh] overflow-y-auto">
-            <button onclick="toggleAdminPanel()" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
-            
-            <div id="adminAuthSection" class="space-y-6 text-center py-4">
-                <div class="w-12 h-12 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h3 class="font-serif text-xl sm:text-2xl text-platinum">Atelier Admin Portal</h3>
-                    <p class="text-xs text-platinumMuted mt-1">Enter Master Access PIN (Default: 1234)</p>
-                </div>
-                <div class="max-w-xs mx-auto space-y-3">
-                    <input type="password" id="adminPinInput" placeholder="Enter PIN..." class="w-full bg-obsidian border border-platinum-subtle text-center text-sm py-2.5 text-platinum placeholder-platinumMuted focus:outline-none">
-                    <button onclick="authenticateAdmin()" class="w-full bg-platinum text-obsidian py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-white transition">Verify Key</button>
-                </div>
-            </div>
-
-            <div id="adminDashboardSection" class="hidden space-y-6 sm:space-y-8">
-                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4">
-                    <div>
-                        <span class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Master Admin Session
-                        </span>
-                        <h3 class="font-serif text-lg sm:text-xl text-platinum mt-0.5">Master Atelier Dashboard</h3>
-                    </div>
-                    <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-serif text-xs sm:text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="shopping-bag" class="w-4 h-4 text-platinum"></i> Customer Orders (<span id="adminOrdersCount">0</span>)
-                        </h4>
-                        <button onclick="clearAllOrders()" class="text-[10px] text-rose-400 hover:text-rose-300 uppercase tracking-wider">Clear All</button>
-                    </div>
-
-                    <div id="adminOrdersList" class="space-y-3 max-h-64 overflow-y-auto pr-1"></div>
-                </div>
-
-                <div class="space-y-4 border-t border-platinum-subtle pt-6">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-serif text-xs sm:text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="phone-incoming" class="w-4 h-4 text-platinum"></i> Callback Requests (<span id="adminCallbackCount">0</span>)
-                        </h4>
-                        <button onclick="clearAllCallbacks()" class="text-[10px] text-rose-400 hover:text-rose-300 uppercase tracking-wider">Clear All</button>
-                    </div>
-
-                    <div id="adminCallbacksList" class="space-y-3 max-h-48 overflow-y-auto pr-1"></div>
-                </div>
-
-                <div class="space-y-4 border-t border-platinum-subtle pt-6">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-serif text-xs sm:text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="boxes" class="w-4 h-4 text-platinum"></i> Quick Stock Adjuster
-                        </h4>
-                        <button onclick="resetDefaultStock()" class="text-[10px] text-platinumMuted hover:text-platinum uppercase tracking-wider">Reset (50 Pairs)</button>
-                    </div>
-
-                    <div id="adminStockList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- MAIN CATALOG & FILTERS -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 flex-grow w-full">
         <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4 border-b border-platinum-subtle pb-4 sm:pb-6">
@@ -279,7 +212,7 @@
                 <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
             </div>
 
-            <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted cursor-pointer" ondblclick="toggleAdminPanel()">
+            <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
                 © 2026 DE'OCEAN Studio. All Rights Reserved.
             </div>
         </div>
@@ -349,7 +282,7 @@
                 </div>
 
                 <button type="submit" id="submitOrderBtn" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
-                    Confirm & Submit Order
+                    Send Order via WhatsApp
                 </button>
             </form>
         </div>
@@ -394,7 +327,7 @@
                 </div>
 
                 <button type="submit" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
-                    Submit Request
+                    Submit Request via WhatsApp
                 </button>
             </form>
         </div>
@@ -416,17 +349,17 @@
         ];
 
         let PRODUCTS = JSON.parse(localStorage.getItem('deocean_products')) || DEFAULT_PRODUCTS;
-        let CALLBACKS = JSON.parse(localStorage.getItem('deocean_callbacks')) || [];
-        let ORDERS = JSON.parse(localStorage.getItem('deocean_orders')) || [];
         
         let state = {
             cart: [],
             wishlist: [],
             activeFilter: 'all',
             searchQuery: '',
-            isAdminLoggedIn: false,
             filterWishlistOnly: false
         };
+
+        // Replace with your official WhatsApp number including country code (e.g., 919876543210 for India)
+        const OWNER_WHATSAPP = "919876543210";
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
@@ -475,137 +408,7 @@
             document.getElementById('cartToggle').addEventListener('click', toggleCartDrawer);
             document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
             document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
-
-            document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
-                    e.preventDefault();
-                    toggleAdminPanel();
-                }
-            });
         });
-
-        /* --- ADMIN PANEL --- */
-        function toggleAdminPanel() {
-            const modal = document.getElementById('adminModal');
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                if (state.isAdminLoggedIn) {
-                    showAdminDashboard();
-                } else {
-                    document.getElementById('adminAuthSection').classList.remove('hidden');
-                    document.getElementById('adminDashboardSection').classList.add('hidden');
-                }
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
-        function authenticateAdmin() {
-            const pin = document.getElementById('adminPinInput').value;
-            if (pin === '1234') {
-                state.isAdminLoggedIn = true;
-                showAdminDashboard();
-                document.getElementById('adminPinInput').value = '';
-            } else {
-                alert("Invalid Admin PIN");
-            }
-        }
-
-        function showAdminDashboard() {
-            document.getElementById('adminAuthSection').classList.add('hidden');
-            document.getElementById('adminDashboardSection').classList.remove('hidden');
-            renderAdminData();
-        }
-
-        function logoutAdmin() {
-            state.isAdminLoggedIn = false;
-            document.getElementById('adminAuthSection').classList.remove('hidden');
-            document.getElementById('adminDashboardSection').classList.add('hidden');
-        }
-
-        function renderAdminData() {
-            const ordersList = document.getElementById('adminOrdersList');
-            document.getElementById('adminOrdersCount').innerText = ORDERS.length;
-            if (ORDERS.length === 0) {
-                ordersList.innerHTML = `<p class="text-xs text-platinumMuted italic">No customer orders recorded yet.</p>`;
-            } else {
-                ordersList.innerHTML = ORDERS.map((o) => `
-                    <div class="bg-obsidian border border-platinum-subtle p-3 text-xs space-y-1 font-mono">
-                        <div class="flex justify-between text-platinum font-bold">
-                            <span>#${o.id} - ${o.name} (${o.phone})</span>
-                            <span class="text-emerald-400">₹${o.total}</span>
-                        </div>
-                        <div class="text-[10px] text-platinumMuted">${o.address} | ${o.date}</div>
-                        <div class="text-[10px] text-platinum border-t border-platinum-subtle pt-1 mt-1">
-                            Items: ${o.items.map(i => `${i.name} (x${i.qty})`).join(', ')}
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            const cbList = document.getElementById('adminCallbacksList');
-            document.getElementById('adminCallbackCount').innerText = CALLBACKS.length;
-            if (CALLBACKS.length === 0) {
-                cbList.innerHTML = `<p class="text-xs text-platinumMuted italic">No callback requests pending.</p>`;
-            } else {
-                cbList.innerHTML = CALLBACKS.map((c) => `
-                    <div class="bg-obsidian border border-platinum-subtle p-3 text-xs space-y-1">
-                        <div class="flex justify-between text-platinum font-semibold">
-                            <span>${c.name} (${c.phone})</span>
-                            <span class="text-[10px] font-mono text-platinumMuted">${c.time}</span>
-                        </div>
-                        <div class="text-[10px] text-platinumMuted font-mono">Strain: ${c.strainName}</div>
-                    </div>
-                `).join('');
-            }
-
-            const stockList = document.getElementById('adminStockList');
-            stockList.innerHTML = PRODUCTS.map(p => `
-                <div class="flex justify-between items-center bg-obsidian border border-platinum-subtle p-2 text-xs">
-                    <span class="truncate max-w-[150px] sm:max-w-[200px] text-platinum">${p.name}</span>
-                    <div class="flex items-center gap-2 font-mono">
-                        <button onclick="updateStock(${p.id}, -1)" class="w-6 h-6 bg-surface border border-platinum-subtle text-platinum hover:bg-platinum hover:text-obsidian flex items-center justify-center">-</button>
-                        <span class="w-6 text-center">${p.stock}</span>
-                        <button onclick="updateStock(${p.id}, 1)" class="w-6 h-6 bg-surface border border-platinum-subtle text-platinum hover:bg-platinum hover:text-obsidian flex items-center justify-center">+</button>
-                    </div>
-                </div>
-            `).join('');
-
-            lucide.createIcons();
-        }
-
-        function updateStock(id, change) {
-            const prod = PRODUCTS.find(p => p.id === id);
-            if (prod) {
-                prod.stock = Math.max(0, prod.stock + change);
-                localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
-                renderAdminData();
-                renderProducts();
-            }
-        }
-
-        function resetDefaultStock() {
-            PRODUCTS.forEach(p => p.stock = 50);
-            localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
-            renderAdminData();
-            renderProducts();
-        }
-
-        function clearAllOrders() {
-            if (confirm("Clear all recorded orders?")) {
-                ORDERS = [];
-                localStorage.removeItem('deocean_orders');
-                renderAdminData();
-            }
-        }
-
-        function clearAllCallbacks() {
-            if (confirm("Clear all callback requests?")) {
-                CALLBACKS = [];
-                localStorage.removeItem('deocean_callbacks');
-                renderAdminData();
-            }
-        }
 
         /* --- CATALOG RENDERING --- */
         function renderProducts() {
@@ -789,7 +592,7 @@
             document.getElementById('cartSubtotal').innerText = `₹${subtotal}`;
         }
 
-        /* --- CHECKOUT --- */
+        /* --- CHECKOUT VIA WHATSAPP --- */
         function openCheckoutModal() {
             if (state.cart.length === 0) {
                 alert("Your cart is empty.");
@@ -811,39 +614,25 @@
             const phone = document.getElementById('custPhone').value;
             const address = document.getElementById('custAddress').value;
             const total = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const orderId = Date.now().toString().slice(-6);
 
-            const order = {
-                id: Date.now().toString().slice(-6),
-                name,
-                phone,
-                address,
-                items: [...state.cart],
-                total,
-                date: new Date().toLocaleDateString()
-            };
+            let itemSummary = state.cart.map(i => `• ${i.name} (x${i.qty}) - ₹${i.price * i.qty}`).join('%0A');
 
-            state.cart.forEach(cartItem => {
-                const prod = PRODUCTS.find(p => p.id === cartItem.id);
-                if (prod) {
-                    prod.stock = Math.max(0, prod.stock - cartItem.qty);
-                }
-            });
+            const waMessage = `*NEW STRAIN RESERVE ORDER (#${orderId})*%0A%0A` +
+                              `*Customer:* ${name}%0A` +
+                              `*Phone:* ${phone}%0A` +
+                              `*Address:* ${address}%0A%0A` +
+                              `*Reserved Strains:*%0A${itemSummary}%0A%0A` +
+                              `*Total Amount:* ₹${total}`;
 
-            localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
-            ORDERS.unshift(order);
-            localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${waMessage}`, '_blank');
 
             state.cart = [];
             updateCartCount();
             closeCheckoutModal();
-            renderProducts();
-            
-            if (state.isAdminLoggedIn) renderAdminData();
-
-            alert(`Thank you, ${name}! Your strain reserve confirmation (#${order.id}) has been recorded. Our head breeder will contact you shortly.`);
         }
 
-        /* --- CALLBACK REQUEST --- */
+        /* --- CALLBACK REQUEST VIA WHATSAPP --- */
         function submitCallbackForm(e) {
             e.preventDefault();
             const strainId = document.getElementById('callbackStrainId').value;
@@ -852,23 +641,16 @@
             const phone = document.getElementById('cbPhone').value;
             const time = document.getElementById('cbTime').value;
 
-            const callbackReq = {
-                id: Date.now(),
-                strainName: product ? product.name : 'General Enquiry',
-                name,
-                phone,
-                time
-            };
+            const waMessage = `*NEW CALL BACK REQUEST*%0A%0A` +
+                              `*Customer:* ${name}%0A` +
+                              `*Phone:* ${phone}%0A` +
+                              `*Strain:* ${product ? product.name : 'General Enquiry'}%0A` +
+                              `*Preferred Time:* ${time}`;
 
-            CALLBACKS.unshift(callbackReq);
-            localStorage.setItem('deocean_callbacks', JSON.stringify(CALLBACKS));
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${waMessage}`, '_blank');
 
             closeCallbackModal();
             document.getElementById('callbackForm').reset();
-            
-            if (state.isAdminLoggedIn) renderAdminData();
-
-            alert(`Callback request submitted! Our concierge will contact you during ${time}.`);
         }
 
         function openCallbackModal(productId) {
