@@ -617,25 +617,29 @@
             const totalPairs = state.cart.reduce((sum, i) => sum + i.qty, 0);
             const orderId = Date.now().toString().slice(-6);
 
-            // Detailed Itemized List with strain names, quantities, and prices
             let itemSummary = state.cart.map((item, index) => {
-                return `${index + 1}. *${item.name}*%0A   • Quantity: ${item.qty} Pair${item.qty > 1 ? 's' : ''}%0A   • Price: ₹${item.price * item.qty} (₹${item.price} / pair)`;
-            }).join('%0A%0A');
+                return `${index + 1}. Strain: ${item.name}\n   • Pair Count: ${item.qty} Pair(s)\n   • Rate: ₹${item.price} per pair\n   • Subtotal: ₹${item.price * item.qty}`;
+            }).join('\n\n');
 
-            const waMessage = `*DE'OCEAN ATELIER | STRAIN RESERVE ORDER (#${orderId})*%0A` +
-                              `----------------------------------%0A` +
-                              `*CUSTOMER DETAILS:*%0A` +
-                              `• *Name:* ${name}%0A` +
-                              `• *Phone:* ${phone}%0A` +
-                              `• *Delivery Address:* ${address}%0A%0A` +
-                              `*ORDER DETAILS (${totalPairs} PAIRS TOTAL):*%0A` +
-                              `${itemSummary}%0A` +
-                              `----------------------------------%0A` +
-                              `*TOTAL AMOUNT:* ₹${total}%0A` +
-                              `----------------------------------%0A` +
-                              `_Sent via DE'OCEAN Strain Vault_`;
+            const rawMessage = 
+`*DE'OCEAN ATELIER | STRAIN RESERVE ORDER (#${orderId})*
+----------------------------------
+*CUSTOMER DETAILS:*
+• Name: ${name}
+• Phone: ${phone}
+• Delivery Address: ${address}
 
-            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${waMessage}`, '_blank');
+*ORDER DETAILS (${totalPairs} PAIRS TOTAL):*
+${itemSummary}
+
+----------------------------------
+*TOTAL AMOUNT:* ₹${total}
+----------------------------------
+_Sent via DE'OCEAN Strain Vault_`;
+
+            const encodedMessage = encodeURIComponent(rawMessage);
+
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
 
             state.cart = [];
             updateCartCount();
@@ -651,15 +655,18 @@
             const phone = document.getElementById('cbPhone').value.trim();
             const time = document.getElementById('cbTime').value;
 
-            const waMessage = `*DE'OCEAN ATELIER | CALL BACK REQUEST*%0A` +
-                              `----------------------------------%0A` +
-                              `• *Name:* ${name}%0A` +
-                              `• *Phone:* ${phone}%0A` +
-                              `• *Requested Strain:* ${product ? product.name : 'General Enquiry'}%0A` +
-                              `• *Preferred Time:* ${time}%0A` +
-                              `----------------------------------`;
+            const rawMessage = 
+`*DE'OCEAN ATELIER | CALL BACK REQUEST*
+----------------------------------
+• Name: ${name}
+• Phone: ${phone}
+• Requested Strain: ${product ? product.name : 'General Enquiry'}
+• Preferred Time: ${time}
+----------------------------------`;
 
-            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${waMessage}`, '_blank');
+            const encodedMessage = encodeURIComponent(rawMessage);
+
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
 
             closeCallbackModal();
             document.getElementById('callbackForm').reset();
