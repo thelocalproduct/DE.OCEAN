@@ -176,13 +176,13 @@
     <!-- MAIN CONTENT CONTAINER -->
     <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
         <!-- VAULT HERO BANNER -->
-        <section class="border-b border-platinum-subtle py-8 sm:py-16 bg-charcoal px-4 sm:px-6 lg:px-8">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
-                <div>
-                    <span class="text-[10px] sm:text-xs text-platinumMuted tracking-[0.2em] sm:tracking-[0.25em] uppercase font-mono">Private Genetics Reserve</span>
-                    <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl text-platinum tracking-tight uppercase mt-1 sm:mt-2">Strain Vault</h1>
+        <section class="border-b border-platinum-subtle py-16 sm:py-24 bg-obsidian/80 backdrop-blur-md px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3.5 py-1.5 text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-black/50">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Private Genetics Reserve
                 </div>
-                <p class="text-xs text-platinumMuted max-w-md font-light leading-relaxed">
+                <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl text-platinum tracking-tight uppercase">Strain Vault</h1>
+                <p class="text-xs sm:text-sm text-platinumMuted max-w-2xl mx-auto font-light leading-relaxed px-2">
                     Explore signature purebred guppy lineages. Direct enquiry or request an immediate callback from our head breeder.
                 </p>
             </div>
@@ -460,7 +460,7 @@
                             <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> ${isAvailable ? 'Reserve Pair' : 'Out of Stock'}
                         </button>
                         <button onclick="openCallbackModal(${product.id})" class="w-full border border-platinum-subtle text-platinumMuted hover:text-platinum hover:border-platinum py-2 text-[10px] uppercase tracking-widest transition flex items-center justify-center gap-1.5 active:scale-[0.99]">
-                            <i data-lucide="phone" class="w-3 h-3"></i> Request Call Back
+                            <i data-lucide="phone" class="w-3.5 h-3.5"></i> Request Call Back
                         </button>
                     </div>
                 `;
