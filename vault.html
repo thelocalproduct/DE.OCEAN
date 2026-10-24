@@ -94,9 +94,9 @@
 </head>
 <body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
-    <!-- FIXED TOP BAR (EXACT MOBILE LAYOUT FROM index.html) -->
-    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-22 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300 h-18 sm:h-22 flex items-center">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
             
             <!-- Mobile: Empty left grid cell to balance centering / Desktop: Brand Logo -->
             <div class="flex items-center lg:hidden"></div>
@@ -107,25 +107,25 @@
                 </a>
             </div>
 
-            <!-- Mobile: Centered Larger Title (DE'OCEAN logo only, no subtitle) -->
-            <div class="col-start-2 flex justify-center lg:hidden">
-                <a href="index.html" class="group py-2">
-                    <span class="font-serif text-2xl sm:text-3xl tracking-[0.25em] text-platinum font-bold group-hover:text-white transition drop-shadow-md">DE'OCEAN</span>
+            <!-- Mobile: Centered Larger Title (DE'OCEAN logo only) -->
+            <div class="col-start-2 flex justify-center items-center lg:hidden text-center">
+                <a href="index.html" class="group py-1 inline-block">
+                    <span class="font-serif text-xl sm:text-3xl tracking-[0.2em] text-platinum font-bold group-hover:text-white transition drop-shadow-md whitespace-nowrap">DE'OCEAN</span>
                 </a>
             </div>
 
             <!-- Mobile: Hamburger Menu Icon Only (Top Right) -->
-            <div class="col-start-3 flex justify-end lg:hidden">
-                <button id="mobileMenuBtn" class="text-platinum hover:text-white p-2.5 -mr-2 focus:outline-none flex items-center" aria-label="Open Menu">
+            <div class="col-start-3 flex justify-end items-center lg:hidden">
+                <button id="mobileMenuBtn" class="text-platinum hover:text-white p-2 -mr-2 focus:outline-none flex items-center justify-center" aria-label="Open Menu">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
 
             <!-- Desktop Navigation Links -->
             <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
-                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group text-platinum">
                     Collections
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-full h-px bg-platinum transition-all duration-300"></span>
                 </a>
                 <a href="discover.html" class="hover:text-platinum transition py-2 relative group">
                     Discover
@@ -139,7 +139,7 @@
                     Genetics
                     <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="#parameters" class="hover:text-platinum transition py-2 relative group">
+                <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">
                     Water Specs
                     <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
                 </a>
@@ -154,7 +154,7 @@
         </div>
     </header>
 
-    <!-- MOBILE MENU (EXACT 1:1 COPY FROM index.html) -->
+    <!-- MOBILE MENU -->
     <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
         <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
             <div class="flex flex-col">
@@ -168,7 +168,7 @@
             <a href="discover.html" class="text-platinumMuted hover:text-platinum py-1 transition">Discover Strains</a>
             <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
             <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
-            <a href="#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
+            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
         </nav>
         <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
@@ -197,7 +197,7 @@
                 </div>
 
                 <!-- Horizontal Swipe Filters -->
-                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 sm:mx-0 sm:px-0 w-screen sm:w-auto" id="categoryFilters">
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 w-full sm:w-auto" id="categoryFilters">
                     <button data-filter="all" class="filter-btn active-filter px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum bg-platinum text-obsidian transition whitespace-nowrap flex-shrink-0">All</button>
                     <button data-filter="platinum" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Platinum</button>
                     <button data-filter="moscow" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Moscow</button>
@@ -218,7 +218,7 @@
                 </div>
                 
                 <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
-                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
+                    <a href="vault.html" class="hover:text-platinum py-1 text-platinum">Vault</a>
                     <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
                     <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
                     <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
