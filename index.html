@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DE'OCEAN | Platinum Guppy Atelier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#080808',
+                        charcoal: '#121212',
+                        surface: '#181818',
+                        borderSubtle: '#262626',
+                        platinum: '#E5E4E2',
+                        platinumLight: '#F4F4F0',
+                        platinumMuted: '#A1A1AA',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #080808;
+            color: #E5E4E2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #262626; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525B; }
+
+        .border-platinum-subtle { border-color: rgba(229, 228, 226, 0.12); }
+        .bg-glass { background: rgba(18, 18, 18, 0.65); backdrop-filter: blur(14px); }
+    </style>
+</head>
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- BACKGROUND WITH SCROLL FADE -->
+    <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
+        <img src="bg.jpg" alt="Planted Aquascape Background" class="w-full h-full object-cover brightness-[0.70] contrast-[1.10] saturate-[1.15]" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/90"></div>
+    </div>
+
+    <!-- STANDARDIZED TOP BAR -->
+    <header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 focus:outline-none">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+
+            <a href="index.html" class="flex flex-col items-center lg:items-start group">
+                <span class="font-serif text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                <span class="text-[9px] tracking-[0.3em] uppercase text-platinumMuted -mt-1 font-sans">Guppy Atelier</span>
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition">Collections</a>
+                <a href="discover.html" class="hover:text-platinum transition">Discover</a>
+                <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
+                <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
+                <a href="#parameters" class="hover:text-platinum transition">Water Specs</a>
+            </nav>
+
+            <div class="flex items-center space-x-4 sm:space-x-5">
+                <button onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2" title="Search Vault">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <button id="wishlistToggle" onclick="toggleWishlistDrawer()" class="text-platinumMuted hover:text-platinum transition p-2 relative" title="Saved Favorites">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    <span id="wishlistBadge" class="absolute top-1 right-1 w-2 h-2 bg-platinum rounded-full hidden"></span>
+                </button>
+
+                <button id="adminToggleBtn" onclick="toggleAdminPanel()" class="hidden text-platinumMuted hover:text-platinum transition p-2 items-center gap-1 border border-platinum-subtle px-2.5 py-1.5 text-xs tracking-wider" title="Admin Portal">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                    <span class="hidden md:inline uppercase text-[10px] font-mono">Admin</span>
+                </button>
+
+                <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-2 border border-platinum-subtle px-3 py-1.5 text-xs tracking-wider">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    <span id="cartCount" class="font-mono text-xs">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-95 hidden flex-col justify-between p-8">
+        <div class="flex justify-between items-center">
+            <span class="font-serif text-xl tracking-widest">DE'OCEAN</span>
+            <button id="closeMobileMenu" class="text-platinum"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-lg tracking-widest uppercase my-auto">
+            <a href="vault.html">Collections</a>
+            <a href="discover.html">Discover</a>
+            <a href="contract.html">Wholesale Partnership</a>
+            <a href="genetics.html">Genetics</a>
+            <a href="#parameters">Water Specs</a>
+        </nav>
+        <div class="text-center text-xs text-platinumMuted tracking-widest">© 2026 DE'OCEAN ATELIER</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="relative z-10 flex-grow flex flex-col">
+        <section class="relative py-28 sm:py-36 border-b border-platinum-subtle px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center space-y-8">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-platinumMuted backdrop-blur-md bg-black/40 shadow-xl">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                    Pure Genetic Lineage Reserve
+                </div>
+                
+                <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-platinum uppercase leading-tight drop-shadow-md">
+                    Pure Genetics. <br><span class="font-normal italic text-platinumLight">Unrivaled Majesty.</span>
+                </h1>
+
+                <p class="text-platinumMuted text-sm sm:text-base font-light tracking-wide max-w-xl mx-auto leading-relaxed">
+                    Sculpted through generations of elite breeding selection. Discover pure strain guppy specimens tailored for discriminating aquascaper connoisseurs.
+                </p>
+
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="vault.html" class="w-full sm:w-auto bg-platinum text-obsidian px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center shadow-2xl">
+                        Explore Vault
+                    </a>
+                    <a href="discover.html" class="w-full sm:w-auto border border-platinum-subtle px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-platinum hover:border-platinum transition text-center backdrop-blur-sm bg-obsidian/40">
+                        Discover DE'OCEAN
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WATER PARAMETERS SECTION -->
+        <section id="parameters" class="border-t border-platinum-subtle bg-charcoal/90 backdrop-blur-md py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16 space-y-2">
+                    <h2 class="font-serif text-2xl sm:text-3xl text-platinum tracking-wide uppercase">Ideal Environment</h2>
+                    <p class="text-xs text-platinumMuted tracking-widest uppercase">Target parameters for optimal finnage & vibrant color expression</p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="border border-platinum-subtle p-6 text-center bg-obsidian/80">
+                        <div class="text-platinumMuted text-xs tracking-widest uppercase mb-2">Temperature</div>
+                        <div class="font-serif text-2xl text-platinum">24°C - 26°C</div>
+                        <div class="text-[11px] text-platinumMuted mt-2 font-mono">75°F - 78°F</div>
+                    </div>
+
+                    <div class="border border-platinum-subtle p-6 text-center bg-obsidian/80">
+                        <div class="text-platinumMuted text-xs tracking-widest uppercase mb-2">pH Balance</div>
+                        <div class="font-serif text-2xl text-platinum">6.8 - 7.5</div>
+                        <div class="text-[11px] text-platinumMuted mt-2 font-mono">Slightly Alkaline</div>
+                    </div>
+
+                    <div class="border border-platinum-subtle p-6 text-center bg-obsidian/80">
+                        <div class="text-platinumMuted text-xs tracking-widest uppercase mb-2">Hardness (GH)</div>
+                        <div class="font-serif text-2xl text-platinum">8 - 12 dGH</div>
+                        <div class="text-[11px] text-platinumMuted mt-2 font-mono">Moderate Minerals</div>
+                    </div>
+
+                    <div class="border border-platinum-subtle p-6 text-center bg-obsidian/80">
+                        <div class="text-platinumMuted text-xs tracking-widest uppercase mb-2">TDS Range</div>
+                        <div class="font-serif text-2xl text-platinum">150 - 220</div>
+                        <div class="text-[11px] text-platinumMuted mt-2 font-mono">PPM Clean Water</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-platinum-subtle bg-obsidian py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="font-serif text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                </div>
+                
+                <div class="flex gap-8 uppercase tracking-widest text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum">Vault</a>
+                    <a href="discover.html" class="hover:text-platinum">Discover</a>
+                    <a href="contract.html" class="hover:text-platinum">Wholesale Partnership</a>
+                    <a href="genetics.html" class="hover:text-platinum">Genetics</a>
+                    <a href="#parameters" class="hover:text-platinum">Care Specs</a>
+                </div>
+
+                <div class="text-[11px] tracking-wider cursor-pointer select-none" ondblclick="toggleSecretAdmin()">
+                    © 2026 DE'OCEAN Studio. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- WISHLIST / FAVORITES DRAWER -->
+    <div id="wishlistDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
+        <div id="wishlistOverlay" class="absolute inset-0 bg-obsidian bg-opacity-80 transition-opacity pointer-events-auto" onclick="toggleWishlistDrawer()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-platinum-subtle p-6 flex flex-col justify-between pointer-events-auto shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4 mb-6">
+                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="heart" class="w-4 h-4 text-rose-400"></i> Saved Favorites (<span id="wishlistDrawerCount">0</span>)
+                    </h3>
+                    <button onclick="toggleWishlistDrawer()" class="text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+
+                <div id="wishlistItems" class="space-y-4 max-h-[65vh] overflow-y-auto pr-1"></div>
+            </div>
+
+            <div class="border-t border-platinum-subtle pt-4">
+                <a href="vault.html" class="block w-full bg-platinum text-obsidian py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center">
+                    Browse All Strains
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECRET ADMIN MODAL -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div id="adminOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="toggleAdminPanel()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-3xl w-full p-6 sm:p-8 z-10 max-h-[85vh] overflow-y-auto">
+            <button onclick="toggleAdminPanel()" class="absolute top-4 right-4 text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <div id="adminAuthSection" class="space-y-6 text-center">
+                <div class="w-12 h-12 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="font-serif text-2xl text-platinum">Atelier Admin Portal</h3>
+                    <p class="text-xs text-platinumMuted mt-1">Enter Master Access PIN (Default: 1234)</p>
+                </div>
+                <div class="max-w-xs mx-auto space-y-3">
+                    <input type="password" id="adminPinInput" placeholder="Enter PIN..." class="w-full bg-obsidian border border-platinum-subtle text-center text-sm py-2.5 text-platinum placeholder-platinumMuted focus:outline-none">
+                    <button onclick="authenticateAdmin()" class="w-full bg-platinum text-obsidian py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-white transition">Verify Key</button>
+                </div>
+            </div>
+
+            <div id="adminDashboardSection" class="hidden space-y-8">
+                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4">
+                    <div>
+                        <span class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest">Authenticated Session</span>
+                        <h3 class="font-serif text-xl text-platinum">Master Atelier Dashboard</h3>
+                    </div>
+                    <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-serif text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="shopping-bag" class="w-4 h-4 text-platinum"></i> Vault Confirmations / Customer Orders (<span id="adminOrdersCount">0</span>)
+                        </h4>
+                    </div>
+                    <div id="adminOrdersList" class="space-y-3 max-h-64 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const DEFAULT_PRODUCTS = [
+            { id: 1, name: "Platinum White Dumbo Ear", price: 1200, image: "images/1.jpg" },
+            { id: 2, name: "Midnight Dark Moscow", price: 950, image: "images/2.jpg" },
+            { id: 3, name: "Albino Full Red Platinum", price: 1400, image: "images/3.jpg" },
+            { id: 4, name: "Platinum Red Dragon", price: 1100, image: "images/4.jpg" },
+            { id: 5, name: "Albino Sky Blue Topaz", price: 1600, image: "images/5.jpg" }
+        ];
+
+        let wishlist = JSON.parse(localStorage.getItem('deocean_wishlist')) || [];
+        let cart = JSON.parse(localStorage.getItem('deocean_cart')) || [];
+        let isAdminLoggedIn = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            updateWishlistUI();
+
+            const cartCountEl = document.getElementById('cartCount');
+            if (cartCountEl) cartCountEl.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+
+            // Scroll Fade
+            const heroBg = document.getElementById('heroBg');
+            if (heroBg) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    heroBg.style.opacity = scrolled <= 550 ? (1 - (scrolled / 550)).toFixed(2) : 0;
+                });
+            }
+
+            // Mobile Menu
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('flex');
+            });
+            document.getElementById('closeMobileMenu').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenu').classList.remove('flex');
+            });
+
+            // Admin Shortcut
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+                    e.preventDefault();
+                    toggleSecretAdmin();
+                }
+            });
+        });
+
+        function toggleWishlistDrawer() {
+            const drawer = document.getElementById('wishlistDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function updateWishlistUI() {
+            wishlist = JSON.parse(localStorage.getItem('deocean_wishlist')) || [];
+            const badge = document.getElementById('wishlistBadge');
+            const drawerCount = document.getElementById('wishlistDrawerCount');
+            const container = document.getElementById('wishlistItems');
+
+            if (badge) {
+                if (wishlist.length > 0) badge.classList.remove('hidden');
+                else badge.classList.add('hidden');
+            }
+
+            if (drawerCount) drawerCount.textContent = wishlist.length;
+
+            if (container) {
+                container.innerHTML = '';
+                if (wishlist.length === 0) {
+                    container.innerHTML = `<p class="text-center text-xs text-platinumMuted py-8 uppercase tracking-widest">No saved favorite strains.</p>`;
+                    return;
+                }
+
+                wishlist.forEach(id => {
+                    const item = DEFAULT_PRODUCTS.find(p => p.id === id) || { name: `Strain Pair #${id}`, price: 1200, image: `images/${id}.jpg` };
+                    const row = document.createElement('div');
+                    row.className = "flex items-center justify-between border-b border-platinum-subtle pb-3";
+                    row.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" class="w-12 h-12 object-cover border border-platinum-subtle" onerror="this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=400&q=80';">
+                            <div>
+                                <h4 class="font-serif text-xs text-platinum">${item.name}</h4>
+                                <span class="font-mono text-[11px] text-platinumMuted">₹${item.price.toLocaleString('en-IN')}</span>
+                            </div>
+                        </div>
+                        <button onclick="removeFromWishlist(${id})" class="text-xs text-rose-400 hover:text-rose-300 uppercase tracking-wider">Remove</button>
+                    `;
+                    container.appendChild(row);
+                });
+            }
+        }
+
+        function removeFromWishlist(id) {
+            wishlist = wishlist.filter(item => item !== id);
+            localStorage.setItem('deocean_wishlist', JSON.stringify(wishlist));
+            updateWishlistUI();
+        }
+
+        function toggleSecretAdmin() {
+            const adminBtn = document.getElementById('adminToggleBtn');
+            if (adminBtn) {
+                if (adminBtn.classList.contains('hidden')) {
+                    adminBtn.classList.remove('hidden');
+                    adminBtn.classList.add('flex');
+                    alert("Admin Button Unlocked!");
+                } else {
+                    adminBtn.classList.add('hidden');
+                    adminBtn.classList.remove('flex');
+                    alert("Admin Button Hidden.");
+                }
+            }
+        }
+
+        function toggleAdminPanel() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden') && isAdminLoggedIn) {
+                renderAdminDashboard();
+            }
+        }
+
+        function authenticateAdmin() {
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === '1234') {
+                isAdminLoggedIn = true;
+                document.getElementById('adminAuthSection').classList.add('hidden');
+                document.getElementById('adminDashboardSection').classList.remove('hidden');
+                renderAdminDashboard();
+            } else {
+                alert('Invalid Atelier Master Access Key.');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminPinInput').value = '';
+            document.getElementById('adminAuthSection').classList.remove('hidden');
+            document.getElementById('adminDashboardSection').classList.add('hidden');
+        }
+
+        function renderAdminDashboard() {
+            const orders = JSON.parse(localStorage.getItem('deocean_orders')) || [];
+            const ordersList = document.getElementById('adminOrdersList');
+            document.getElementById('adminOrdersCount').textContent = orders.length;
+            ordersList.innerHTML = orders.length === 0 ? `<p class="text-xs text-platinumMuted italic">No customer orders recorded.</p>` : `<p class="text-xs text-emerald-400 font-mono">${orders.length} active orders logged.</p>`;
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

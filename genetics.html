@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DE'OCEAN | Genetics & Botanical Pond Culture</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#080808',
+                        charcoal: '#121212',
+                        surface: '#181818',
+                        borderSubtle: '#262626',
+                        platinum: '#E5E4E2',
+                        platinumLight: '#F4F4F0',
+                        platinumMuted: '#A1A1AA',
+                        botanicalGreen: '#1c281e',
+                        accentEmerald: '#2D4F36'
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #080808;
+            color: #E5E4E2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525B;
+        }
+
+        .border-platinum-subtle {
+            border-color: rgba(229, 228, 226, 0.12);
+        }
+
+        .bg-glass {
+            background: rgba(18, 18, 18, 0.65);
+            backdrop-filter: blur(14px);
+        }
+
+        /* Editorial Article Typography Enhancements */
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #D1D5DB;
+        }
+
+        .article-content h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.625rem;
+            color: #E5E4E2;
+            margin-top: 3.5rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(229, 228, 226, 0.12);
+            padding-bottom: 0.75rem;
+        }
+
+        .article-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.125rem;
+            color: #F4F4F0;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.03em;
+        }
+
+        .dropcap::first-letter {
+            font-family: 'Cinzel', serif;
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 12px;
+            padding-bottom: 2px;
+            color: #E5E4E2;
+        }
+
+        /* Figure Hover Transition */
+        .article-img-container img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+            filter: grayscale(15%) brightness(90%);
+        }
+        .article-img-container:hover img {
+            transform: scale(1.03);
+            filter: grayscale(0%) brightness(100%);
+        }
+    </style>
+</head>
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- FULLSCREEN NATURAL BOTANICAL POND BACKGROUND WITH SCROLL FADE -->
+    <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
+        <img src="images/hero-bg.jpg" 
+             alt="Botanical Aquatic Ecosystem Background" 
+             class="w-full h-full object-cover brightness-[0.55] contrast-[1.15] saturate-[1.10]"
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
+             
+        <!-- Subtle Natural Botanical Vignette Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/95"></div>
+    </div>
+
+    <!-- STANDARDIZED TOP BAR (DE'OCEAN) -->
+<header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Mobile Hamburger Button -->
+        <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 focus:outline-none">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Brand / Logo -->
+        <a href="index.html" class="flex flex-col items-center lg:items-start group">
+            <span class="font-serif text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+            <span class="text-[9px] tracking-[0.3em] uppercase text-platinumMuted -mt-1 font-sans">Guppy Atelier</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
+            <a href="vault.html" class="hover:text-platinum transition">Collections</a>
+            <a href="discover.html" class="hover:text-platinum transition">Discover</a>
+            <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
+            <a href="index.html#parameters" class="hover:text-platinum transition">Water Specs</a>
+        </nav>
+
+        <!-- Action Icons (Search, Favorites / Wishlist, Hidden Admin, Cart) -->
+        <div class="flex items-center space-x-4 sm:space-x-5">
+            <button onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2" title="Search Vault">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+            <button id="wishlistToggle" onclick="toggleWishlistDrawer()" class="text-platinumMuted hover:text-platinum transition p-2 relative" title="Saved Favorites">
+                <i data-lucide="heart" class="w-5 h-5"></i>
+                <span id="wishlistBadge" class="absolute top-1 right-1 w-2 h-2 bg-platinum rounded-full hidden"></span>
+            </button>
+
+            <!-- Secret Admin Portal Toggle (Hidden by default) -->
+            <button id="adminToggleBtn" onclick="toggleAdminPanel()" class="hidden text-platinumMuted hover:text-platinum transition p-2 items-center gap-1 border border-platinum-subtle px-2.5 py-1.5 text-xs tracking-wider" title="Admin Portal">
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                <span class="hidden md:inline uppercase text-[10px] font-mono">Admin</span>
+            </button>
+
+            <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-2 border border-platinum-subtle px-3 py-1.5 text-xs tracking-wider">
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                <span id="cartCount" class="font-mono text-xs">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+    <!-- MOBILE MENU MODAL -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-95 hidden flex-col justify-between p-8">
+        <div class="flex justify-between items-center">
+            <span class="font-serif text-xl tracking-widest">DE'OCEAN</span>
+            <button id="closeMobileMenu" class="text-platinum"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-lg tracking-widest uppercase my-auto">
+            <a href="vault.html" class="mobile-nav-link">Collections</a>
+            <a href="genetics.html" class="mobile-nav-link text-platinum">Genetics</a>
+            <a href="index.html#parameters" class="mobile-nav-link">Water Specs</a>
+            <a href="index.html#guarantee" class="mobile-nav-link">Guarantee</a>
+        </nav>
+        <div class="text-center text-xs text-platinumMuted tracking-widest">
+            © 2026 DE'OCEAN ATELIER
+        </div>
+    </div>
+
+    <!-- MAIN ARTICLE CONTENT CONTAINER -->
+    <div class="relative z-10 flex-grow flex flex-col">
+
+        <!-- ARTICLE HERO HEADER -->
+        <section class="relative py-20 sm:py-28 border-b border-platinum-subtle px-4 sm:px-6 lg:px-8 bg-charcoal/40 backdrop-blur-md">
+            <div class="max-w-4xl mx-auto text-center space-y-6">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-obsidian/60 shadow-lg">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
+                    Atelier Breeding & Ecology Treatise
+                </div>
+                
+                <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-light tracking-tight text-platinum uppercase leading-tight">
+                    The Art of Pure Strain Genetics <br>
+                    <span class="font-normal italic text-platinumLight">& Outdoor Pond Culture</span>
+                </h1>
+
+                <div class="flex items-center justify-center gap-6 text-[11px] uppercase tracking-[0.2em] text-platinumMuted pt-2 font-mono">
+                    <span>Published: DE'OCEAN Atelier</span>
+                    <span>•</span>
+                    <span>Reading Time: 8 Min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN JOURNAL ARTICLE -->
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 article-content">
+            
+            <!-- SECTION 1: INTRODUCTION & POND CULTURE PHILOSOPHY -->
+            <p class="dropcap">
+                For over a century, serious aquarists have viewed glass aquariums as the undisputed standard for housing pure strain guppies (<em>Poecilia reticulata</em>). However, within high-grade genetic studios, a deeper truth has re-emerged: glass boxes isolate fish from the crucial ecological cues required for peak color expression, fin development, and robust vitality. True genetic potential flourishes when guppies are nurtured within open-air natural ponds and shallow botanical micro-ecosystems.
+            </p>
+
+            <p>
+                In an outdoor pond setting, sunlight delivers full-spectrum light rays that synthesize vivid, naturally iridescent iridophores and vibrant carotenoid pigments. Furthermore, natural pond bio-films, live zooplankton, micro-crustaceans, and gentle thermal day-night cycles mirror the native riverways of Trinidad and South America, strengthening the immune constitution of high-end lines far beyond artificial aquarium conditions.
+            </p>
+
+            <!-- ARTICLE IMAGE 1: OUTDOOR BOTANICAL POND CULTURE (Path: genetics/1.jpg) -->
+            <figure class="my-10 border border-platinum-subtle bg-surface p-2 space-y-3 article-img-container">
+                <div class="aspect-[16/9] overflow-hidden bg-obsidian border border-platinum-subtle/50">
+                    <img src="genetics/1.jpg" 
+                         alt="Outdoor Botanical Guppy Breeding Pond" 
+                         class="w-full h-full object-cover"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=80';">
+                </div>
+                <figcaption class="text-[10px] uppercase tracking-[0.2em] text-platinumMuted text-center font-mono py-1">
+                    Fig. I — Outdoor Shallow Botanical Culture Pond with Salvinia Cover & Natural Sun Ray Penetration
+                </figcaption>
+            </figure>
+
+            <!-- SECTION 2: GENETICS & STRAIN PURITY -->
+            <h2>I. The Mechanics of Guppy Inheritance & Line Fixation</h2>
+
+            <p>
+                Guppy breeding is a discipline of structural genetics, pigment isolation, and strict culling. Every DE'OCEAN lineage—whether liquid snow-white <em>Platinum Dumbo Ears</em> or velvet dark <em>Midnight Moscows</em>—relies on understanding sex-linked and autosomal genetic traits:
+            </p>
+
+            <h3>1. Sex-Linked Traits (Y-Linked & X-Linked)</h3>
+            <p>
+                Many iconic color patterns reside on the Y-chromosome, passing directly from father to son (such as snake-skin lace patterns and metallic dorsals). Other traits, like fin length and specific caudal shapes, travel on the X-chromosome. Achieving true-breeding lines requires selecting virgin females with verified X-lineage to ensure progeny replicate parent phenotypes with over 90% precision.
+            </p>
+
+            <h3>2. Pigment Layer Isolation</h3>
+            <p>
+                A guppy’s brilliance depends on three stacked chromatophore layers:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-xs sm:text-sm text-platinumMuted pl-4 my-4 font-light">
+                <li><strong class="text-platinum">Melanophores:</strong> Dark brown/black velvet undertones (prominent in Moscows).</li>
+                <li><strong class="text-platinum">Xanthophores & Erythrophores:</strong> Yellow, orange, and deep red pigments (fixed in Albino Full Reds).</li>
+                <li><strong class="text-platinum">Iridophores:</strong> Reflective structural guanine crystals that create the liquid mirror effect in Platinum and Metal Lace strains.</li>
+            </ul>
+
+            <p>
+                In natural ponds, natural solar UV rays activate guanophore crystallization within iridophores, producing metallic sheens that artificial LED strip lights simply cannot replicate.
+            </p>
+
+            <!-- ARTICLE IMAGE 2: PURE STRAIN GENETICS INSPECTION (Path: genetics/2.jpg) -->
+            <figure class="my-10 border border-platinum-subtle bg-surface p-2 space-y-3 article-img-container">
+                <div class="aspect-[16/9] overflow-hidden bg-obsidian border border-platinum-subtle/50">
+                    <img src="genetics/2.jpg" 
+                         alt="Purebred Platinum Strain Phenotype Inspection" 
+                         class="w-full h-full object-cover"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1600&q=80';">
+                </div>
+                <figcaption class="text-[10px] uppercase tracking-[0.2em] text-platinumMuted text-center font-mono py-1">
+                    Fig. II — Selective Examination of Iridophore Layer Uniformity in F8 Platinum Lineage
+                </figcaption>
+            </figure>
+
+            <!-- CALLOUT BOX: ATELIER BREEDING FORMULA -->
+            <div class="my-10 p-6 border border-platinum-subtle bg-surface/80 rounded-none space-y-3">
+                <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-platinum font-serif">
+                    <i data-lucide="dna" class="w-4 h-4 text-emerald-400"></i> Atelier Lineage Protocol
+                </div>
+                <p class="text-xs text-platinumMuted leading-relaxed font-light mb-0">
+                    To maintain zero line contamination, we maintain a 1 Male to 2 Female ratio per tub/pond batch. Fry are separated within 14 days of birth using floating Salvinia micro-barriers, allowing mothers to rest while ensuring zero premature cross-breeding among juvenile males.
+                </p>
+            </div>
+
+            <!-- SECTION 3: OUTDOOR POND CARE & NATURAL WATER CONDITIONING -->
+            <h2>II. Natural Pond Construction & Water Conditioning</h2>
+
+            <p>
+                Creating a high-end outdoor guppy culture setup does not require concrete or expensive glass. In fact, shallow black plastic tubs, terra-cotta basins, or lined natural earth ponds provide vastly superior thermal stability and dark contrasting backgrounds that stimulate deep fish coloration.
+            </p>
+
+            <h3>1. The Botanical Buffer: Guava Leaves & Organic Tannins</h3>
+            <p>
+                Instead of synthetic chemical buffers, natural outdoor ponds benefit immensely from aged botanicals. Dried guava leaves (<em>Psidium guajava</em>) and Indian Almond leaves release mild tannins, humic acids, and natural anti-bacterial compounds. These botanicals gently lower pH toward a stable 6.8 - 7.4 range while creating protective micro-habitats where newborn fry can forage safely.
+            </p>
+
+            <h3>2. Natural pH Stabilization with Calcite & Eggshells</h3>
+            <p>
+                Outdoor rain can occasionally cause sudden pH drops. To counter soft rainwater acidity without harsh chemicals, line a small mesh pouch with crushed baked eggshells or natural calcite substrate. This slowly leaches essential calcium and magnesium ions into the water, maintaining an ideal 8–12 dGH mineral hardness for strong caudal fin development.
+            </p>
+
+            <h3>3. Floating Flora as Living Biological Filters</h3>
+            <p>
+                Mechanical pumps can create harsh currents that shred delicate delta tails. In outdoor ponds, heavy floating vegetation—such as <em>Salvinia natans</em>, Water Lettuce, or Amazon Frogbit—acts as a complete biological filter. Their extensive root networks absorb toxic ammonia, nitrates, and heavy metals, providing pristine water clarity and shaded thermal cover under direct afternoon sunlight.
+            </p>
+
+            <!-- ARTICLE IMAGE 3: BOTANICAL LEAF TANNING & FLORA (Path: genetics/3.jpg) -->
+            <figure class="my-10 border border-platinum-subtle bg-surface p-2 space-y-3 article-img-container">
+                <div class="aspect-[16/9] overflow-hidden bg-obsidian border border-platinum-subtle/50">
+                    <img src="genetics/3.jpg" 
+                         alt="Guava Leaves & Floating Salvinia Filter Bed" 
+                         class="w-full h-full object-cover"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80';">
+                </div>
+                <figcaption class="text-[10px] uppercase tracking-[0.2em] text-platinumMuted text-center font-mono py-1">
+                    Fig. III — Botanical Tannin Infusion via Guava Leaves & Aquatic Floating Roots
+                </figcaption>
+            </figure>
+
+            <!-- DATA TABLE: PARALLEL COMPARISON -->
+            <div class="my-12 border border-platinum-subtle overflow-x-auto bg-obsidian">
+                <table class="w-full text-left text-xs text-platinumMuted">
+                    <thead class="bg-surface text-platinum uppercase font-serif text-[11px] tracking-wider border-b border-platinum-subtle">
+                        <tr>
+                            <th class="p-4">Parameter</th>
+                            <th class="p-4">Indoor Glass Aquarium</th>
+                            <th class="p-4 text-platinum font-semibold">Outdoor Botanical Pond</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-platinum-subtle font-light">
+                        <tr>
+                            <td class="p-4 font-serif text-platinum">Light Source</td>
+                            <td class="p-4">Artificial LED (Flat Spectra)</td>
+                            <td class="p-4 text-emerald-400 font-mono">Full-Spectrum Sunlight (Full Iridophore Activation)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-serif text-platinum">Filtration</td>
+                            <td class="p-4">Power Canister / Sponge Filter</td>
+                            <td class="p-4 text-emerald-400 font-mono">Salvinia & Micro-film Roots (Zero Tail Drag)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-serif text-platinum">Water Conditioning</td>
+                            <td class="p-4">Liquid Dosing Buffers</td>
+                            <td class="p-4 text-emerald-400 font-mono">Guava Leaves & Crushed Eggshells (Natural GH/pH)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-serif text-platinum">Immune Response</td>
+                            <td class="p-4">Moderate (Sterile Environment)</td>
+                            <td class="p-4 text-emerald-400 font-mono">High (Rich Infusoria & Live Micro-fauna)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SECTION 4: SELECTIVE CULLING & VAULT SELECTION -->
+            <h2>III. The Selective Culling Standard</h2>
+
+            <p>
+                Without strict selection, even the finest strain will regress to wild phenotypes within three generations. At DE'OCEAN, culling is performed at three distinct growth milestones:
+            </p>
+
+            <ol class="list-decimal list-inside space-y-3 text-xs sm:text-sm text-platinumMuted pl-2 my-6 font-light">
+                <li><strong class="text-platinum">Week 3 (Sex Separation):</strong> Juvenile males are separated as soon as gonopodium development appears to prevent uncontrolled mating.</li>
+                <li><strong class="text-platinum">Month 2 (Finnage Symmetry):</strong> Young adults are evaluated for straight dorsal rays and symmetrical caudal expansion. Any bent spines or uneven tails are removed.</li>
+                <li><strong class="text-platinum">Month 4 (Vault Selection):</strong> Only top 5% breeder pairs displaying full color saturation, liquid metallic sheen, and flawless swimming poise are chosen for release in our Private Vault.</li>
+            </ol>
+
+            <p class="pt-4 border-t border-platinum-subtle text-xs text-platinumMuted italic">
+                By maintaining natural outdoor ponds conditioned with organic botanicals, we deliver guppy trios and pairs equipped with superior natural resilience and unmatched genetic beauty.
+            </p>
+
+            <!-- EXPLORE VAULT CTA -->
+            <div class="pt-10 text-center">
+                <a href="vault.html" class="inline-flex items-center gap-3 bg-platinum text-obsidian px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition shadow-2xl">
+                    Explore Vault Strains <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </article>
+
+        <!-- FOOTER (IDENTICAL TO INDEX.HTML FOOTER) -->
+        <footer class="border-t border-platinum-subtle bg-obsidian py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="font-serif text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                </div>
+                
+                <div class="flex gap-8 uppercase tracking-widest text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum">Vault</a>
+                    <a href="genetics.html" class="hover:text-platinum">Genetics</a>
+                    <a href="index.html#parameters" class="hover:text-platinum">Care Specs</a>
+                    <a href="index.html#about" class="hover:text-platinum">Guarantee</a>
+                </div>
+
+                <div class="text-[11px] tracking-wider">
+                    © 2026 DE'OCEAN Studio. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- CART SLIDE-OUT DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
+        <div id="cartOverlay" class="absolute inset-0 bg-obsidian bg-opacity-80 transition-opacity pointer-events-auto"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-platinum-subtle p-6 flex flex-col justify-between pointer-events-auto shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4 mb-6">
+                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Your Vault (<span id="cartDrawerCount">0</span>)
+                    </h3>
+                    <button id="closeCart" class="text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+
+                <div id="cartItems" class="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
+                    <!-- Dynamic Cart Rows -->
+                </div>
+            </div>
+
+            <div class="border-t border-platinum-subtle pt-4 space-y-4">
+                <div class="flex justify-between text-sm uppercase tracking-wider">
+                    <span class="text-platinumMuted">Subtotal</span>
+                    <span id="cartSubtotal" class="font-mono text-platinum">$0.00</span>
+                </div>
+                <p class="text-[10px] text-platinumMuted tracking-wider uppercase">Insulated Thermal Courier calculated at checkout.</p>
+                <button onclick="alert('Proceeding to Platinum Encrypted Checkout')" class="w-full bg-platinum text-obsidian py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            // Mobile menu listeners
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('flex');
+            });
+            document.getElementById('closeMobileMenu').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenu').classList.remove('flex');
+            });
+
+            // Cart Drawer Controls
+            document.getElementById('cartToggle').addEventListener('click', toggleCartDrawer);
+            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
+            document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
+
+            // HERO BACKGROUND SCROLL FADE LOGIC
+            const heroBg = document.getElementById('heroBg');
+            const fadeThreshold = 550;
+
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                if (scrolled <= fadeThreshold) {
+                    const opacity = 1 - (scrolled / fadeThreshold);
+                    heroBg.style.opacity = opacity.toFixed(2);
+                } else {
+                    heroBg.style.opacity = 0;
+                }
+            });
+        });
+
+        function toggleCartDrawer(openForce) {
+            const drawer = document.getElementById('cartDrawer');
+            if (openForce === true) {
+                drawer.classList.remove('hidden');
+                drawer.classList.add('pointer-events-auto');
+            } else {
+                drawer.classList.toggle('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

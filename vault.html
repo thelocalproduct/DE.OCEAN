@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DE'OCEAN | Strain Vault</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#080808',
+                        charcoal: '#121212',
+                        surface: '#181818',
+                        borderSubtle: '#262626',
+                        platinum: '#E5E4E2',
+                        platinumLight: '#F4F4F0',
+                        platinumMuted: '#A1A1AA',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #080808;
+            color: #E5E4E2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525B;
+        }
+
+        .border-platinum-subtle {
+            border-color: rgba(229, 228, 226, 0.12);
+        }
+
+        .bg-glass {
+            background: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(12px);
+        }
+
+        .img-container img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+            filter: grayscale(20%);
+        }
+        .img-container:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+    </style>
+</head>
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen">
+
+    <!-- STANDARDIZED TOP BAR (DE'OCEAN) -->
+<header class="sticky top-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Mobile Hamburger Button -->
+        <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2 focus:outline-none">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Brand / Logo -->
+        <a href="index.html" class="flex flex-col items-center lg:items-start group">
+            <span class="font-serif text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+            <span class="text-[9px] tracking-[0.3em] uppercase text-platinumMuted -mt-1 font-sans">Guppy Atelier</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-platinumMuted">
+            <a href="vault.html" class="hover:text-platinum transition">Collections</a>
+            <a href="discover.html" class="hover:text-platinum transition">Discover</a>
+            <a href="contract.html" class="hover:text-platinum transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="hover:text-platinum transition">Genetics</a>
+            <a href="index.html#parameters" class="hover:text-platinum transition">Water Specs</a>
+        </nav>
+
+        <!-- Action Icons (Search, Favorites / Wishlist, Hidden Admin, Cart) -->
+        <div class="flex items-center space-x-4 sm:space-x-5">
+            <button onclick="window.location.href='vault.html'" class="text-platinumMuted hover:text-platinum transition p-2" title="Search Vault">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+            <button id="wishlistToggle" onclick="toggleWishlistDrawer()" class="text-platinumMuted hover:text-platinum transition p-2 relative" title="Saved Favorites">
+                <i data-lucide="heart" class="w-5 h-5"></i>
+                <span id="wishlistBadge" class="absolute top-1 right-1 w-2 h-2 bg-platinum rounded-full hidden"></span>
+            </button>
+
+            <!-- Secret Admin Portal Toggle (Hidden by default) -->
+            <button id="adminToggleBtn" onclick="toggleAdminPanel()" class="hidden text-platinumMuted hover:text-platinum transition p-2 items-center gap-1 border border-platinum-subtle px-2.5 py-1.5 text-xs tracking-wider" title="Admin Portal">
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                <span class="hidden md:inline uppercase text-[10px] font-mono">Admin</span>
+            </button>
+
+            <button id="cartToggle" onclick="window.location.href='vault.html'" class="text-platinum hover:text-white transition p-2 relative flex items-center gap-2 border border-platinum-subtle px-3 py-1.5 text-xs tracking-wider">
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                <span id="cartCount" class="font-mono text-xs">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+    <!-- MOBILE MENU MODAL -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-95 hidden flex-col justify-between p-8">
+        <div class="flex justify-between items-center">
+            <span class="font-serif text-xl tracking-widest">DE'OCEAN</span>
+            <button id="closeMobileMenu" class="text-platinum"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-lg tracking-widest uppercase my-auto">
+            <a href="vault.html" class="mobile-nav-link text-platinum">Collections</a>
+            <a href="discover.html" class="mobile-nav-link">Discover</a>
+            <a href="contract.html" class="mobile-nav-link">Wholesale Partnership</a>
+            <a href="index.html#about" class="mobile-nav-link">Philosophy</a>
+            <a href="index.html#parameters" class="mobile-nav-link">Water Specs</a>
+        </nav>
+        <div class="text-center text-xs text-platinumMuted tracking-widest">
+            © 2026 DE'OCEAN ATELIER
+        </div>
+    </div>
+
+    <!-- VAULT HERO BANNER -->
+    <section class="border-b border-platinum-subtle py-16 bg-charcoal px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <span class="text-xs text-platinumMuted tracking-[0.25em] uppercase">Private Genetics Reserve</span>
+                <h1 class="font-serif text-3xl sm:text-5xl text-platinum tracking-tight uppercase mt-2">Strain Vault</h1>
+            </div>
+            <p class="text-xs text-platinumMuted max-w-md font-light leading-relaxed">
+                Explore 10 signature purebred guppy lineages. Direct enquiry or request an immediate callback from our head breeder.
+            </p>
+        </div>
+    </section>
+
+    <!-- ADMIN PORTAL MODAL / DASHBOARD -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div id="adminOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="toggleAdminPanel()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-3xl w-full p-6 sm:p-8 z-10 max-h-[85vh] overflow-y-auto">
+            <button onclick="toggleAdminPanel()" class="absolute top-4 right-4 text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <div id="adminAuthSection" class="space-y-6 text-center">
+                <div class="w-12 h-12 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="font-serif text-2xl text-platinum">Atelier Admin Portal</h3>
+                    <p class="text-xs text-platinumMuted mt-1">Enter Master Access PIN (Default: 1234)</p>
+                </div>
+                <div class="max-w-xs mx-auto space-y-3">
+                    <input type="password" id="adminPinInput" placeholder="Enter PIN..." class="w-full bg-obsidian border border-platinum-subtle text-center text-sm py-2.5 text-platinum placeholder-platinumMuted focus:outline-none">
+                    <button onclick="authenticateAdmin()" class="w-full bg-platinum text-obsidian py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-white transition">Verify Key</button>
+                </div>
+            </div>
+
+            <div id="adminDashboardSection" class="hidden space-y-8">
+                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4">
+                    <div>
+                        <span class="text-[10px] text-emerald-400 font-mono uppercase tracking-widest">Authenticated Session</span>
+                        <h3 class="font-serif text-xl text-platinum">Master Atelier Dashboard</h3>
+                    </div>
+                    <button onclick="logoutAdmin()" class="text-xs text-platinumMuted hover:text-white uppercase tracking-wider">Logout</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-serif text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="shopping-bag" class="w-4 h-4 text-platinum"></i> Vault Confirmations / Customer Orders (<span id="adminOrdersCount">0</span>)
+                        </h4>
+                        <button onclick="clearAllOrders()" class="text-[10px] text-rose-400 hover:text-rose-300 uppercase tracking-wider">Clear All Orders</button>
+                    </div>
+
+                    <div id="adminOrdersList" class="space-y-3 max-h-64 overflow-y-auto pr-1"></div>
+                </div>
+
+                <div class="space-y-4 border-t border-platinum-subtle pt-6">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-serif text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="phone-incoming" class="w-4 h-4 text-platinum"></i> Callback Requests (<span id="adminCallbackCount">0</span>)
+                        </h4>
+                        <button onclick="clearAllCallbacks()" class="text-[10px] text-rose-400 hover:text-rose-300 uppercase tracking-wider">Clear All</button>
+                    </div>
+
+                    <div id="adminCallbacksList" class="space-y-3 max-h-48 overflow-y-auto pr-1"></div>
+                </div>
+
+                <div class="space-y-4 border-t border-platinum-subtle pt-6">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-serif text-sm text-platinum uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="boxes" class="w-4 h-4 text-platinum"></i> Quick Stock Adjuster
+                        </h4>
+                        <button onclick="resetDefaultStock()" class="text-[10px] text-platinumMuted hover:text-platinum uppercase tracking-wider">Reset All (50 Pairs)</button>
+                    </div>
+
+                    <div id="adminStockList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CATALOG & FILTERS -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-platinum-subtle pb-6">
+            <div>
+                <h2 class="font-serif text-xl text-platinum tracking-wide uppercase">All Strains (10)</h2>
+                <p class="text-xs text-platinumMuted tracking-widest mt-1 uppercase">Filter by phenotype class</p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2" id="categoryFilters">
+                <button data-filter="all" class="filter-btn active-filter px-4 py-2 text-xs uppercase tracking-wider border border-platinum bg-platinum text-obsidian transition">All</button>
+                <button data-filter="platinum" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition">Platinum</button>
+                <button data-filter="moscow" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition">Moscow</button>
+                <button data-filter="albino" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition">Albino</button>
+                <button data-filter="dragon" class="filter-btn px-4 py-2 text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition">Dragon</button>
+            </div>
+        </div>
+
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-platinum-subtle bg-obsidian py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start gap-1">
+                <span class="font-serif text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                <span class="text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+            </div>
+            
+            <div class="flex gap-8 uppercase tracking-widest text-[11px]">
+                <a href="vault.html" class="hover:text-platinum">Vault</a>
+                <a href="discover.html" class="hover:text-platinum">Discover</a>
+                <a href="contract.html" class="hover:text-platinum">Wholesale Partnership</a>
+                <a href="index.html#parameters" class="hover:text-platinum">Care Specs</a>
+            </div>
+
+            <div class="text-[11px] tracking-wider cursor-pointer select-none" ondblclick="toggleSecretAdmin()">
+                © 2026 DE'OCEAN Studio. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART SLIDE-OUT DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
+        <div id="cartOverlay" class="absolute inset-0 bg-obsidian bg-opacity-80 transition-opacity pointer-events-auto"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface border-l border-platinum-subtle p-6 flex flex-col justify-between pointer-events-auto shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4 mb-6">
+                    <h3 class="font-serif text-lg text-platinum uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Your Vault (<span id="cartDrawerCount">0</span>)
+                    </h3>
+                    <button id="closeCart" class="text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+
+                <div id="cartItems" class="space-y-4 max-h-[55vh] overflow-y-auto pr-1"></div>
+            </div>
+
+            <div class="border-t border-platinum-subtle pt-4 space-y-4">
+                <div class="flex justify-between text-sm uppercase tracking-wider">
+                    <span class="text-platinumMuted">Subtotal</span>
+                    <span id="cartSubtotal" class="font-mono text-platinum">₹0</span>
+                </div>
+                <p class="text-[10px] text-platinumMuted tracking-wider uppercase">Insulated Thermal Courier calculated at checkout.</p>
+                <button onclick="openCheckoutModal()" class="w-full bg-platinum text-obsidian py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center">
+                    Proceed to Confirmation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER CHECKOUT CONFIRMATION MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div id="checkoutOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeCheckoutModal()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-md w-full p-6 sm:p-8 z-10">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <form id="checkoutForm" onsubmit="submitOrder(event)" class="space-y-4 text-left">
+                <div class="text-center space-y-1">
+                    <div class="w-10 h-10 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum mb-2">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-platinumMuted">Atelier Checkout</span>
+                    <h3 class="font-serif text-xl text-platinum">Confirm Strain Reserve</h3>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Full Name</label>
+                        <input type="text" id="custName" required placeholder="e.g. Julian Vance" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Phone / WhatsApp Number</label>
+                        <input type="tel" id="custPhone" required placeholder="+91 98765 43210" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Delivery Address</label>
+                        <textarea id="custAddress" required rows="2" placeholder="Full address with pincode..." class="w-full bg-obsidian border border-platinum-subtle text-xs py-2 px-3 text-platinum placeholder-platinumMuted focus:outline-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="border-t border-platinum-subtle pt-3 flex justify-between items-center text-xs">
+                    <span class="text-platinumMuted uppercase">Order Total:</span>
+                    <span id="checkoutTotalAmount" class="font-mono text-platinum text-sm font-semibold">₹0</span>
+                </div>
+
+                <button type="submit" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2">
+                    Confirm & Submit Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- REQUEST CALL BACK MODAL -->
+    <div id="callbackModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div id="callbackOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeCallbackModal()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-md w-full p-6 sm:p-8 z-10">
+            <button onclick="closeCallbackModal()" class="absolute top-4 right-4 text-platinumMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <form id="callbackForm" onsubmit="submitCallbackForm(event)" class="space-y-5 text-left">
+                <div class="text-center space-y-1">
+                    <div class="w-10 h-10 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum mb-2">
+                        <i data-lucide="phone-call" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-platinumMuted">Atelier Concierge Service</span>
+                    <h3 class="font-serif text-xl text-platinum">Request Call Back</h3>
+                    <p id="callbackStrainTitle" class="text-xs text-platinum font-mono mt-1"></p>
+                </div>
+
+                <input type="hidden" id="callbackStrainId" value="">
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Your Full Name</label>
+                        <input type="text" id="cbName" required placeholder="e.g. Julian Vance" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Phone / WhatsApp Number</label>
+                        <input type="tel" id="cbPhone" required placeholder="+91 98765 43210" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Preferred Time Window</label>
+                        <select id="cbTime" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum focus:outline-none">
+                            <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                            <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
+                            <option value="Evening (4 PM - 8 PM)">Evening (4 PM - 8 PM)</option>
+                            <option value="As Soon As Possible">As Soon As Possible</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2">
+                    Submit Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const DEFAULT_PRODUCTS = [
+            { id: 1, name: "Platinum White Dumbo Ear", category: "platinum", grade: "High Grade Pair (1M/1F)", price: 1200, stock: 50, image: "images/1.jpg", description: "Iridescent snow-white dorsal and large pectoral fins with pristine tail symmetry." },
+            { id: 2, name: "Midnight Dark Moscow", category: "moscow", grade: "Show Pair (1M/1F)", price: 950, stock: 50, image: "images/2.jpg", description: "Deep jet-black velvet coloration extending seamlessly through body and caudal tail." },
+            { id: 3, name: "Albino Full Red Platinum", category: "albino", grade: "Breeder Pair (1M/1F)", price: 1400, stock: 50, image: "images/3.jpg", description: "Ruby red eyes with solid crimson caudal fins contrasted against platinum body sheen." },
+            { id: 4, name: "Platinum Red Dragon", category: "dragon", grade: "Select Pair (1M/1F)", price: 1100, stock: 50, image: "images/4.jpg", description: "Intricate metallic dragon scale pattern with brilliant blood-red delta tail extensions." },
+            { id: 5, name: "Albino Sky Blue Topaz", category: "albino", grade: "Show Pair (1M/1F)", price: 1600, stock: 50, image: "images/5.jpg", description: "Translucent pastel sky-blue fins with luminous platinum belly sheen." },
+            { id: 6, name: "Platinum Metal Lace", category: "platinum", grade: "Select Pair (1M/1F)", price: 1300, stock: 50, image: "images/6.jpg", description: "Fine webbed snakeskin lattice pattern rendered in liquid platinum hues." },
+            { id: 7, name: "Black Blue Moscow Tail", category: "moscow", grade: "High Grade Pair (1M/1F)", price: 1050, stock: 50, image: "images/7.jpg", description: "Cobalt blue shimmer gradient merging with pure dark moscow body tones." },
+            { id: 8, name: "Albino German Yellow Tail", category: "albino", grade: "Breeder Pair (1M/1F)", price: 1250, stock: 50, image: "images/8.jpg", description: "Vibrant lemon-yellow delta tail matched with pure albino ruby gaze." },
+            { id: 9, name: "Green Dragon Mosaic", category: "dragon", grade: "Select Pair (1M/1F)", price: 1150, stock: 50, image: "images/9.jpg", description: "Emerald dragon scales with mosaic reticulated tail fin patterns." },
+            { id: 10, name: "Platinum Magenta Violet", category: "platinum", grade: "Show Pair (1M/1F)", price: 1750, stock: 50, image: "images/10.jpg", description: "Rare violet-magenta iridescence layered over a brilliant platinum base." }
+        ];
+
+        let PRODUCTS = JSON.parse(localStorage.getItem('deocean_products')) || DEFAULT_PRODUCTS;
+        let CALLBACKS = JSON.parse(localStorage.getItem('deocean_callbacks')) || [];
+        let ORDERS = JSON.parse(localStorage.getItem('deocean_orders')) || [];
+        
+        let state = {
+            cart: [],
+            wishlist: [],
+            activeFilter: 'all',
+            searchQuery: '',
+            isAdminLoggedIn: false
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderProducts();
+
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('flex');
+            });
+            document.getElementById('closeMobileMenu').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenu').classList.remove('flex');
+            });
+
+            document.getElementById('searchToggle').addEventListener('click', () => {
+                const searchBar = document.getElementById('searchBar');
+                searchBar.classList.toggle('hidden');
+                if(!searchBar.classList.contains('hidden')) {
+                    document.getElementById('searchInput').focus();
+                }
+            });
+            document.getElementById('closeSearch').addEventListener('click', () => {
+                document.getElementById('searchBar').classList.add('hidden');
+            });
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                state.searchQuery = e.target.value.toLowerCase();
+                renderProducts();
+            });
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('bg-platinum', 'text-obsidian', 'border-platinum');
+                        b.classList.add('border-platinum-subtle', 'text-platinumMuted');
+                    });
+                    
+                    e.target.classList.remove('border-platinum-subtle', 'text-platinumMuted');
+                    e.target.classList.add('bg-platinum', 'text-obsidian', 'border-platinum');
+
+                    state.activeFilter = e.target.getAttribute('data-filter');
+                    renderProducts();
+                });
+            });
+
+            document.getElementById('cartToggle').addEventListener('click', toggleCartDrawer);
+            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
+            document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+                    e.preventDefault();
+                    toggleSecretAdmin();
+                }
+            });
+        });
+
+        function toggleSecretAdmin() {
+            const adminBtn = document.getElementById('adminToggleBtn');
+            if (adminBtn) {
+                if (adminBtn.classList.contains('hidden')) {
+                    adminBtn.classList.remove('hidden');
+                    adminBtn.classList.add('flex');
+                    alert("Admin Button Unlocked!");
+                } else {
+                    adminBtn.classList.add('hidden');
+                    adminBtn.classList.remove('flex');
+                    alert("Admin Button Hidden.");
+                }
+            }
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = PRODUCTS.filter(p => {
+                const matchesCategory = state.activeFilter === 'all' || p.category === state.activeFilter;
+                const matchesSearch = p.name.toLowerCase().includes(state.searchQuery) || p.description.toLowerCase().includes(state.searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 border border-platinum-subtle">
+                        <p class="text-platinumMuted text-xs uppercase tracking-widest">No strains matching criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(product => {
+                const isWishlisted = state.wishlist.includes(product.id);
+                const isAvailable = product.stock > 0;
+                const card = document.createElement('div');
+                card.className = "border border-platinum-subtle bg-surface flex flex-col justify-between group";
+
+                card.innerHTML = `
+                    <div class="relative overflow-hidden img-container aspect-[4/3] bg-obsidian border-b border-platinum-subtle">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=800&q=80';">
+                        
+                        <div class="absolute top-3 left-3 bg-obsidian/80 border border-platinum-subtle px-2.5 py-1 text-[9px] uppercase tracking-widest text-platinum">
+                            ${isAvailable 
+                                ? `<span class="text-emerald-400">●</span> ${product.stock} PAIRS AVAILABLE` 
+                                : `<span class="text-rose-400">●</span> OUT OF STOCK`}
+                        </div>
+
+                        <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 text-platinumMuted hover:text-platinum transition p-1.5 bg-obsidian/70">
+                            <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-platinum text-platinum' : ''}"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="text-[10px] uppercase tracking-[0.2em] text-platinumMuted mb-1">${product.grade}</div>
+                            <h3 class="font-serif text-lg text-platinum group-hover:text-white transition">${product.name}</h3>
+                            <p class="text-xs text-platinumMuted font-light mt-2 line-clamp-2">${product.description}</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-platinum-subtle space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-mono text-sm text-platinum">₹${product.price.toLocaleString('en-IN')}</span>
+                                
+                                <span class="font-mono text-[11px] uppercase tracking-wider ${isAvailable ? 'text-emerald-400 border border-emerald-500/30 bg-emerald-950/20' : 'text-rose-400 border border-rose-500/30 bg-rose-950/20'} px-2.5 py-1">
+                                    ${isAvailable ? `${product.stock} Pairs Left` : 'Out of Stock'}
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="addToCart(${product.id})" ${!isAvailable ? 'disabled' : ''} class="w-full bg-platinum text-obsidian py-2.5 text-[10px] font-semibold uppercase tracking-widest hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed">
+                                    Add To Vault
+                                </button>
+                                <button onclick="openCallbackModal(${product.id}, '${product.name.replace(/'/g, "\\'")}')" class="w-full border border-platinum-subtle text-platinum hover:border-platinum py-2.5 text-[10px] font-medium uppercase tracking-widest transition flex items-center justify-center gap-1">
+                                    <i data-lucide="phone-call" class="w-3 h-3"></i> Call Back
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        function toggleWishlist(id) {
+            const index = state.wishlist.indexOf(id);
+            if (index > -1) {
+                state.wishlist.splice(index, 1);
+            } else {
+                state.wishlist.push(id);
+            }
+            const badge = document.getElementById('wishlistBadge');
+            if (state.wishlist.length > 0) {
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+            renderProducts();
+        }
+
+        function addToCart(id) {
+            const product = PRODUCTS.find(p => p.id === id);
+            if (!product || product.stock <= 0) return;
+
+            const existing = state.cart.find(item => item.id === id);
+            if (existing) {
+                if (existing.qty < product.stock) {
+                    existing.qty += 1;
+                } else {
+                    alert("Maximum available stock reached for this strain.");
+                    return;
+                }
+            } else {
+                state.cart.push({ id: product.id, name: product.name, price: product.price, qty: 1, image: product.image });
+            }
+
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        function updateCartQty(id, delta) {
+            const item = state.cart.find(i => i.id === id);
+            const product = PRODUCTS.find(p => p.id === id);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty > product.stock) {
+                item.qty = product.stock;
+                alert("Maximum available stock reached.");
+            }
+            if (item.qty <= 0) {
+                state.cart = state.cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cartCount');
+            const drawerCountEl = document.getElementById('cartDrawerCount');
+            const itemsContainer = document.getElementById('cartItems');
+            const subtotalEl = document.getElementById('cartSubtotal');
+
+            const totalQty = state.cart.reduce((sum, i) => sum + i.qty, 0);
+            const subtotal = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+            countEl.textContent = totalQty;
+            drawerCountEl.textContent = totalQty;
+            subtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+
+            itemsContainer.innerHTML = '';
+            if (state.cart.length === 0) {
+                itemsContainer.innerHTML = `<p class="text-center text-xs text-platinumMuted py-8 uppercase tracking-widest">Vault is currently empty.</p>`;
+                return;
+            }
+
+            state.cart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between border-b border-platinum-subtle pb-3";
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" class="w-12 h-12 object-cover border border-platinum-subtle">
+                        <div>
+                            <h4 class="font-serif text-xs text-platinum">${item.name}</h4>
+                            <span class="font-mono text-[11px] text-platinumMuted">₹${item.price.toLocaleString('en-IN')}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 border border-platinum-subtle px-2 py-1">
+                        <button onclick="updateCartQty(${item.id}, -1)" class="text-xs text-platinumMuted hover:text-white px-1">-</button>
+                        <span class="font-mono text-xs px-1 text-platinum">${item.qty}</span>
+                        <button onclick="updateCartQty(${item.id}, 1)" class="text-xs text-platinumMuted hover:text-white px-1">+</button>
+                    </div>
+                `;
+                itemsContainer.appendChild(row);
+            });
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function openCheckoutModal() {
+            if (state.cart.length === 0) {
+                alert("Your Vault is empty.");
+                return;
+            }
+            const subtotal = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            document.getElementById('checkoutTotalAmount').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
+
+            const subtotal = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+            const newOrder = {
+                id: Date.now(),
+                clientName: name,
+                phone: phone,
+                address: address,
+                items: state.cart,
+                total: subtotal,
+                status: 'PENDING',
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' })
+            };
+
+            state.cart.forEach(cartItem => {
+                const product = PRODUCTS.find(p => p.id === cartItem.id);
+                if (product) {
+                    product.stock = Math.max(0, product.stock - cartItem.qty);
+                }
+            });
+
+            ORDERS.unshift(newOrder);
+            localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+            localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+
+            alert(`Thank you, ${name}. Your order has been logged. Our team will verify and contact you on ${phone}.`);
+            
+            state.cart = [];
+            updateCartUI();
+            closeCheckoutModal();
+            toggleCartDrawer();
+            renderProducts();
+            document.getElementById('checkoutForm').reset();
+        }
+
+        function openCallbackModal(id, name) {
+            document.getElementById('callbackStrainId').value = id;
+            document.getElementById('callbackStrainTitle').textContent = `Strain: ${name}`;
+            document.getElementById('callbackModal').classList.remove('hidden');
+        }
+
+        function closeCallbackModal() {
+            document.getElementById('callbackModal').classList.add('hidden');
+        }
+
+        function submitCallbackForm(e) {
+            e.preventDefault();
+            const strainId = document.getElementById('callbackStrainId').value;
+            const name = document.getElementById('cbName').value;
+            const phone = document.getElementById('cbPhone').value;
+            const time = document.getElementById('cbTime').value;
+
+            const product = PRODUCTS.find(p => p.id == strainId);
+
+            const newCallback = {
+                id: Date.now(),
+                strainName: product ? product.name : "General Enquiry",
+                clientName: name,
+                phone: phone,
+                preferredTime: time,
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' })
+            };
+
+            CALLBACKS.unshift(newCallback);
+            localStorage.setItem('deocean_callbacks', JSON.stringify(CALLBACKS));
+
+            alert(`Thank you, ${name}. Our head breeder will contact you via ${phone} during ${time}.`);
+            closeCallbackModal();
+            document.getElementById('callbackForm').reset();
+            renderAdminDashboard();
+        }
+
+        function toggleAdminPanel() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden') && state.isAdminLoggedIn) {
+                renderAdminDashboard();
+            }
+        }
+
+        function authenticateAdmin() {
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === '1234') {
+                state.isAdminLoggedIn = true;
+                document.getElementById('adminAuthSection').classList.add('hidden');
+                document.getElementById('adminDashboardSection').classList.remove('hidden');
+                renderAdminDashboard();
+            } else {
+                alert('Invalid Atelier Master Access Key.');
+            }
+        }
+
+        function logoutAdmin() {
+            state.isAdminLoggedIn = false;
+            document.getElementById('adminPinInput').value = '';
+            document.getElementById('adminAuthSection').classList.remove('hidden');
+            document.getElementById('adminDashboardSection').classList.add('hidden');
+        }
+
+        function renderAdminDashboard() {
+            ORDERS = JSON.parse(localStorage.getItem('deocean_orders')) || [];
+            CALLBACKS = JSON.parse(localStorage.getItem('deocean_callbacks')) || [];
+            PRODUCTS = JSON.parse(localStorage.getItem('deocean_products')) || DEFAULT_PRODUCTS;
+
+            const ordersList = document.getElementById('adminOrdersList');
+            document.getElementById('adminOrdersCount').textContent = ORDERS.length;
+            ordersList.innerHTML = '';
+
+            if (ORDERS.length === 0) {
+                ordersList.innerHTML = `<p class="text-xs text-platinumMuted italic">No customer orders recorded.</p>`;
+            } else {
+                ORDERS.forEach(order => {
+                    const row = document.createElement('div');
+                    row.className = "border border-platinum-subtle p-3.5 bg-obsidian text-left text-xs space-y-2";
+                    
+                    const itemsText = order.items.map(i => `${i.qty}x ${i.name} (₹${(i.price * i.qty).toLocaleString('en-IN')})`).join(', ');
+
+                    let statusBadge = `<span class="text-amber-400 font-mono text-[10px] px-2 py-0.5 border border-amber-500/30 bg-amber-950/20">PENDING</span>`;
+                    if (order.status === 'CONFIRMED') {
+                        statusBadge = `<span class="text-emerald-400 font-mono text-[10px] px-2 py-0.5 border border-emerald-500/30 bg-emerald-950/20">CONFIRMED</span>`;
+                    } else if (order.status === 'DECLINED') {
+                        statusBadge = `<span class="text-rose-400 font-mono text-[10px] px-2 py-0.5 border border-rose-500/30 bg-rose-950/20">DECLINED</span>`;
+                    }
+
+                    row.innerHTML = `
+                        <div class="flex justify-between items-start text-platinum">
+                            <div>
+                                <span class="font-semibold text-sm">${order.clientName}</span>
+                                <span class="text-emerald-400 font-mono ml-2">${order.phone}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                ${statusBadge}
+                                <span class="text-[10px] text-platinumMuted font-mono">${order.timestamp}</span>
+                            </div>
+                        </div>
+                        <div class="text-[11px] text-platinumMuted leading-relaxed">
+                            <strong class="text-platinum font-normal">Address:</strong> ${order.address}
+                        </div>
+                        <div class="text-[11px] text-platinumMuted">
+                            <strong class="text-platinum font-normal">Strains:</strong> ${itemsText}
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-platinum-subtle/50">
+                            <span class="font-mono text-platinum text-xs font-semibold">Total: ₹${order.total.toLocaleString('en-IN')}</span>
+                            <div class="flex items-center gap-2">
+                                ${order.status === 'PENDING' ? `
+                                    <button onclick="confirmOrder(${order.id})" class="bg-emerald-600/80 hover:bg-emerald-500 text-white text-[10px] px-2.5 py-1 uppercase tracking-wider transition">Confirm</button>
+                                    <button onclick="declineOrder(${order.id})" class="bg-rose-900/80 hover:bg-rose-800 text-rose-200 text-[10px] px-2.5 py-1 uppercase tracking-wider transition">Decline</button>
+                                ` : ''}
+                                <button onclick="deleteOrder(${order.id})" class="text-platinumMuted hover:text-rose-400 text-[10px] uppercase tracking-wider ml-1">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    ordersList.appendChild(row);
+                });
+            }
+
+            const callbackList = document.getElementById('adminCallbacksList');
+            document.getElementById('adminCallbackCount').textContent = CALLBACKS.length;
+            callbackList.innerHTML = '';
+
+            if (CALLBACKS.length === 0) {
+                callbackList.innerHTML = `<p class="text-xs text-platinumMuted italic">No pending callback requests.</p>`;
+            } else {
+                CALLBACKS.forEach(cb => {
+                    const row = document.createElement('div');
+                    row.className = "border border-platinum-subtle p-3 bg-obsidian text-left text-xs space-y-1";
+                    row.innerHTML = `
+                        <div class="flex justify-between items-center text-platinum">
+                            <span class="font-semibold">${cb.clientName}</span>
+                            <span class="text-[10px] text-platinumMuted font-mono">${cb.timestamp}</span>
+                        </div>
+                        <div class="text-emerald-400 font-mono">${cb.phone}</div>
+                        <div class="text-[11px] text-platinumMuted">${cb.strainName} • <span class="italic">${cb.preferredTime}</span></div>
+                    `;
+                    callbackList.appendChild(row);
+                });
+            }
+
+            const stockList = document.getElementById('adminStockList');
+            stockList.innerHTML = '';
+
+            PRODUCTS.forEach(p => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between border border-platinum-subtle p-2 bg-obsidian text-xs";
+                row.innerHTML = `
+                    <span class="text-platinum truncate max-w-[200px]">${p.name}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-platinumMuted font-mono">₹${p.price.toLocaleString('en-IN')}</span>
+                        <div class="flex items-center border border-platinum-subtle">
+                            <button onclick="updateStockDirect(${p.id}, -1)" class="px-2 py-0.5 text-platinumMuted hover:text-white">-</button>
+                            <span class="font-mono text-platinum px-2">${p.stock}</span>
+                            <button onclick="updateStockDirect(${p.id}, 1)" class="px-2 py-0.5 text-platinumMuted hover:text-white">+</button>
+                        </div>
+                    </div>
+                `;
+                stockList.appendChild(row);
+            });
+
+            lucide.createIcons();
+        }
+
+        function confirmOrder(orderId) {
+            ORDERS = ORDERS.map(o => o.id === orderId ? { ...o, status: 'CONFIRMED' } : o);
+            localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+            renderAdminDashboard();
+        }
+
+        function declineOrder(orderId) {
+            const order = ORDERS.find(o => o.id === orderId);
+            if (order && order.status !== 'DECLINED') {
+                order.items.forEach(item => {
+                    const prod = PRODUCTS.find(p => p.id === item.id);
+                    if (prod) prod.stock += item.qty;
+                });
+                localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+
+                order.status = 'DECLINED';
+                localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+                renderProducts();
+                renderAdminDashboard();
+            }
+        }
+
+        function deleteOrder(orderId) {
+            ORDERS = ORDERS.filter(o => o.id !== orderId);
+            localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+            renderAdminDashboard();
+        }
+
+        function clearAllOrders() {
+            if (confirm("Are you sure you want to clear all order history?")) {
+                ORDERS = [];
+                localStorage.setItem('deocean_orders', JSON.stringify(ORDERS));
+                renderAdminDashboard();
+            }
+        }
+
+        function updateStockDirect(id, delta) {
+            const product = PRODUCTS.find(p => p.id === id);
+            if (product) {
+                product.stock = Math.max(0, product.stock + delta);
+                localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+                renderProducts();
+                renderAdminDashboard();
+            }
+        }
+
+        function resetDefaultStock() {
+            PRODUCTS = DEFAULT_PRODUCTS.map(p => ({ ...p, stock: 50 }));
+            localStorage.setItem('deocean_products', JSON.stringify(PRODUCTS));
+            renderProducts();
+            renderAdminDashboard();
+            alert("All strains reset to default 50 pairs.");
+        }
+
+        function clearAllCallbacks() {
+            CALLBACKS = [];
+            localStorage.setItem('deocean_callbacks', JSON.stringify(CALLBACKS));
+            renderAdminDashboard();
+        }
+    </script>
+</body>
+</html>
