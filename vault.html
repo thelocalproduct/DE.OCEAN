@@ -128,12 +128,11 @@
                 </a>
             </nav>
 
-            <!-- Desktop Direct Access Action (With Cart Trigger) -->
-            <div class="hidden lg:flex items-center gap-3">
-                <button onclick="toggleCartDrawer()" class="border border-platinum-subtle px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-platinum hover:bg-platinum hover:text-obsidian transition duration-300 flex items-center gap-2">
-                    <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
-                    Cart (<span id="cartCount">0</span>)
-                </button>
+            <!-- Desktop Direct Access Action -->
+            <div class="hidden lg:flex items-center">
+                <a href="vault.html" class="border border-platinum-subtle px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-platinum hover:bg-platinum hover:text-obsidian transition duration-300">
+                    Explore Strain Vault
+                </a>
             </div>
 
             <!-- Mobile Hamburger Button -->
@@ -159,7 +158,6 @@
             <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
             <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
             <a href="#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
-            <button onclick="toggleCartDrawer(); closeMobileMenuFunc();" class="text-platinum py-1 transition uppercase tracking-[0.2em]">View Cart (<span id="mobileCartCount">0</span>)</button>
         </nav>
         <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
@@ -225,13 +223,13 @@
     <!-- CART SLIDE-OUT DRAWER -->
     <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
         <div id="cartOverlay" class="absolute inset-0 bg-obsidian bg-opacity-80 transition-opacity pointer-events-auto"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-full sm:max-w-md bg-surface border-l border-platinum-subtle p-4 sm:p-6 flex flex-col justify-between pointer-events-auto shadow-2xl z-10">
+        <div class="absolute right-0 top-0 bottom-0 w-full sm:max-w-md bg-surface border-l border-platinum-subtle p-4 sm:p-6 flex flex-col justify-between pointer-events-auto shadow-2xl">
             <div>
                 <div class="flex items-center justify-between border-b border-platinum-subtle pb-4 mb-4 sm:mb-6">
                     <h3 class="font-serif text-base sm:text-lg text-platinum uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Your Reserve Cart (<span id="cartDrawerCount">0</span>)
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Your Vault (<span id="cartDrawerCount">0</span>)
                     </h3>
-                    <button id="closeCart" onclick="toggleCartDrawer()" class="text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+                    <button id="closeCart" class="text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
                 </div>
 
                 <div id="cartItems" class="space-y-3 max-h-[60vh] sm:max-h-[55vh] overflow-y-auto pr-1"></div>
@@ -356,27 +354,21 @@
         
         let state = {
             cart: [],
-            activeFilter: 'all'
+            activeFilter: 'all',
+            searchQuery: ''
         };
 
         const OWNER_WHATSAPP = "918592899766";
 
         document.addEventListener('DOMContentLoaded', () => {
-            refreshIcons();
+            lucide.createIcons();
             renderProducts();
 
-            const mobileBtn = document.getElementById('mobileMenuBtn');
-            if (mobileBtn) {
-                mobileBtn.addEventListener('click', () => {
-                    document.getElementById('mobileMenu').classList.remove('hidden');
-                    document.getElementById('mobileMenu').classList.add('flex');
-                });
-            }
-
-            const closeMobileBtn = document.getElementById('closeMobileMenu');
-            if (closeMobileBtn) {
-                closeMobileBtn.addEventListener('click', closeMobileMenuFunc);
-            }
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('flex');
+            });
+            document.getElementById('closeMobileMenu').addEventListener('click', closeMobileMenuFunc);
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -393,21 +385,9 @@
                 });
             });
 
-            const cartOverlay = document.getElementById('cartOverlay');
-            if (cartOverlay) {
-                cartOverlay.addEventListener('click', toggleCartDrawer);
-            }
+            document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
+            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
         });
-
-        function refreshIcons() {
-            if (window.lucide) {
-                try {
-                    lucide.createIcons();
-                } catch(e) {
-                    console.warn(e);
-                }
-            }
-        }
 
         function closeMobileMenuFunc() {
             document.getElementById('mobileMenu').classList.add('hidden');
@@ -420,7 +400,11 @@
             if (!grid) return;
             grid.innerHTML = '';
 
-            const filtered = PRODUCTS.filter(p => state.activeFilter === 'all' || p.category === state.activeFilter);
+            const filtered = PRODUCTS.filter(p => {
+                const matchesCategory = state.activeFilter === 'all' || p.category === state.activeFilter;
+                const matchesSearch = p.name.toLowerCase().includes(state.searchQuery) || p.description.toLowerCase().includes(state.searchQuery);
+                return matchesCategory && matchesSearch;
+            });
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
@@ -472,16 +456,14 @@
                 grid.appendChild(card);
             });
 
-            refreshIcons();
+            lucide.createIcons();
         }
 
         /* --- CART MANAGEMENT --- */
         function toggleCartDrawer() {
             const drawer = document.getElementById('cartDrawer');
-            if (drawer) {
-                drawer.classList.toggle('hidden');
-                renderCartDrawer();
-            }
+            drawer.classList.toggle('hidden');
+            renderCartDrawer();
         }
 
         function addToCart(productId) {
@@ -522,19 +504,12 @@
 
         function updateCartCount() {
             const totalItems = state.cart.reduce((sum, i) => sum + i.qty, 0);
-            const cartCountEl = document.getElementById('cartCount');
-            if (cartCountEl) cartCountEl.innerText = totalItems;
-            
-            const cartDrawerCountEl = document.getElementById('cartDrawerCount');
-            if (cartDrawerCountEl) cartDrawerCountEl.innerText = totalItems;
-
-            const mobileCartCountEl = document.getElementById('mobileCartCount');
-            if (mobileCartCountEl) mobileCartCountEl.innerText = totalItems;
+            document.getElementById('cartCount').innerText = totalItems;
+            document.getElementById('cartDrawerCount').innerText = totalItems;
         }
 
         function renderCartDrawer() {
             const cartContainer = document.getElementById('cartItems');
-            if (!cartContainer) return;
             cartContainer.innerHTML = '';
 
             if (state.cart.length === 0) {
@@ -568,7 +543,6 @@
             });
 
             document.getElementById('cartSubtotal').innerText = `₹${subtotal}`;
-            refreshIcons();
         }
 
         /* --- CHECKOUT VIA WHATSAPP --- */
