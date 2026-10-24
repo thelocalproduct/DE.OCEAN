@@ -140,14 +140,31 @@
     </div>
 
     <!-- FIXED TOP BAR -->
-    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-22 flex items-center justify-between">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300 h-18 sm:h-22 flex items-center">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
             
-            <!-- Brand / Logo -->
-            <a href="index.html" class="flex flex-col group py-2">
-                <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
-                <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
-            </a>
+            <!-- Mobile: Empty left grid cell to balance centering / Desktop: Brand Logo -->
+            <div class="flex items-center lg:hidden"></div>
+            <div class="hidden lg:flex items-center">
+                <a href="index.html" class="flex flex-col group py-2">
+                    <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                    <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
+                </a>
+            </div>
+
+            <!-- Mobile: Centered Larger Title (DE'OCEAN logo only) -->
+            <div class="col-start-2 flex justify-center items-center lg:hidden text-center">
+                <a href="index.html" class="group py-1 inline-block">
+                    <span class="font-serif text-xl sm:text-3xl tracking-[0.2em] text-platinum font-bold group-hover:text-white transition drop-shadow-md whitespace-nowrap">DE'OCEAN</span>
+                </a>
+            </div>
+
+            <!-- Mobile: Hamburger Menu Icon Only (Top Right) -->
+            <div class="col-start-3 flex justify-end items-center lg:hidden">
+                <button id="mobileMenuBtn" class="text-platinum hover:text-white p-2 -mr-2 focus:outline-none flex items-center justify-center" aria-label="Open Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
 
             <!-- Desktop Navigation Links -->
             <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
@@ -163,9 +180,9 @@
                     Wholesale
                     <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="genetics.html" class="text-platinum transition py-2 relative group">
+                <a href="genetics.html" class="hover:text-platinum transition py-2 relative group text-platinum">
                     Genetics
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-full h-px bg-platinum transition-all duration-300"></span>
                 </a>
                 <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">
                     Water Specs
@@ -179,12 +196,6 @@
                     Explore Strain Vault
                 </a>
             </div>
-
-            <!-- Mobile Hamburger Button -->
-            <button id="mobileMenuBtn" class="lg:hidden text-platinum hover:text-white p-2.5 -mr-2 focus:outline-none flex items-center gap-2" aria-label="Open Menu">
-                <span class="text-[10px] font-mono uppercase tracking-widest text-platinumMuted">Menu</span>
-                <i data-lucide="menu" class="w-5 h-5"></i>
-            </button>
         </div>
     </header>
 
@@ -413,7 +424,7 @@
                     <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
                     <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
                     <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
-                    <a href="genetics.html" class="hover:text-platinum py-1">Genetics</a>
+                    <a href="genetics.html" class="hover:text-platinum py-1 text-platinum">Genetics</a>
                     <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
                 </div>
 
