@@ -348,21 +348,24 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        const DEFAULT_PRODUCTS = [
-            { id: 1, name: "Platinum White Dumbo Ear", category: "platinum", grade: "High Grade Pair (1M/1F)", price: 1, stock: 50, image: "images/1.jpg", description: "Iridescent snow-white dorsal and large pectoral fins with pristine tail symmetry." },
-            { id: 2, name: "Midnight Dark Moscow", category: "moscow", grade: "Show Pair (1M/1F)", price: 150, stock: 50, image: "images/2.jpg", description: "Deep jet-black velvet coloration extending seamlessly through body and caudal tail." },
-            { id: 3, name: "Albino Full Red Platinum", category: "albino", grade: "Breeder Pair (1M/1F)", price: 150, stock: 50, image: "images/3.jpg", description: "Ruby red eyes with solid crimson caudal fins contrasted against platinum body sheen." },
+        // EDIT YOUR PRODUCTS DIRECTLY HERE:
+        // Any change made to the price, name, stock, or description here will update immediately on the page.
+        const PRODUCTS = [
+            { id: 1, name: "Platinum White Dumbo Ear", category: "platinum", grade: "High Grade Pair (1M/1F)", price: 200, stock: 50, image: "images/1.jpg", description: "Iridescent snow-white dorsal and large pectoral fins with pristine tail symmetry." },
+            { id: 2, name: "Midnight Dark Moscow", category: "moscow", grade: "Show Pair (1M/1F)", price: 200, stock: 50, image: "images/2.jpg", description: "Deep jet-black velvet coloration extending seamlessly through body and caudal tail." },
+            { id: 3, name: "Albino Full Red Platinum", category: "albino", grade: "Breeder Pair (1M/1F)", price: 200, stock: 50, image: "images/3.jpg", description: "Ruby red eyes with solid crimson caudal fins contrasted against platinum body sheen." },
             { id: 4, name: "Platinum Red Dragon", category: "dragon", grade: "Select Pair (1M/1F)", price: 150, stock: 50, image: "images/4.jpg", description: "Intricate metallic dragon scale pattern with brilliant blood-red delta tail extensions." },
             { id: 5, name: "Albino Sky Blue Topaz", category: "albino", grade: "Show Pair (1M/1F)", price: 150, stock: 50, image: "images/5.jpg", description: "Translucent pastel sky-blue fins with luminous platinum belly sheen." },
             { id: 6, name: "Platinum Metal Lace", category: "platinum", grade: "Select Pair (1M/1F)", price: 150, stock: 50, image: "images/6.jpg", description: "Fine webbed snakeskin lattice pattern rendered in liquid platinum hues." },
-            { id: 7, name: "Black Blue Moscow Tail", category: "moscow", grade: "High Grade Pair (1M/1F)", price: 150, stock: 50, image: "images/7.jpg", description: "Cobalt blue shimmer gradient merging with pure dark moscow body tones." },
+            { id: 7, name: "Black Blue Moscow Tail", category: "moscow", grade: "High Grade Pair (1M/1F)", price: 200, stock: 50, image: "images/7.jpg", description: "Cobalt blue shimmer gradient merging with pure dark moscow body tones." },
             { id: 8, name: "Albino German Yellow Tail", category: "albino", grade: "Breeder Pair (1M/1F)", price: 150, stock: 50, image: "images/8.jpg", description: "Vibrant lemon-yellow delta tail matched with pure albino ruby gaze." },
             { id: 9, name: "Green Dragon Mosaic", category: "dragon", grade: "Select Pair (1M/1F)", price: 150, stock: 50, image: "images/9.jpg", description: "Emerald dragon scales with mosaic reticulated tail fin patterns." },
-            { id: 10, name: "Platinum Magenta Violet", category: "platinum", grade: "Show Pair (1M/1F)", price: 150, stock: 50, image: "images/10.jpg", description: "Rare violet-magenta iridescence layered over a brilliant platinum base." }
+            { id: 10, name: "Platinum Magenta Violet", category: "platinum", grade: "Show Pair (1M/1F)", price: 200, stock: 50, image: "images/10.jpg", description: "Rare violet-magenta iridescence layered over a brilliant platinum base." }
         ];
 
-        let PRODUCTS = JSON.parse(localStorage.getItem('deocean_products')) || DEFAULT_PRODUCTS;
-        
+        // Clear out any stale cached data from previous sessions
+        localStorage.removeItem('deocean_products');
+
         let state = {
             cart: [],
             activeFilter: 'all',
