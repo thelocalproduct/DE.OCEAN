@@ -80,6 +80,19 @@
             -webkit-backdrop-filter: blur(16px);
         }
 
+        /* Hero Header Section Dissolve Effect */
+        #vaultHeroHeader {
+            will-change: transform, opacity;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-dissolved {
+            opacity: 0 !important;
+            transform: translateY(-20px) scale(0.98) !important;
+            pointer-events: none !important;
+        }
+
         .img-container img {
             transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
             filter: grayscale(15%);
@@ -94,7 +107,7 @@
 </head>
 <body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
-    <!-- FIXED TOP BAR -->
+    <!-- FIXED TOP BAR (UNCHANGED EXACT PREVIOUS DESIGN) -->
     <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300 h-18 sm:h-22 flex items-center">
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
             
@@ -175,8 +188,8 @@
 
     <!-- MAIN CONTENT CONTAINER -->
     <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
-        <!-- VAULT HERO BANNER -->
-        <section class="border-b border-platinum-subtle py-16 sm:py-24 bg-obsidian/80 backdrop-blur-md px-4 sm:px-6 lg:px-8 text-center">
+        <!-- VAULT HERO BANNER HEADER (SEPARATE FROM TOP BAR WITH FADE DISSOLVE EFFECT) -->
+        <section id="vaultHeroHeader" class="border-b border-platinum-subtle py-16 sm:py-24 bg-obsidian/80 backdrop-blur-md px-4 sm:px-6 lg:px-8 text-center">
             <div class="max-w-4xl mx-auto space-y-4">
                 <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3.5 py-1.5 text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-black/50">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Private Genetics Reserve
@@ -351,16 +364,16 @@
         // EDIT YOUR PRODUCTS DIRECTLY HERE:
         // Any change made to the price, name, stock, or description here will update immediately on the page.
         const PRODUCTS = [
-            { id: 1, name: "Platinum White Dumbo Ear", category: "platinum", grade: "High Grade Pair (1M/1F)", price: 200, stock: 50, image: "images/1.jpg", description: "Iridescent snow-white dorsal and large pectoral fins with pristine tail symmetry." },
-            { id: 2, name: "Midnight Dark Moscow", category: "moscow", grade: "Show Pair (1M/1F)", price: 200, stock: 50, image: "images/2.jpg", description: "Deep jet-black velvet coloration extending seamlessly through body and caudal tail." },
-            { id: 3, name: "Albino Full Red Platinum", category: "albino", grade: "Breeder Pair (1M/1F)", price: 200, stock: 50, image: "images/3.jpg", description: "Ruby red eyes with solid crimson caudal fins contrasted against platinum body sheen." },
+            { id: 1, name: "Platinum White Dumbo Ear", category: "platinum", grade: "High Grade Pair (1M/1F)", price: 150, stock: 50, image: "images/1.jpg", description: "Iridescent snow-white dorsal and large pectoral fins with pristine tail symmetry." },
+            { id: 2, name: "Midnight Dark Moscow", category: "moscow", grade: "Show Pair (1M/1F)", price: 150, stock: 50, image: "images/2.jpg", description: "Deep jet-black velvet coloration extending seamlessly through body and caudal tail." },
+            { id: 3, name: "Albino Full Red Platinum", category: "albino", grade: "Breeder Pair (1M/1F)", price: 150, stock: 50, image: "images/3.jpg", description: "Ruby red eyes with solid crimson caudal fins contrasted against platinum body sheen." },
             { id: 4, name: "Platinum Red Dragon", category: "dragon", grade: "Select Pair (1M/1F)", price: 150, stock: 50, image: "images/4.jpg", description: "Intricate metallic dragon scale pattern with brilliant blood-red delta tail extensions." },
             { id: 5, name: "Albino Sky Blue Topaz", category: "albino", grade: "Show Pair (1M/1F)", price: 150, stock: 50, image: "images/5.jpg", description: "Translucent pastel sky-blue fins with luminous platinum belly sheen." },
             { id: 6, name: "Platinum Metal Lace", category: "platinum", grade: "Select Pair (1M/1F)", price: 150, stock: 50, image: "images/6.jpg", description: "Fine webbed snakeskin lattice pattern rendered in liquid platinum hues." },
-            { id: 7, name: "Black Blue Moscow Tail", category: "moscow", grade: "High Grade Pair (1M/1F)", price: 200, stock: 50, image: "images/7.jpg", description: "Cobalt blue shimmer gradient merging with pure dark moscow body tones." },
+            { id: 7, name: "Black Blue Moscow Tail", category: "moscow", grade: "High Grade Pair (1M/1F)", price: 150, stock: 50, image: "images/7.jpg", description: "Cobalt blue shimmer gradient merging with pure dark moscow body tones." },
             { id: 8, name: "Albino German Yellow Tail", category: "albino", grade: "Breeder Pair (1M/1F)", price: 150, stock: 50, image: "images/8.jpg", description: "Vibrant lemon-yellow delta tail matched with pure albino ruby gaze." },
             { id: 9, name: "Green Dragon Mosaic", category: "dragon", grade: "Select Pair (1M/1F)", price: 150, stock: 50, image: "images/9.jpg", description: "Emerald dragon scales with mosaic reticulated tail fin patterns." },
-            { id: 10, name: "Platinum Magenta Violet", category: "platinum", grade: "Show Pair (1M/1F)", price: 200, stock: 50, image: "images/10.jpg", description: "Rare violet-magenta iridescence layered over a brilliant platinum base." }
+            { id: 10, name: "Platinum Magenta Violet", category: "platinum", grade: "Show Pair (1M/1F)", price: 150, stock: 50, image: "images/10.jpg", description: "Rare violet-magenta iridescence layered over a brilliant platinum base." }
         ];
 
         // Clear out any stale cached data from previous sessions
@@ -377,6 +390,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             renderProducts();
+            initVaultHeaderDissolve();
 
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.remove('hidden');
@@ -402,6 +416,22 @@
             document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
             document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
         });
+
+        /* --- VAULT HERO HEADER DISSOLVE EFFECT ON SCROLL (MOBILE & DESKTOP) --- */
+        function initVaultHeaderDissolve() {
+            const vaultHeader = document.getElementById('vaultHeroHeader');
+            if (!vaultHeader) return;
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                // Fade out & scale dissolve on scroll down past threshold
+                if (scrollY > 60) {
+                    vaultHeader.classList.add('hero-dissolved');
+                } else {
+                    vaultHeader.classList.remove('hero-dissolved');
+                }
+            }, { passive: true });
+        }
 
         function closeMobileMenuFunc() {
             document.getElementById('mobileMenu').classList.add('hidden');
