@@ -72,7 +72,7 @@
         }
 
         .bg-glass {
-            background: rgba(12, 12, 12, 0.88);
+            background: rgba(12, 12, 12, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
         }
@@ -120,23 +120,17 @@
             color: #E5E4E2;
         }
 
-        /* Hardware Accelerated Smooth Transitions */
-        #fixedTitleCard {
-            will-change: transform, opacity;
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        }
-
         /* Figure Hover Transition */
         .article-img-container img {
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-            filter: grayscale(10%) brightness(95%);
+            filter: grayscale(5%) brightness(98%);
         }
         .article-img-container:hover img {
             transform: scale(1.03);
             filter: grayscale(0%) brightness(100%);
         }
 
-        /* Touch Scroll optimization for table */
+        /* Touch Scroll optimization for data table */
         .touch-scroll {
             -webkit-overflow-scrolling: touch;
         }
@@ -144,19 +138,19 @@
 </head>
 <body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
 
-    <!-- FULLSCREEN HIGH-VISIBILITY NATURAL BOTANICAL POND BACKGROUND WITH SCROLL FADE -->
-    <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
+    <!-- FULLSCREEN HIGH-VISIBILITY NATURAL BOTANICAL POND BACKGROUND (Fades out smoothly on scroll) -->
+    <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-150 ease-out">
         <img src="images/hero-bg.jpg" 
              alt="Botanical Aquatic Ecosystem Background" 
-             class="w-full h-full object-cover brightness-[0.85] contrast-[1.10] saturate-[1.20]"
+             class="w-full h-full object-cover brightness-[0.88] contrast-[1.12] saturate-[1.25]"
              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
              
-        <!-- Subtle Natural Gradient Overlay for Readability -->
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80"></div>
+        <!-- Balanced Light Vignette Overlay for Crisp Readability Across All Screens -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/85"></div>
     </div>
 
     <!-- FIXED TOP BAR -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-glass border-b border-platinum-subtle transition-all duration-300 h-16 sm:h-22 flex items-center">
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 bg-glass border-b border-platinum-subtle transition-all duration-300 h-16 sm:h-22 flex items-center">
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
             
             <!-- Mobile: Empty left grid cell to balance centering / Desktop: Brand Logo -->
@@ -234,35 +228,32 @@
         <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
     </div>
 
-    <!-- FIXED TITLE CARD HEADER (Fades, Dissolves, and Translates on Scroll) -->
-    <div id="fixedTitleCard" class="fixed top-16 sm:top-22 left-0 right-0 z-30 pointer-events-none">
-        <section class="py-5 sm:py-12 md:py-16 border-b border-platinum-subtle/80 px-4 sm:px-6 lg:px-8 bg-obsidian/60 backdrop-blur-md shadow-2xl">
-            <div class="max-w-4xl mx-auto text-center space-y-2 sm:space-y-4">
-                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3 sm:px-4 py-1 text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-platinumMuted bg-obsidian/70 shadow-lg pointer-events-auto">
+    <!-- RELATIVE CONTAINER FOR TITLE CARD & ARTICLE -->
+    <div class="relative z-20 flex-grow flex flex-col pt-16 sm:pt-22">
+        
+        <!-- TITLE CARD HEADER -->
+        <section class="py-6 sm:py-10 md:py-14 border-b border-platinum-subtle/80 px-4 sm:px-6 lg:px-8 bg-obsidian/80 backdrop-blur-md shadow-2xl">
+            <div class="max-w-4xl mx-auto text-center space-y-2 sm:space-y-3">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3 sm:px-4 py-1 text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-platinumMuted bg-obsidian/70 shadow-lg">
                     <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
                     Atelier Ecology & Aquaculture Guide
                 </div>
                 
                 <h1 class="font-serif text-lg sm:text-3xl md:text-5xl font-light tracking-tight text-platinum uppercase leading-snug sm:leading-tight">
-                    10 Principles for Crafting a <br>
+                    10 Principles for Crafting a <br class="hidden sm:inline">
                     <span class="font-normal italic text-platinumLight">Natural Outdoor Guppy Ecosystem</span>
                 </h1>
 
-                <div class="flex items-center justify-center gap-4 sm:gap-6 text-[9px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-platinumMuted pt-0.5 sm:pt-1 font-mono">
+                <div class="flex items-center justify-center gap-3 sm:gap-6 text-[8px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-platinumMuted font-mono">
                     <span>Published: DE'OCEAN Atelier</span>
                     <span>•</span>
                     <span>Reading Time: 10 Min</span>
                 </div>
             </div>
         </section>
-    </div>
-
-    <!-- MAIN ARTICLE CONTENT CONTAINER -->
-    <!-- Content container starts naturally without overlapping title card -->
-    <div class="relative z-20 flex-grow flex flex-col pt-[180px] sm:pt-[280px] md:pt-[330px]">
 
         <!-- MAIN JOURNAL ARTICLE -->
-        <article class="max-w-3xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-20 article-content bg-obsidian/80 backdrop-blur-sm border-t border-platinum-subtle shadow-2xl">
+        <article class="max-w-3xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-20 article-content bg-obsidian/95 backdrop-blur-md border-t border-platinum-subtle shadow-2xl">
             
             <!-- INTRODUCTION -->
             <p class="dropcap">
@@ -339,199 +330,111 @@
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 text-center text-xs font-mono pt-2">
                     <div class="p-2 border border-platinum-subtle bg-obsidian">
-                        <div class="text-[9px] sm:text-[10px] text-platinumMuted uppercase">Temperature</div>
-                        <div class="text-platinum font-semibold mt-1 text-xs sm:text-sm">22°C - 28°C</div>
+                        <div class="text-platinumMuted text-[10px]">TEMPERATURE</div>
+                        <div class="text-platinum font-semibold mt-1">22°C - 28°C</div>
                     </div>
                     <div class="p-2 border border-platinum-subtle bg-obsidian">
-                        <div class="text-[9px] sm:text-[10px] text-platinumMuted uppercase">pH Range</div>
-                        <div class="text-platinum font-semibold mt-1 text-xs sm:text-sm">7.0 - 7.8</div>
+                        <div class="text-platinumMuted text-[10px]">pH LEVEL</div>
+                        <div class="text-platinum font-semibold mt-1">7.2 - 7.8</div>
                     </div>
                     <div class="p-2 border border-platinum-subtle bg-obsidian">
-                        <div class="text-[9px] sm:text-[10px] text-platinumMuted uppercase">Hardness</div>
-                        <div class="text-platinum font-semibold mt-1 text-xs sm:text-sm">8 - 14 dGH</div>
+                        <div class="text-platinumMuted text-[10px]">HARDNESS</div>
+                        <div class="text-platinum font-semibold mt-1">8 - 14 dGH</div>
                     </div>
                     <div class="p-2 border border-platinum-subtle bg-obsidian">
-                        <div class="text-[9px] sm:text-[10px] text-platinumMuted uppercase">Nitrates</div>
-                        <div class="text-platinum font-semibold mt-1 text-xs sm:text-sm">&lt; 15 ppm</div>
+                        <div class="text-platinumMuted text-[10px]">SUNLIGHT</div>
+                        <div class="text-platinum font-semibold mt-1">4-6 hrs MORNING</div>
                     </div>
                 </div>
             </div>
 
             <!-- POINT 6 -->
-            <h3><span class="font-mono text-emerald-400 text-sm">06.</span> Oxygenation & Submerged Vegetation</h3>
+            <h3><span class="font-mono text-emerald-400 text-sm">06.</span> Micro-Fauna Cultivation</h3>
             <p>
-                In addition to floating vegetation, plant oxygenating submerged species such as <em>Hornwort (Ceratophyllum demersum)</em>, <em>Anacharis</em>, or <em>Cabomba</em>. These submerged plants release dissolved oxygen directly into the water column during peak photosynthesis and absorb excess nutrient waste.
+                Before introducing valuable guppy strains, let the setup mature for 10–14 days. Seed the water with cultures of <em>Daphnia magna</em>, copepods, and ostracods. These micro-crustaceans feast on soft algae and bio-film, generating a continuous live food chain that powers juvenile guppy growth and accelerates development naturally.
             </p>
 
             <!-- POINT 7 -->
-            <h3><span class="font-mono text-emerald-400 text-sm">07.</span> Live Infusoria & Micro-Fauna Cultivation</h3>
+            <h3><span class="font-mono text-emerald-400 text-sm">07.</span> Passive Aeration & Circulation</h3>
             <p>
-                Establish your pond 2 to 3 weeks prior to introducing fish. Sunlight and decaying botanical organic matter encourage the proliferation of beneficial micro-fauna including infusoria, ostracods (seed shrimp), daphnia, and green micro-algae biofilms—providing fry with continuous, high-protein live food 24/7.
+                While natural ponds function without noisy motorized filters, gentle water circulation prevents thermal stratification and surface film accumulation. Utilizing a subtle solar-powered sponge filter or a micro air-stone ensures continuous oxygenation during warm summer nights when aquatic plants consume oxygen.
             </p>
 
-            <!-- ARTICLE IMAGE 3 (Editable Path: art/3.jpg) -->
-            <figure class="my-8 sm:my-10 border border-platinum-subtle bg-surface/90 p-2 space-y-2 sm:space-y-3 article-img-container">
-                <div class="aspect-[16/9] overflow-hidden bg-obsidian border border-platinum-subtle/50">
-                    <img src="art/3.jpg" 
-                         alt="Guppy Swimming in Natural Outdoor Micro-Ecosystem" 
-                         class="w-full h-full object-cover"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1600&q=80';">
-                </div>
-                <figcaption class="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-platinumMuted text-center font-mono py-1">
-                    Fig. III — Pure Strain Guppies Displaying Full Iridophore Pigmentation in Sunlit Water
-                </figcaption>
-            </figure>
-
             <!-- POINT 8 -->
-            <h3><span class="font-mono text-emerald-400 text-sm">08.</span> Overflow Protection & Rain Management</h3>
+            <h3><span class="font-mono text-emerald-400 text-sm">08.</span> Predator Defense Architecture</h3>
             <p>
-                Heavy torrential downpours can cause outdoor tubs to overflow and flush out valuable fish and fry. Drill fine mesh-covered overflow weep holes 2 inches below the top rim of your tub, or construct a natural gravel drainage spillway to allow excess rainwater to exit safely without fish escape.
+                Outdoor ecosystems attract natural local predators such as dragonflies (nymphs), birds, and cats. Protect your stock by fitting a fine stainless steel micro-mesh or nylon netting cover securely over top. Inspect plants carefully for dragonfly larvae before introduction to keep your newborn fry safe.
             </p>
 
             <!-- POINT 9 -->
-            <h3><span class="font-mono text-emerald-400 text-sm">09.</span> Biosecurity & Predator Defense</h3>
+            <h3><span class="font-mono text-emerald-400 text-sm">09.</span> Overflows & Monsoon Drainage</h3>
             <p>
-                Outdoor ponds attract dragonflies (whose nymphs prey on fry), birds, cats, and frogs. Cover your pond with fine stainless steel mesh or dark protective netting, elevated slightly above floating plants. This allows sunlight and rain to enter while completely locking out airborne and terrestrial predators.
+                Torrential rainfall can cause outdoor tubs to overflow, washing away surface floating plants and fry. Drill fine overflow holes covered with fine stainless steel mesh about 2 inches below the container's top lip to safely vent excess rainwater during heavy storms.
             </p>
 
             <!-- POINT 10 -->
-            <h3><span class="font-mono text-emerald-400 text-sm">10.</span> Low-Intervention Stocking & Balance</h3>
+            <h3><span class="font-mono text-emerald-400 text-sm">10.</span> Selective Stocking & Genetic Management</h3>
             <p>
-                Maintain low stocking densities to preserve ecological balance (e.g., 1 trio of adult guppies per 10 gallons of water). Resist the urge to overfeed with dry pellets; let the guppies forage naturally on mosquito larvae, algae, and micro-crustaceans, supplementing only lightly with high-quality protein flakes.
+                Avoid overstocking natural tubs. Maintain a ratio of 1 male to 2-3 females, allowing a population capacity of approximately 1 fish per 1.5–2 gallons of water. Routinely evaluate developing juveniles under natural sunlight to pick out top-tier breeders and protect strain purity over successive generations.
             </p>
 
-            <!-- COMPARISON TABLE -->
-            <div class="my-8 sm:my-12 border border-platinum-subtle overflow-x-auto touch-scroll bg-obsidian">
-                <table class="w-full text-left text-xs text-platinumMuted min-w-[500px]">
-                    <thead class="bg-surface text-platinum uppercase font-serif text-[10px] sm:text-[11px] tracking-wider border-b border-platinum-subtle">
-                        <tr>
-                            <th class="p-3 sm:p-4">Component</th>
-                            <th class="p-3 sm:p-4">Outdoor Ecosystem Role</th>
-                            <th class="p-3 sm:p-4 text-platinum font-semibold">Recommended Spec / Type</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-platinum-subtle font-light">
-                        <tr>
-                            <td class="p-3 sm:p-4 font-serif text-platinum">Container Tub</td>
-                            <td class="p-3 sm:p-4">Thermal buffer & dark background</td>
-                            <td class="p-3 sm:p-4 text-emerald-400 font-mono">15–50 Gallon HDPE / Terracotta</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3 sm:p-4 font-serif text-platinum">Surface Cover</td>
-                            <td class="p-3 sm:p-4">Nitrate reduction & fry sanctuary</td>
-                            <td class="p-3 sm:p-4 text-emerald-400 font-mono">Salvinia / Water Lettuce (40%)</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3 sm:p-4 font-serif text-platinum">Substrate Buffer</td>
-                            <td class="p-3 sm:p-4">Humic acid & pH crash defense</td>
-                            <td class="p-3 sm:p-4 text-emerald-400 font-mono">Guava Leaves + Crushed Calcite</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3 sm:p-4 font-serif text-platinum">Predator Barrier</td>
-                            <td class="p-3 sm:p-4">Protects from birds & insect larvae</td>
-                            <td class="p-3 sm:p-4 text-emerald-400 font-mono">Fine Stainless Mesh Canopy</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- CONCLUSION -->
+            <div class="mt-12 pt-8 border-t border-platinum-subtle/80 space-y-4">
+                <h2 class="!mt-0">Conclusion</h2>
+                <p>
+                    By embracing these 10 biological design principles, you cultivate more than just a fish container; you build an interconnected living botanical sanctuary. The harmony between natural sunlight, floating flora, and mineral balance nurtures resilient, brilliantly colored guppies that thrive with minimal intervention.
+                </p>
             </div>
-
-            <p class="pt-4 border-t border-platinum-subtle text-xs text-platinumMuted italic">
-                By honoring these 10 principles of outdoor botanical culture, your guppies will achieve unmatched color intensity, exceptional fin growth, and peak genetic health naturally.
-            </p>
-
-            <!-- EXPLORE VAULT CTA -->
-            <div class="pt-8 sm:pt-10 text-center">
-                <a href="vault.html" class="inline-flex items-center gap-3 bg-platinum text-obsidian px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition shadow-2xl active:scale-[0.99] min-h-[44px]">
-                    Explore Vault Strains <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-            </div>
-
         </article>
-
-        <!-- FOOTER -->
-        <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted relative z-20">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-                <div class="flex flex-col items-center md:items-start gap-1">
-                    <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
-                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
-                </div>
-                
-                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
-                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
-                    <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
-                    <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
-                    <a href="genetics.html" class="hover:text-platinum py-1 text-platinum">Genetics</a>
-                    <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
-                </div>
-
-                <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
-                    © 2026 DE'OCEAN Studio. All Rights Reserved.
-                </div>
-            </div>
-        </footer>
-
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- FOOTER -->
+    <footer class="relative z-20 bg-obsidian border-t border-platinum-subtle py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-center text-xs text-platinumMuted font-mono">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <p class="tracking-widest uppercase">DE'OCEAN Atelier • Purebred Strain Aquaculture</p>
+            <p class="text-[10px] text-zinc-500">© 2026 DE'OCEAN. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT FOR LUCIDE ICONS, MOBILE MENU & SCROLL FADE BACKGROUND -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-            // Mobile Menu Handlers
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const closeMobileMenu = document.getElementById('closeMobileMenu');
-            const mobileMenu = document.getElementById('mobileMenu');
+        // Mobile Menu Toggle logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-            if (mobileMenuBtn && closeMobileMenu && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenu.classList.add('flex');
-                });
-                closeMobileMenu.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
-                });
-            }
+        if (mobileMenuBtn && closeMobileMenu && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
 
-            // DISSOLVE & FADE TITLE CARD ON SCROLL WITH REQUEST ANIMATION FRAME
-            const fixedTitleCard = document.getElementById('fixedTitleCard');
-            const heroBg = document.getElementById('heroBg');
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Scroll Fade-out Effect for Background Image
+        const heroBg = document.getElementById('heroBg');
+        const fadeMultiplier = 400; // Adjust this value to control how fast it fades out (higher = slower fade)
+
+        window.addEventListener('scroll', () => {
+            let scrollPosition = window.scrollY;
+            // Calculate opacity from 1 down to 0 based on scroll distance
+            let opacity = 1 - (scrollPosition / fadeMultiplier);
             
-            let ticking = false;
+            // Ensure opacity stays strictly between 0 and 1
+            if (opacity < 0) opacity = 0;
+            if (opacity > 1) opacity = 1;
 
-            function updateScrollEffects() {
-                const scrolled = window.scrollY;
-                
-                if (fixedTitleCard) {
-                    const fadeThreshold = window.innerWidth < 640 ? 120 : 200;
-                    const opacity = Math.max(0, Math.min(1, 1 - (scrolled / fadeThreshold)));
-                    const translateY = -scrolled * 0.4;
-                    
-                    fixedTitleCard.style.opacity = opacity.toFixed(3);
-                    fixedTitleCard.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
-                    
-                    if (opacity <= 0) {
-                        fixedTitleCard.style.visibility = 'hidden';
-                    } else {
-                        fixedTitleCard.style.visibility = 'visible';
-                    }
-                }
-
-                if (heroBg) {
-                    const bgThreshold = 800;
-                    heroBg.style.opacity = scrolled <= bgThreshold ? (1 - (scrolled / bgThreshold)).toFixed(2) : 0;
-                }
-
-                ticking = false;
-            }
-
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateScrollEffects);
-                    ticking = true;
-                }
-            }, { passive: true });
-        });
+            heroBg.style.opacity = opacity;
+        }, { passive: true });
     </script>
 </body>
 </html>
