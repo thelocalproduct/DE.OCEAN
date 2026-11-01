@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DE'OCEAN | Planted Aquariums & Aquascapes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#080808',
+                        charcoal: '#121212',
+                        surface: '#181818',
+                        borderSubtle: '#262626',
+                        platinum: '#E5E4E2',
+                        platinumLight: '#F4F4F0',
+                        platinumMuted: '#A1A1AA',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            background-color: #080808;
+            color: #E5E4E2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #262626; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525B; }
+
+        .border-platinum-subtle { border-color: rgba(229, 228, 226, 0.12); }
+        .bg-glass { background: rgba(12, 12, 12, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+        .img-container img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+            filter: grayscale(10%);
+        }
+        @media (hover: hover) {
+            .img-container:hover img {
+                transform: scale(1.04);
+                filter: grayscale(0%);
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
+
+    <!-- BACKGROUND WITH SCROLL FADE -->
+    <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
+        <img src="bg.jpg" alt="Planted Aquascape Background" class="w-full h-full object-cover brightness-[0.70] contrast-[1.10] saturate-[1.15]" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/95"></div>
+    </div>
+
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300 h-18 sm:h-22 flex items-center">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
+            
+            <!-- Mobile: Empty left grid cell to balance centering / Desktop: Brand Logo -->
+            <div class="flex items-center lg:hidden"></div>
+            <div class="hidden lg:flex items-center">
+                <a href="index.html" class="flex flex-col group py-2">
+                    <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                    <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
+                </a>
+            </div>
+
+            <!-- Mobile: Centered Larger Title (DE'OCEAN logo only) -->
+            <div class="col-start-2 flex justify-center items-center lg:hidden text-center">
+                <a href="index.html" class="group py-1 inline-block">
+                    <span class="font-serif text-xl sm:text-3xl tracking-[0.2em] text-platinum font-bold group-hover:text-white transition drop-shadow-md whitespace-nowrap">DE'OCEAN</span>
+                </a>
+            </div>
+
+            <!-- Mobile: Hamburger Menu Icon Only (Top Right) -->
+            <div class="col-start-3 flex justify-end items-center lg:hidden">
+                <button id="mobileMenuBtn" class="text-platinum hover:text-white p-2 -mr-2 focus:outline-none flex items-center justify-center" aria-label="Open Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">
+                    Collections
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="discover.html" class="hover:text-platinum transition py-2 relative group">
+                    Discover
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="contract.html" class="hover:text-platinum transition py-2 relative group">
+                    Wholesale
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="genetics.html" class="hover:text-platinum transition py-2 relative group">
+                    Genetics
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">
+                    Water Specs
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <!-- Desktop Direct Access Action -->
+            <div class="hidden lg:flex items-center">
+                <a href="aquascape.html" class="border border-platinum px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-obsidian bg-platinum transition duration-300">
+                    AQUA SCAPE
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
+        <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
+            <div class="flex flex-col">
+                <span class="font-serif text-xl tracking-widest text-platinum">DE'OCEAN</span>
+                <span class="text-[8px] tracking-[0.25em] uppercase text-platinumMuted">Guppy Atelier</span>
+            </div>
+            <button id="closeMobileMenu" class="text-platinum p-2 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-base sm:text-xl tracking-[0.2em] uppercase my-auto py-6">
+            <a href="vault.html" class="text-platinumMuted hover:text-platinum py-1 transition">Collections</a>
+            <a href="discover.html" class="text-platinumMuted hover:text-platinum py-1 transition">Discover Strains</a>
+            <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
+            <a href="aquascape.html" class="text-platinum py-1 hover:text-white transition">AQUA SCAPE</a>
+            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
+        </nav>
+        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
+        <!-- HERO BANNER HEADER -->
+        <section id="aquariumsHeroHeader" class="border-b border-platinum-subtle py-16 sm:py-24 bg-obsidian/80 backdrop-blur-md px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3.5 py-1.5 text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-platinumMuted bg-black/50">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Masterpiece Aquascaped Ecosystems
+                </div>
+                <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl text-platinum tracking-tight uppercase">Planted Aquariums Reserve</h1>
+                <p class="text-xs sm:text-sm text-platinumMuted max-w-2xl mx-auto font-light leading-relaxed px-2">
+                    Twelve custom-designed nature aquariums and iwagumi layouts optimized for elite guppy display and biological harmony.
+                </p>
+            </div>
+        </section>
+
+        <!-- MAIN CATALOG & FILTERS -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 flex-grow w-full">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4 border-b border-platinum-subtle pb-4 sm:pb-6">
+                <div>
+                    <h2 class="font-serif text-lg sm:text-xl text-platinum tracking-wide uppercase">All 12 Aquascapes</h2>
+                    <p class="text-[10px] sm:text-xs text-platinumMuted tracking-widest mt-0.5 sm:mt-1 uppercase">Filter by style architecture</p>
+                </div>
+
+                <!-- Horizontal Swipe Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 w-full sm:w-auto" id="categoryFilters">
+                    <button data-filter="all" class="filter-btn active-filter px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum bg-platinum text-obsidian transition whitespace-nowrap flex-shrink-0">All Layouts</button>
+                    <button data-filter="nature" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Nature Style</button>
+                    <button data-filter="iwagumi" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Iwagumi</button>
+                    <button data-filter="dutch" class="filter-btn px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs uppercase tracking-wider border border-platinum-subtle text-platinumMuted hover:border-platinum hover:text-platinum transition whitespace-nowrap flex-shrink-0">Dutch / Jungle</button>
+                </div>
+            </div>
+
+            <div id="aquariumGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
+                    <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
+                    <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
+                    <a href="genetics.html" class="hover:text-platinum py-1">Genetics</a>
+                    <a href="aquascape.html" class="hover:text-platinum py-1 text-platinum">Aqua Scape</a>
+                    <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
+                </div>
+
+                <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
+                    © 2026 DE'OCEAN Studio. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CART SLIDE-OUT DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none hidden">
+        <div id="cartOverlay" class="absolute inset-0 bg-obsidian bg-opacity-80 transition-opacity pointer-events-auto"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full sm:max-w-md bg-surface border-l border-platinum-subtle p-4 sm:p-6 flex flex-col justify-between pointer-events-auto shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between border-b border-platinum-subtle pb-4 mb-4 sm:mb-6">
+                    <h3 class="font-serif text-base sm:text-lg text-platinum uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i> Aquariums Cart (<span id="cartDrawerCount">0</span>)
+                    </h3>
+                    <button id="closeCart" class="text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+
+                <div id="cartItems" class="space-y-3 max-h-[60vh] sm:max-h-[55vh] overflow-y-auto pr-1"></div>
+            </div>
+
+            <div class="border-t border-platinum-subtle pt-4 space-y-3 sm:space-y-4">
+                <div class="flex justify-between text-xs sm:text-sm uppercase tracking-wider">
+                    <span class="text-platinumMuted">Subtotal</span>
+                    <span id="cartSubtotal" class="font-mono text-platinum font-semibold">₹0</span>
+                </div>
+                <p class="text-[9px] sm:text-[10px] text-platinumMuted tracking-wider uppercase">Wooden Crate & Insulated Freight calculated at checkout.</p>
+                <button onclick="openCheckoutModal()" class="w-full bg-platinum text-obsidian py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center active:scale-[0.99]">
+                    Proceed to Confirmation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER CHECKOUT CONFIRMATION MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div id="checkoutOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeCheckoutModal()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-md w-full p-5 sm:p-8 z-10 max-h-[92vh] overflow-y-auto">
+            <button onclick="closeCheckoutModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <form id="checkoutForm" onsubmit="submitOrder(event)" class="space-y-4 text-left">
+                <div class="text-center space-y-1">
+                    <div class="w-10 h-10 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum mb-2">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-platinumMuted font-mono">Atelier Checkout</span>
+                    <h3 class="font-serif text-lg sm:text-xl text-platinum">Confirm Aquarium Reserve</h3>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Full Name</label>
+                        <input type="text" id="custName" required placeholder="e.g. Julian Vance" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Phone / WhatsApp Number</label>
+                        <input type="tel" id="custPhone" required placeholder="+91 98765 43210" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Delivery Address</label>
+                        <textarea id="custAddress" required rows="2" placeholder="Full address with pincode..." class="w-full bg-obsidian border border-platinum-subtle text-xs py-2 px-3 text-platinum placeholder-platinumMuted focus:outline-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="border-t border-platinum-subtle pt-3 flex justify-between items-center text-xs">
+                    <span class="text-platinumMuted uppercase">Order Total:</span>
+                    <span id="checkoutTotalAmount" class="font-mono text-platinum text-sm font-semibold">₹0</span>
+                </div>
+
+                <button type="submit" id="submitOrderBtn" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
+                    Send Order via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- REQUEST CALL BACK MODAL -->
+    <div id="callbackModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div id="callbackOverlay" class="absolute inset-0 bg-obsidian bg-opacity-90" onclick="closeCallbackModal()"></div>
+        <div class="relative bg-surface border border-platinum-subtle max-w-md w-full p-5 sm:p-8 z-10 max-h-[92vh] overflow-y-auto">
+            <button onclick="closeCallbackModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-platinumMuted hover:text-white p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <form id="callbackForm" onsubmit="submitCallbackForm(event)" class="space-y-4 sm:space-y-5 text-left">
+                <div class="text-center space-y-1">
+                    <div class="w-10 h-10 border border-platinum-subtle rounded-full flex items-center justify-center mx-auto text-platinum mb-2">
+                        <i data-lucide="phone-call" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-platinumMuted font-mono">Atelier Concierge Service</span>
+                    <h3 class="font-serif text-lg sm:text-xl text-platinum">Request Aquascape Consultation</h3>
+                    <p id="callbackTankTitle" class="text-xs text-platinum font-mono mt-1"></p>
+                </div>
+
+                <input type="hidden" id="callbackTankId" value="">
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Your Full Name</label>
+                        <input type="text" id="cbName" required placeholder="e.g. Julian Vance" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Phone / WhatsApp Number</label>
+                        <input type="tel" id="cbPhone" required placeholder="+91 98765 43210" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum placeholder-platinumMuted focus:outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-platinumMuted mb-1">Preferred Time Window</label>
+                        <select id="cbTime" class="w-full bg-obsidian border border-platinum-subtle text-xs py-2.5 px-3 text-platinum focus:outline-none">
+                            <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                            <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
+                            <option value="Evening (4 PM - 8 PM)">Evening (4 PM - 8 PM)</option>
+                            <option value="As Soon As Possible">As Soon As Possible</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-platinum text-obsidian py-3 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition mt-2 active:scale-[0.99]">
+                    Submit Request via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 12 PREMIUM PLANTED AQUARIUMS DATA WITH LOCAL PICTURE PATHS (images/aquariums/1.jpg to 12.jpg)
+        const AQUARIUMS = [
+            { 
+                id: 1, 
+                name: "The Emerald Forest Nature Tank", 
+                category: "nature", 
+                grade: "60cm Rimless Opti-White", 
+                price: 14500, 
+                stock: 5, 
+                image: "images/aquariums/1.jpg", 
+                description: "Dense stem forest layout featuring Rotala and Java Fern; offers supreme micro-shelter for guppy fry." 
+            },
+            { 
+                id: 2, 
+                name: "Seiryu Stone Iwagumi Masterpiece", 
+                category: "iwagumi", 
+                grade: "90cm Low Iron Crystal Tank", 
+                price: 24000, 
+                stock: 3, 
+                image: "images/aquariums/2.jpg", 
+                description: "Minimalist limestone arrangement carpeted with Dwarf Hairgrass for ultimate contrast against metallic guppies." 
+            },
+            { 
+                id: 3, 
+                name: "Amazonian Botanical Blackwater", 
+                category: "nature", 
+                grade: "45cm Cube Studio Edition", 
+                price: 9500, 
+                stock: 8, 
+                image: "images/aquariums/3.jpg", 
+                description: "Infused with Guava and Almond leaf botanicals for natural pH buffering and deep amber aesthetic." 
+            },
+            { 
+                id: 4, 
+                name: "Dutch Grand Prix Botanical Scape", 
+                category: "dutch", 
+                grade: "120cm Professional Display", 
+                price: 42000, 
+                stock: 2, 
+                image: "images/aquariums/4.jpg", 
+                description: "Meticulously terraced street-like rows of contrasting colored stem plants for exquisite showroom presence." 
+            },
+            { 
+                id: 5, 
+                name: "Monte Carlo Minimalist Cube", 
+                category: "iwagumi", 
+                grade: "30cm Crystal Nano Cube", 
+                price: 6800, 
+                stock: 12, 
+                image: "images/aquariums/5.jpg", 
+                description: "A flawless rolling green carpet of Monte Carlo paired with weathered dragon stone highlights." 
+            },
+            { 
+                id: 6, 
+                name: "Driftwood Canyon Riverway", 
+                category: "nature", 
+                grade: "75cm Panoramic Rimless", 
+                price: 18500, 
+                stock: 4, 
+                image: "images/aquariums/6.jpg", 
+                description: "Intricately tangled spider wood roots bridging an open sand pathway flanked by lush Anubias." 
+            },
+            { 
+                id: 7, 
+                name: "Highland Moss & Fern Grotto", 
+                category: "nature", 
+                grade: "60cm Shallow Breeder Rimless", 
+                price: 12800, 
+                stock: 6, 
+                image: "images/aquariums/7.jpg", 
+                description: "Shallow basin layout specialized for effortless guppy breeding and fry monitoring." 
+            },
+            { 
+                id: 8, 
+                name: "Volcanic Dragon Stone Valley", 
+                category: "iwagumi", 
+                grade: "90cm Standard Opti-White", 
+                price: 26000, 
+                stock: 3, 
+                image: "images/aquariums/8.jpg", 
+                description: "Dramatic reddish-brown textured multi-layered rock formation with pearl weed foreground." 
+            },
+            { 
+                id: 9, 
+                name: "Dense Jungle Biotopes Sanctuary", 
+                category: "dutch", 
+                grade: "100cm Community Display", 
+                price: 31000, 
+                stock: 2, 
+                image: "images/aquariums/9.jpg", 
+                description: "Unstructured wild botanical jungle layout replicating pristine South American tributaries." 
+            },
+            { 
+                id: 10, 
+                name: "Crimson Sunset Stem Aquarium", 
+                category: "dutch", 
+                grade: "60cm High-Tech Aquascape", 
+                price: 16500, 
+                stock: 7, 
+                image: "images/aquariums/10.jpg", 
+                description: "Showcases blazing red Ludwigia Super Red contrasting brilliantly against snowy platinum guppies." 
+            },
+            { 
+                id: 11, 
+                name: "Zenith Island Rock Iwagumi", 
+                category: "iwagumi", 
+                grade: "50cm Cube Panorama", 
+                price: 11000, 
+                stock: 5, 
+                image: "images/aquariums/11.jpg", 
+                description: "Single grand focal rock island rising above a pristine carpet of bright green hairgrass." 
+            },
+            { 
+                id: 12, 
+                name: "Floating Salvinia Canopy Haven", 
+                category: "nature", 
+                grade: "80cm Open-Top Breeder Tank", 
+                price: 15500, 
+                stock: 0, 
+                image: "images/aquariums/12.jpg", 
+                description: "Sunlight-lit top-open basin draped with thick trailing roots for absolute top-tier fry survival." 
+            }
+        ];
+
+        let state = {
+            cart: [],
+            activeFilter: 'all'
+        };
+
+        const OWNER_WHATSAPP = "918592899766";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderAquariums();
+            initSmoothScrollFade();
+
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('flex');
+            });
+            document.getElementById('closeMobileMenu').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenu').classList.remove('flex');
+            });
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('bg-platinum', 'text-obsidian', 'border-platinum');
+                        b.classList.add('border-platinum-subtle', 'text-platinumMuted');
+                    });
+                    
+                    e.target.classList.remove('border-platinum-subtle', 'text-platinumMuted');
+                    e.target.classList.add('bg-platinum', 'text-obsidian', 'border-platinum');
+
+                    state.activeFilter = e.target.getAttribute('data-filter');
+                    renderAquariums();
+                });
+            });
+
+            document.getElementById('cartOverlay').addEventListener('click', toggleCartDrawer);
+            document.getElementById('closeCart').addEventListener('click', toggleCartDrawer);
+        });
+
+        /* --- CONTINUOUS SCROLL-BASED SMOOTH FADE EFFECT --- */
+        function initSmoothScrollFade() {
+            const heroHeader = document.getElementById('aquariumsHeroHeader');
+            if (!heroHeader) return;
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const maxScroll = 250;
+                let opacity = 1 - (scrollY / maxScroll);
+                opacity = Math.max(0, Math.min(1, opacity));
+                let translateY = -(scrollY * 0.15);
+
+                heroHeader.style.opacity = opacity;
+                heroHeader.style.transform = `translateY(${translateY}px)`;
+                heroHeader.style.pointerEvents = opacity < 0.1 ? 'none' : 'auto';
+            }, { passive: true });
+        }
+
+        /* --- CATALOG RENDERING --- */
+        function renderAquariums() {
+            const grid = document.getElementById('aquariumGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = AQUARIUMS.filter(a => {
+                return state.activeFilter === 'all' || a.category === state.activeFilter;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 border border-platinum-subtle">
+                        <p class="text-platinumMuted text-xs uppercase tracking-widest">No aquariums matching criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(tank => {
+                const isAvailable = tank.stock > 0;
+                const card = document.createElement('div');
+                card.className = "border border-platinum-subtle bg-surface flex flex-col justify-between group";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden img-container aspect-[4/3] bg-obsidian border-b border-platinum-subtle">
+                            <img src="${tank.image}" alt="${tank.name}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80';">
+                            
+                            <div class="absolute top-2.5 left-2.5 bg-obsidian/90 border border-platinum-subtle px-2 py-0.5 sm:px-2.5 sm:py-1 text-[8px] sm:text-[9px] uppercase tracking-widest text-platinum font-mono">
+                                ${isAvailable 
+                                    ? `<span class="text-emerald-400">●</span> IN STOCK` 
+                                    : `<span class="text-rose-400">●</span> OUT OF STOCK`}
+                            </div>
+                        </div>
+
+                        <div class="p-4 sm:p-6 space-y-2.5 sm:space-y-3">
+                            <div class="flex justify-between items-start gap-2">
+                                <div>
+                                    <span class="text-[8px] sm:text-[9px] font-mono uppercase tracking-widest text-platinumMuted">${tank.grade}</span>
+                                    <h3 class="font-serif text-base sm:text-lg text-platinum group-hover:text-white transition mt-0.5">${tank.name}</h3>
+                                </div>
+                                <span class="font-mono text-xs sm:text-sm text-platinum font-semibold whitespace-nowrap">₹${tank.price}</span>
+                            </div>
+                            <p class="text-xs text-platinumMuted leading-relaxed font-light line-clamp-2">${tank.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 sm:p-6 pt-0 space-y-2">
+                        <button onclick="addToCart(${tank.id})" ${!isAvailable ? 'disabled' : ''} class="w-full bg-platinum text-obsidian py-2.5 sm:py-3 text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.2em] hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-2 active:scale-[0.99]">
+                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> ${isAvailable ? 'Reserve Aquarium' : 'Out of Stock'}
+                        </button>
+                        <button onclick="openCallbackModal(${tank.id})" class="w-full border border-platinum-subtle text-platinumMuted hover:text-platinum hover:border-platinum py-2 text-[10px] uppercase tracking-widest transition flex items-center justify-center gap-1.5 active:scale-[0.99]">
+                            <i data-lucide="phone" class="w-3.5 h-3.5"></i> Aquascape Consultation
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        /* --- CART MANAGEMENT --- */
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+            renderCartDrawer();
+        }
+
+        function addToCart(tankId) {
+            const tank = AQUARIUMS.find(t => t.id === tankId);
+            if (!tank || tank.stock <= 0) return;
+
+            const existing = state.cart.find(item => item.id === tankId);
+            if (existing) {
+                if (existing.qty < tank.stock) {
+                    existing.qty++;
+                } else {
+                    alert("Maximum available stock reached for this aquarium model.");
+                }
+            } else {
+                state.cart.push({ id: tank.id, name: tank.name, price: tank.price, qty: 1, image: tank.image });
+            }
+
+            updateCartCount();
+            toggleCartDrawer();
+        }
+
+        function updateCartQty(id, delta) {
+            const item = state.cart.find(i => i.id === id);
+            if (!item) return;
+            const tank = AQUARIUMS.find(t => t.id === id);
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                state.cart = state.cart.filter(i => i.id !== id);
+            } else if (tank && item.qty > tank.stock) {
+                item.qty = tank.stock;
+                alert("Cannot exceed available stock.");
+            }
+
+            updateCartCount();
+            renderCartDrawer();
+        }
+
+        function updateCartCount() {
+            const totalItems = state.cart.reduce((sum, i) => sum + i.qty, 0);
+            const drawerCount = document.getElementById('cartDrawerCount');
+            if (drawerCount) drawerCount.innerText = totalItems;
+        }
+
+        function renderCartDrawer() {
+            const cartContainer = document.getElementById('cartItems');
+            cartContainer.innerHTML = '';
+
+            if (state.cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="text-center py-12 text-platinumMuted text-xs uppercase tracking-widest">
+                        Your Aquariums Cart is empty.
+                    </div>
+                `;
+                document.getElementById('cartSubtotal').innerText = '₹0';
+                return;
+            }
+
+            let subtotal = 0;
+            state.cart.forEach(item => {
+                subtotal += item.price * item.qty;
+                const el = document.createElement('div');
+                el.className = "flex items-center justify-between bg-obsidian border border-platinum-subtle p-2.5 sm:p-3 gap-3";
+                el.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-10 h-10 sm:w-12 sm:h-12 object-cover border border-platinum-subtle flex-shrink-0">
+                    <div class="flex-grow min-w-0">
+                        <h4 class="text-xs text-platinum truncate font-medium">${item.name}</h4>
+                        <span class="text-[10px] font-mono text-platinumMuted">₹${item.price} each</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 sm:gap-2 font-mono text-xs flex-shrink-0">
+                        <button onclick="updateCartQty(${item.id}, -1)" class="w-6 h-6 bg-surface border border-platinum-subtle text-platinum hover:bg-platinum hover:text-obsidian flex items-center justify-center">-</button>
+                        <span class="w-4 text-center">${item.qty}</span>
+                        <button onclick="updateCartQty(${item.id}, 1)" class="w-6 h-6 bg-surface border border-platinum-subtle text-platinum hover:bg-platinum hover:text-obsidian flex items-center justify-center">+</button>
+                    </div>
+                `;
+                cartContainer.appendChild(el);
+            });
+
+            document.getElementById('cartSubtotal').innerText = `₹${subtotal}`;
+        }
+
+        /* --- CHECKOUT VIA WHATSAPP --- */
+        function openCheckoutModal() {
+            if (state.cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+            const total = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            document.getElementById('checkoutTotalAmount').innerText = `₹${total}`;
+            toggleCartDrawer();
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const total = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const totalTanks = state.cart.reduce((sum, i) => sum + i.qty, 0);
+            const orderId = Date.now().toString().slice(-6);
+
+            let itemSummary = state.cart.map((item, index) => {
+                return `${index + 1}. Aquarium: ${item.name}\n   • Quantity: ${item.qty} Unit(s)\n   • Rate: ₹${item.price}\n   • Subtotal: ₹${item.price * item.qty}`;
+            }).join('\n\n');
+
+            const rawMessage = 
+`*DE'OCEAN ATELIER | AQUARIUM RESERVE ORDER (#${orderId})*
+----------------------------------
+*CUSTOMER DETAILS:*
+• Name: ${name}
+• Phone: ${phone}
+• Delivery Address: ${address}
+
+*ORDER DETAILS (${totalTanks} UNITS TOTAL):*
+${itemSummary}
+
+----------------------------------
+*TOTAL AMOUNT:* ₹${total}
+----------------------------------
+_Sent via DE'OCEAN Aquariums Reserve_`;
+
+            const encodedMessage = encodeURIComponent(rawMessage);
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
+
+            state.cart = [];
+            updateCartCount();
+            closeCheckoutModal();
+        }
+
+        /* --- CALLBACK REQUEST VIA WHATSAPP --- */
+        function submitCallbackForm(e) {
+            e.preventDefault();
+            const tankId = document.getElementById('callbackTankId').value;
+            const tank = AQUARIUMS.find(t => t.id == tankId);
+            const name = document.getElementById('cbName').value.trim();
+            const phone = document.getElementById('cbPhone').value.trim();
+            const time = document.getElementById('cbTime').value;
+
+            const rawMessage = 
+`*DE'OCEAN ATELIER | AQUASCAPE CONSULTATION REQUEST*
+----------------------------------
+• Name: ${name}
+• Phone: ${phone}
+• Requested Aquarium: ${tank ? tank.name : 'General Tank Inquiry'}
+• Preferred Time: ${time}
+----------------------------------`;
+
+            const encodedMessage = encodeURIComponent(rawMessage);
+            window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodedMessage}`, '_blank');
+
+            closeCallbackModal();
+            document.getElementById('callbackForm').reset();
+        }
+
+        function openCallbackModal(tankId) {
+            const tank = AQUARIUMS.find(t => t.id === tankId);
+            if (!tank) return;
+
+            document.getElementById('callbackTankId').value = tank.id;
+            document.getElementById('callbackTankTitle').innerText = tank.name;
+            document.getElementById('callbackModal').classList.remove('hidden');
+        }
+
+        function closeCallbackModal() {
+            document.getElementById('callbackModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
