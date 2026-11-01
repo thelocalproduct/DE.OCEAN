@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DE'OCEAN | Aqua Scape Atelier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#080808',
+                        charcoal: '#121212',
+                        surface: '#181818',
+                        borderSubtle: '#262626',
+                        platinum: '#E5E4E2',
+                        platinumLight: '#F4F4F0',
+                        platinumMuted: '#A1A1AA',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            background-color: #080808;
+            color: #E5E4E2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #262626; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525B; }
+
+        .border-platinum-subtle { border-color: rgba(229, 228, 226, 0.12); }
+        .bg-glass { background: rgba(12, 12, 12, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+        .img-zoom img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+            filter: grayscale(15%);
+        }
+        @media (hover: hover) {
+            .img-zoom:hover img {
+                transform: scale(1.04);
+                filter: grayscale(0%);
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-platinum selection:text-obsidian flex flex-col min-h-screen relative">
+
+    <!-- BACKGROUND WITH SCROLL FADE -->
+    <div id="heroBg" class="fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-out">
+        <img src="bg.jpg" alt="Planted Aquascape Background" class="w-full h-full object-cover brightness-[0.70] contrast-[1.10] saturate-[1.15]" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2500&q=95';">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/95"></div>
+    </div>
+
+    <!-- FIXED TOP BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-glass border-b border-platinum-subtle transition-all duration-300 h-18 sm:h-22 flex items-center">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 lg:flex lg:items-center lg:justify-between items-center">
+            
+            <!-- Mobile: Empty left grid cell to balance centering / Desktop: Brand Logo -->
+            <div class="flex items-center lg:hidden"></div>
+            <div class="hidden lg:flex items-center">
+                <a href="index.html" class="flex flex-col group py-2">
+                    <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] text-platinum font-semibold group-hover:text-white transition">DE'OCEAN</span>
+                    <span class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-platinumMuted -mt-0.5 font-sans">Guppy Atelier</span>
+                </a>
+            </div>
+
+            <!-- Mobile: Centered Larger Title (DE'OCEAN logo only) -->
+            <div class="col-start-2 flex justify-center items-center lg:hidden text-center">
+                <a href="index.html" class="group py-1 inline-block">
+                    <span class="font-serif text-xl sm:text-3xl tracking-[0.2em] text-platinum font-bold group-hover:text-white transition drop-shadow-md whitespace-nowrap">DE'OCEAN</span>
+                </a>
+            </div>
+
+            <!-- Mobile: Hamburger Menu Icon Only (Top Right) -->
+            <div class="col-start-3 flex justify-end items-center lg:hidden">
+                <button id="mobileMenuBtn" class="text-platinum hover:text-white p-2 -mr-2 focus:outline-none flex items-center justify-center" aria-label="Open Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12 text-xs uppercase tracking-[0.25em] font-medium text-platinumMuted">
+                <a href="vault.html" class="hover:text-platinum transition py-2 relative group">
+                    Collections
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="discover.html" class="hover:text-platinum transition py-2 relative group">
+                    Discover
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="contract.html" class="hover:text-platinum transition py-2 relative group">
+                    Wholesale
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="genetics.html" class="hover:text-platinum transition py-2 relative group">
+                    Genetics
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="index.html#parameters" class="hover:text-platinum transition py-2 relative group">
+                    Water Specs
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-platinum transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <!-- Desktop Direct Access Action -->
+            <div class="hidden lg:flex items-center">
+                <a href="aquascape.html" class="border border-platinum px-5 py-2.5 text-[10px] uppercase tracking-[0.25em] text-obsidian bg-platinum transition duration-300">
+                    AQUA SCAPE
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-obsidian bg-opacity-98 hidden flex-col justify-between p-6 sm:p-10 transition-all">
+        <div class="flex justify-between items-center border-b border-platinum-subtle pb-4">
+            <div class="flex flex-col">
+                <span class="font-serif text-xl tracking-widest text-platinum">DE'OCEAN</span>
+                <span class="text-[8px] tracking-[0.25em] uppercase text-platinumMuted">Guppy Atelier</span>
+            </div>
+            <button id="closeMobileMenu" class="text-platinum p-2 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-center font-serif text-base sm:text-xl tracking-[0.2em] uppercase my-auto py-6">
+            <a href="vault.html" class="text-platinumMuted hover:text-platinum py-1 transition">Collections</a>
+            <a href="discover.html" class="text-platinumMuted hover:text-platinum py-1 transition">Discover Strains</a>
+            <a href="contract.html" class="text-platinumMuted hover:text-platinum py-1 transition">Wholesale Partnership</a>
+            <a href="genetics.html" class="text-platinumMuted hover:text-platinum py-1 transition">Genetics Documentation</a>
+            <a href="aquascape.html" class="text-platinum py-1 hover:text-white transition">AQUA SCAPE</a>
+            <a href="index.html#parameters" class="text-platinumMuted hover:text-platinum py-1 transition">Water Parameters</a>
+        </nav>
+        <div class="text-center text-[10px] sm:text-xs text-platinumMuted tracking-widest border-t border-platinum-subtle pt-4">© 2026 DE'OCEAN ATELIER</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="relative z-10 flex-grow flex flex-col pt-18 sm:pt-22">
+        <section class="relative py-12 sm:py-24 border-b border-platinum-subtle px-4 sm:px-6 lg:px-8 text-center bg-obsidian/80 backdrop-blur-md">
+            <div class="max-w-4xl mx-auto space-y-3 sm:space-y-4">
+                <div class="inline-flex items-center gap-2 border border-platinum-subtle px-3 py-1 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-platinumMuted bg-black/50">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                    Custom Aquatic Architecture
+                </div>
+                <h1 class="font-serif text-2xl sm:text-5xl md:text-6xl text-platinum tracking-tight uppercase">
+                    Aqua <span class="italic text-platinumLight">Scape</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-platinumMuted max-w-2xl mx-auto font-light leading-relaxed px-2">
+                    Professional grade rimless aquariums and pristine tissue-culture aquarium flora designed to complement elite guppy breeding environments.
+                </p>
+            </div>
+        </section>
+
+        <!-- TWO CARDS SECTION -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 flex-grow w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+
+                <!-- CARD 1: AQUARIUM -->
+                <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between group shadow-2xl">
+                    <div class="space-y-6">
+                        <div class="relative overflow-hidden img-zoom aspect-[16/10] border border-platinum-subtle bg-obsidian">
+                            <img src="images/aquarium.jpg" alt="Custom Rimless Aquarium" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=1000&q=80';">
+                            <div class="absolute top-3 left-3 bg-obsidian/90 border border-platinum-subtle px-2.5 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
+                                ● Ultra-Clear Low Iron Glass
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em]">Hardware Collection</span>
+                            <h2 class="font-serif text-xl sm:text-2xl text-platinum uppercase group-hover:text-white transition">Custom Rimless Aquariums</h2>
+                            <p class="text-xs text-platinumMuted font-light leading-relaxed">
+                                Hand-assembled crystal clear 91.5% optical transmission low-iron glass tanks with mitered 45-degree polished edges. Engineered for pristine panoramic viewing of your elite guppy strains.
+                            </p>
+                            <div class="pt-2 flex flex-wrap gap-2 text-[10px] font-mono text-platinumMuted">
+                                <span class="border border-platinum-subtle px-2.5 py-1 bg-obsidian">Opti-White Glass</span>
+                                <span class="border border-platinum-subtle px-2.5 py-1 bg-obsidian">German Silicone</span>
+                                <span class="border border-platinum-subtle px-2.5 py-1 bg-obsidian">Custom Dimensions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="aquariums.html" class="w-full bg-platinum text-obsidian py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center active:scale-[0.99] flex items-center justify-center gap-2">
+                            Explore Collection <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- CARD 2: AQUARIUM PLANT -->
+                <article class="border border-platinum-subtle bg-surface/90 backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between group shadow-2xl">
+                    <div class="space-y-6">
+                        <div class="relative overflow-hidden img-zoom aspect-[16/10] border border-platinum-subtle bg-obsidian">
+                            <img src="images/plant.jpg" alt="Aquarium Plants & Flora" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80';">
+                            <div class="absolute top-3 left-3 bg-obsidian/90 border border-platinum-subtle px-2.5 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest text-emerald-400 font-mono">
+                                ● Pest & Snail Free Lab Grown
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <span class="text-[9px] sm:text-[10px] font-mono text-platinumMuted uppercase tracking-[0.2em]">Botanical Reserve</span>
+                            <h2 class="font-serif text-xl sm:text-2xl text-platinum uppercase group-hover:text-white transition">Aquarium Plants & Flora</h2>
+                            <p class="text-xs text-platinumMuted font-light leading-relaxed">
+                                Sterile tissue-culture and emersed-grown carpet, stem, and floating plants (including Small Salvinia) optimized to absorb nitrates and provide natural fry shelter without introducing pathogens.
+                            </p>
+                            <div class="pt-2 flex flex-wrap gap-2 text-[10px] font-mono text-platinumMuted">
+                                <span class="border border-platinum-subtle px-2.5 py-1 bg-obsidian">Tissue Culture Cups</span>
+                                <span class="border border-platinum-subtle px-2.5 py-1 bg-obsidian">Carpet & Stem Flora</span>
+                                <span class="border border-platinum-subtle px-2.5 py-1 bg-obsidian">Natural Fry Shelter</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="plants.html" class="w-full bg-platinum text-obsidian py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white transition text-center active:scale-[0.99] flex items-center justify-center gap-2">
+                            Explore Reserve <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-platinum-subtle bg-obsidian py-8 sm:py-12 px-4 sm:px-6 lg:px-8 text-xs text-platinumMuted">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="font-serif text-base sm:text-lg tracking-[0.2em] text-platinum">DE'OCEAN</span>
+                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase">Pure Strain Guppy Breeding Studio</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 uppercase tracking-widest text-[10px] sm:text-[11px]">
+                    <a href="vault.html" class="hover:text-platinum py-1">Vault</a>
+                    <a href="discover.html" class="hover:text-platinum py-1">Discover</a>
+                    <a href="contract.html" class="hover:text-platinum py-1">Wholesale Partnership</a>
+                    <a href="genetics.html" class="hover:text-platinum py-1">Genetics</a>
+                    <a href="aquascape.html" class="hover:text-platinum py-1 text-platinum">Aqua Scape</a>
+                    <a href="index.html#parameters" class="hover:text-platinum py-1">Care Specs</a>
+                </div>
+
+                <div class="text-[10px] sm:text-[11px] tracking-wider select-none text-platinumMuted">
+                    © 2026 DE'OCEAN Studio. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            // Background Scroll Fade
+            const heroBg = document.getElementById('heroBg');
+            if (heroBg) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    heroBg.style.opacity = scrolled <= 550 ? (1 - (scrolled / 550)).toFixed(2) : 0;
+                });
+            }
+
+            // Mobile Menu Handlers
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('hidden');
+                document.getElementById('mobileMenu').classList.add('flex');
+            });
+            document.getElementById('closeMobileMenu').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenu').classList.remove('flex');
+            });
+        });
+    </script>
+</body>
+</html>
